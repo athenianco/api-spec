@@ -7,7 +7,7 @@ on:
   pull_request:
 
 
-steps:
+jobs:
   spec:
     name: OpenAPI in JS
     if: "!contains(github.event.head_commit.message, 'Bump version') || github.event_name != 'push'"
@@ -26,9 +26,10 @@ steps:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
-    - uses: athenianco/no-confusion-action@1.0.6
+    - uses: athenianco/no-confusion-action@1.1.1
       with:
         include: '["**/*.yaml", "**/*.yml"]'
+        exclude_patterns: '{"openapi.yaml": ["Sub-tásks"], ".github/workflows/push.yml": ["Sub-tásks"]}'
   bump_version:
     name: Bump the version
     needs: [spec, no-confusion]
