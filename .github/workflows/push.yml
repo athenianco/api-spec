@@ -1,0 +1,56 @@
+name: Push
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+
+steps:
+  spec:
+    name: OpenAPI in JS
+    if: "!contains(github.event.head_commit.message, 'Bump version') || github.event_name != 'push'"
+    runs-on: ubuntu-20.04
+    steps:
+    - name: actions/checkout
+      uses: actions/checkout@v2
+    - name: openapitools/openapi-generator-cli
+      run: |
+        set -x
+        docker run --rm -v `pwd`:/local --user `id -u`:`id -g` openapitools/openapi-generator-cli generate --input-spec=/local/openapi.yaml --generator-name=javascript --output=/local/js-client
+        npm --prefix js-client install
+        npm --prefix js-client test
+  no-confusion:
+    name: No confusion
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v1
+    - uses: athenianco/no-confusion-action@1.0.6
+      with:
+        include: '["**/*.yaml", "**/*.yml"]'
+  bump_version:
+    name: Bump the version
+    needs: [spec, no-confusion]
+    if: "!contains(github.event.head_commit.message, 'Bump version') && github.ref == 'refs/heads/master' && github.event_name == 'push'"
+    runs-on: ubuntu-20.04
+    steps:
+    - name: actions/checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 100
+        persist-credentials: false
+    - name: current_version
+      run: |
+        set -x
+        echo "current_version=$(grep '  version: ' openapi.yaml | cut -d: -f2 | sed 's/ //g')" >> $GITHUB_ENV
+    - name: FragileTech/bump-version
+      uses: FragileTech/bump-version@main
+      with:
+        current_version: "${{ env.current_version }}"
+        files: openapi.yaml
+        commit_name: Groundskeeper Willie
+        commit_email: bot@athenian.co
+        login: gkwillie
+        token: ${{ secrets.GKWILLIE_TOKEN }}
+
