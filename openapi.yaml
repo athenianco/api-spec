@@ -4144,6 +4144,8 @@ components:
           review_comments: 2
           reviews: 2
           merged: 2021-03-03T13:55:32Z
+          marged_with_failed_check_runs:
+          - Unit tests
           stage_timings:
             wip: 12085s
             review: 86690s
@@ -4249,6 +4251,8 @@ components:
         review_comments: 2
         reviews: 2
         merged: 2021-03-03T13:55:32Z
+        marged_with_failed_check_runs:
+        - Unit tests
         stage_timings:
           wip: 12085s
           review: 86690s
@@ -4362,6 +4366,11 @@ components:
           description: When this PR was merged.
           format: date-time
           type: string
+        marged_with_failed_check_runs:
+          description: PR was merged with these failed check runs.
+          items:
+            type: string
+          type: array
         released:
           description: When this PR was released.
           format: date-time
