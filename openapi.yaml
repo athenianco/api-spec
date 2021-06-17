@@ -7727,6 +7727,7 @@ components:
       description: |-
         The mentioned terms such as "check suite" and "check run" belong to [the official documentation on GitHub](https://docs.github.com/en/rest/guides/getting-started-with-the-checks-api#about-check-runs).
         * `chk-suites-count` - number of executed check suites.
+        * `chk-suites-in-prs-count` - number of executed check suites in pull requests.
         * `chk-successful-suites-count` - number of successfully executed check suites.
         * `chk-failed-suites-count` - number of failed check suites.
         * `chk-cancelled-suites-count` - number of cancelled check suites.
@@ -7744,6 +7745,7 @@ components:
         * `chk-elapsed-time-per-concurrency` - cumulative time spent on each concurrency level across check runs. Only allowed for histograms.
       enum:
       - chk-suites-count
+      - chk-suites-in-prs-count
       - chk-successful-suites-count
       - chk-failed-suites-count
       - chk-cancelled-suites-count
