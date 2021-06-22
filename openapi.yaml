@@ -277,14 +277,64 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.events_controller
       x-codegen-request-body-name: body
-  /events/releases:
+  /events/deployments:
     post:
-      operationId: notify_release
+      operationId: notify_deployments
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NotifyReleaseRequest'
+              $ref: '#/components/schemas/NotifyDeploymentsRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Empty object indicates a successful notification.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: The request is invalid.
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: Calling user is not allowed to access the specified repositories.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The specified account does not exist or the user is not a member.
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The account's installation has not finished yet.
+      security:
+      - apiKeyAuth: []
+      summary: Notify about new deployments.
+      tags:
+      - events
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.events_controller
+      x-codegen-request-body-name: body
+  /events/releases:
+    post:
+      operationId: notify_releases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotifyReleasesRequest'
         x-body-name: body
       responses:
         200:
@@ -7448,7 +7498,11 @@ components:
       - developer_id
       - jira_name
       type: object
-    NotifyReleaseRequest:
+    NotifyDeploymentsRequest:
+      items:
+        $ref: '#/components/schemas/DeploymentNotification'
+      type: array
+    NotifyReleasesRequest:
       items:
         $ref: '#/components/schemas/ReleaseNotification'
       type: array
@@ -7457,6 +7511,84 @@ components:
       maxLength: 40
       minLength: 7
       type: string
+    DeployedComponent:
+      additionalProperties: false
+      description: Definition of the deployed software unit.
+      example:
+        repository: github.com/athenianco/athenian-api
+        reference: v0.10.34
+      properties:
+        repository:
+          $ref: '#/components/schemas/RepositoryID'
+        reference:
+          description: |
+            We accept three ways to define a Git reference:
+            1. Tag name.
+            2. Full commit hash (40 characters).
+            3. Short commit hash (7 characters).
+
+            We ignore the reference while we cannot find it in our database. There can be
+            two reasons:
+            - There is a mistake or a typo in the provided data.
+            - We are temporarily unable to synchronize with GitHub.
+          minLength: 1
+          type: string
+      required:
+      - reference
+      - repository
+      type: object
+    DeploymentConclusion:
+      description: State of the completed deployment. Case-insensitive.
+      enum:
+      - SUCCESS
+      - FAILURE
+      - CANCELLED
+      type: string
+    DeploymentNotification:
+      additionalProperties: false
+      description: |
+        Push message about a deployment. User can send either only `date_started`,
+        only `date_finished`, or both together. Sending `date_finished` requires `conclusion`
+        to exist, too. We remove stale deployments that have `date_started` but do not have
+        `date_finished` after 24 hours.
+      properties:
+        components:
+          example: |
+            List of deployed software version. Each item identifies a Git reference
+            in a repository, either a tag or a commit hash.
+          items:
+            $ref: '#/components/schemas/RepositoryID'
+          minItems: 1
+          type: array
+        environment:
+          description: Name of the environment where the deployment happened.
+          minLength: 1
+          type: string
+        name:
+          description: Name of the deployment. If is not specified, we generate our own
+            by the template `<environment shortcut>-<date>-<hash of the components>`.
+          type: string
+        url:
+          description: URL pointing at the internal details of the deployment.
+          format: url
+          type: string
+        date_started:
+          description: Timestamp of when the deployment procedure launched.
+          format: date-time
+          type: string
+        date_finished:
+          description: Timestamp of when the deployment procedure completed.
+          format: date-time
+          type: string
+        conclusion:
+          $ref: '#/components/schemas/DeploymentConclusion'
+        labels:
+          description: Arbitrary key-value metadata that associates with the deployment.
+          type: object
+      required:
+      - components
+      - environment
+      type: object
     ReleaseNotification:
       additionalProperties: false
       description: Push message about a custom release event.
