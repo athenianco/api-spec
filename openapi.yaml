@@ -7566,7 +7566,7 @@ components:
             List of deployed software version. Each item identifies a Git reference
             in a repository, either a tag or a commit hash.
           items:
-            $ref: '#/components/schemas/RepositoryID'
+            $ref: '#/components/schemas/DeployedComponent'
           minItems: 1
           type: array
         environment:
