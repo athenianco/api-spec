@@ -7551,9 +7551,18 @@ components:
         only `date_finished`, or both together. Sending `date_finished` requires `conclusion`
         to exist, too. We remove stale deployments that have `date_started` but do not have
         `date_finished` after 24 hours.
+      example:
+        components:
+        - repository: github.com/athenianco/athenian-api
+          reference: v0.10.34
+        environment: production
+        date_finished: 2022-01-23T05:01:07.000+00:00
+        date_started: 2022-01-23T04:56:07.000+00:00
+        labels:
+          helm_chart: 0.0.67
       properties:
         components:
-          example: |
+          description: |
             List of deployed software version. Each item identifies a Git reference
             in a repository, either a tag or a commit hash.
           items:
@@ -7565,8 +7574,8 @@ components:
           minLength: 1
           type: string
         name:
-          description: Name of the deployment. If is not specified, we generate our own
-            by the template `<environment shortcut>-<date>-<hash of the components>`.
+          description: Name of the deployment. If is not specified, we generate our
+            own by the template `<environment shortcut>-<date>-<hash of the components>`.
           type: string
         url:
           description: URL pointing at the internal details of the deployment.
