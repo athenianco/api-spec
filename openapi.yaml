@@ -7547,10 +7547,7 @@ components:
     DeploymentNotification:
       additionalProperties: false
       description: |
-        Push message about a deployment. User can send either only `date_started`,
-        only `date_finished`, or both together. Sending `date_finished` requires `conclusion`
-        to exist, too. We remove stale deployments that have `date_started` but do not have
-        `date_finished` after 24 hours.
+        Push message about a deployment. We remove unresolved components after 24h.
       example:
         components:
         - repository: github.com/athenianco/athenian-api
@@ -7558,6 +7555,7 @@ components:
         environment: production
         date_finished: 2022-01-23T05:01:07.000+00:00
         date_started: 2022-01-23T04:56:07.000+00:00
+        conclusion: SUCCESS
         labels:
           helm_chart: 0.0.67
       properties:
@@ -7597,6 +7595,9 @@ components:
       required:
       - components
       - environment
+      - date_started
+      - date_finished
+      - conclusion
       type: object
     ReleaseNotification:
       additionalProperties: false
