@@ -2,9 +2,13 @@ openapi: 3.0.3
 info:
   contact:
     email: admin@athenian.co
-    name: the admins by email
+    name: the administrator by email
   description: |-
     Server version: {{ server_version }} built on {{ build_date }} @ [{{ commit }}](https://github.com/athenianco/athenian-api/commit/{{ commit }})
+
+    Origin GitHub repository: [athenianco/api-spec](https://github.com/athenianco/api-spec).
+
+    Authorization persists between sessions.
   license:
     name: CC-BY-4.0
   title: '{{ title }}'
@@ -8753,7 +8757,8 @@ components:
           type: object
         releases:
           allOf:
-          - description: Deployed releases.
+          - description: Deployed releases. The format matches the response from
+              `/filter/releases`.
           - $ref: '#/components/schemas/ReleaseSet'
       required:
       - code
