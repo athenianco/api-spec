@@ -531,6 +531,58 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+  /filter/deployments:
+    post:
+      operationId: filter_deployments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterDeploymentsRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredDeployments'
+          description: Deployments that satisfy the specified filters.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: The request is invalid.
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: Calling user is not allowed to access the specified repositories.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The specified account does not exist or the user is not a member.
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The account's installation has not finished yet.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: List the deployments that satisfy the provided filters. We submit new
+        deployments using `/events/deployments`.
+      tags:
+      - filter
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
+      x-codegen-request-body-name: body
   /filter/jira:
     post:
       operationId: filter_jira_stuff
@@ -6148,7 +6200,6 @@ components:
           type: array
       type: object
     JIRAEpic:
-      additionalProperties: false
       allOf:
       - $ref: '#/components/schemas/JIRAEpicIssueCommon'
       - properties:
@@ -6203,7 +6254,6 @@ components:
           type: Task
       type: object
     JIRAEpicChild:
-      additionalProperties: false
       allOf:
       - $ref: '#/components/schemas/JIRAEpicIssueCommon'
       - properties:
@@ -6235,7 +6285,6 @@ components:
         type: Task
       type: object
     JIRAIssue:
-      additionalProperties: false
       allOf:
       - $ref: '#/components/schemas/JIRAEpicIssueCommon'
       - properties:
@@ -7545,7 +7594,6 @@ components:
       - CANCELLED
       type: string
     DeploymentNotification:
-      additionalProperties: false
       description: |
         Push message about a deployment. We remove unresolved components after 24h.
       example:
@@ -8577,4 +8625,143 @@ components:
       - size_groups
       - title
       - total_stats
+      type: object
+    FilterDeploymentsRequest:
+      additionalProperties: false
+      description: Filters to select the deployments in `/filter/deployments`.
+      example:
+        account: 1
+        date_from: 2021-06-23
+        date_to: 2021-12-24
+        in:
+        - github.com/athenianco/athenian-api
+        - github.com/athenianco/athenian-webapp
+        - github.com/athenianco/metadata
+        environments:
+        - production
+        - staging
+        conclusions:
+        - FAILURE
+        with_labels:
+          user: github.com/lwsanty
+          rollback: null
+      properties:
+        date_from:
+          description: Date from when to search for the deployments,
+          format: date
+          type: string
+        date_to:
+          description: Date up to which to search for the deployments.
+          format: date
+          type: string
+        timezone:
+          $ref: '#/components/schemas/TimeZone'
+        account:
+          description: Session account ID.
+          type: integer
+        in:
+          $ref: '#/components/schemas/RepositorySet'
+        with:
+          $ref: '#/components/schemas/ReleaseWith'
+        pr_labels_include:
+          description: At least one of these labels must be present in at least one
+            deployed PR.
+          items:
+            type: string
+          type: array
+        pr_labels_exclude:
+          description: None of these labels must be present in each deployed PR.
+          items:
+            type: string
+          type: array
+        jira:
+          $ref: '#/components/schemas/JIRAFilter'
+        environments:
+          description: Deployments must belong to one of these environments.
+          items:
+            type: string
+          type: array
+        conclusions:
+          description: Deployments must execute with any of these conclusions.
+          items:
+            $ref: '#/components/schemas/DeploymentConclusion'
+          type: array
+        with_labels:
+          description: Deployments should contain at least one of the specified label
+            values. `null` matches any label value and effectively checks the label
+            existence.
+          type: object
+        without_labels:
+          description: Deployments may not contain the specified label values. `null`
+            matches any label value and effectively ensures that the label does not
+            exist.
+          type: object
+      required:
+      - account
+      - date_from
+      - date_to
+      type: object
+    FilteredDeployments:
+      description: Found deployments, response from `/filter/deployments`.
+      items:
+        $ref: '#/components/schemas/FilteredDeployment'
+      type: array
+    DeploymentAnalysis:
+      additionalProperties: false
+      description: Result the analysis of the deployment.
+      properties:
+        code:
+          additionalProperties: false
+          description: Summary of the deployed code.
+          properties:
+            prs:
+              description: Number of deployed pull requests per repository.
+              additionalProperties:
+                minimum: 0
+                type: integer
+              type: object
+            lines_prs:
+              description: Number of changed lines in the deployed PRs per repository.
+              additionalProperties:
+                minimum: 0
+                type: integer
+              type: object
+            lines_overall:
+              description: Number of changed lines in the deployment per repository.
+              additionalProperties:
+                minimum: 0
+                type: integer
+              type: object
+            commits_prs:
+              description: Number of deployed PR commits per repository.
+              additionalProperties:
+                minimum: 0
+                type: integer
+              type: object
+            commits_overall:
+              description: Number of deployed commits per repository.
+              additionalProperties:
+                minimum: 0
+                type: integer
+              type: object
+          required:
+          - commits_overall
+          - commits_prs
+          - lines_overall
+          - lines_prs
+          - prs
+          type: object
+        releases:
+          allOf:
+          - description: Deployed releases.
+          - $ref: '#/components/schemas/ReleaseSet'
+      required:
+      - code
+      - releases
+      type: object
+    FilteredDeployment:
+      allOf:
+      - $ref: '#/components/schemas/DeploymentNotification'
+      - $ref: '#/components/schemas/DeploymentAnalysis'
+      description: Everything we know about the deployment.
       type: object
