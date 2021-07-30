@@ -3228,11 +3228,13 @@ components:
             expired: false
             has_jira: true
             has_ci: true
+            has_deployments: true
           2:
             is_admin: false
             expired: false
             has_jira: false
             has_ci: true
+            has_deployments: false
       properties:
         id:
           description: Auth0 user identifier.
@@ -3277,6 +3279,7 @@ components:
         expired: false
         has_jira: true
         has_ci: true
+        has_deployments: true
       properties:
         is_admin:
           description: Indicates whether the user is an account administrator.
@@ -3290,9 +3293,13 @@ components:
         has_ci:
           description: Indicates whether the account permitted the access to check suites.
           type: boolean
+        has_deployments:
+          description: Indicates whether the account has submitted at least one deployment.
+          type: boolean
       required:
       - expired
       - has_ci
+      - has_deployments
       - has_jira
       - is_admin
       type: object
