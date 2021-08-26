@@ -2539,7 +2539,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TeamList'
-          description: List the teams belonging to the specified account.
+          description: List of the teams belonging to the specified account.
         404:
           content:
             application/json:
@@ -2550,6 +2550,43 @@ paths:
       - bearerAuth: []
       - apiKeyAuth: []
       summary: List the teams belonging to the calling user.
+      tags:
+      - team
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.team_controller
+      x-codegen-request-body-name: body
+    delete:
+      operationId: resync_teams
+      parameters:
+      - description: Numeric identifier of the account.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamList'
+          description: List of the new, reset teams belonging to the specified account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user does not belong to the specified account.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: Delete all the teams belonging to the account and then clone from GitHub.
+        The "Bots" team will remain intact. The rest of the teams will be identical to
+        what's on GitHub.
       tags:
       - team
 # {% if False %}
@@ -3999,6 +4036,7 @@ components:
         date_to: 2020-05-23
         in:
         - '{1}'
+        - github.com/athenianco/athenian-webapp
       properties:
         account:
           description: Session account ID.
@@ -4035,6 +4073,7 @@ components:
         date_to: 2020-05-23
         in:
         - '{1}'
+        - github.com/athenianco/athenian-webapp
         with:
           pr_author:
           - github.com/vmarkovtsev
@@ -4085,6 +4124,7 @@ components:
         date_to: 2020-05-23
         in:
         - '{1}'
+        - github.com/athenianco/athenian-webapp
         as:
         - author
         - committer
@@ -4135,6 +4175,7 @@ components:
         date_to: 2020-05-23
         in:
         - '{1}'
+        - github.com/athenianco/athenian-webapp
         stages:
         - wip
         with:
@@ -4663,6 +4704,7 @@ components:
         date_to: 2020-05-23
         in:
         - '{1}'
+        - github.com/athenianco/athenian-webapp
         property: bypassing_prs
       properties:
         account:
@@ -4861,6 +4903,7 @@ components:
         granularity: day
         in:
         - '{1}'
+        - github.com/athenianco/athenian-webapp
         with_author:
         - github.com/vmarkovtsev
       properties:
@@ -6811,6 +6854,7 @@ components:
           date_to: 2020-05-23
           in:
           - '{1}'
+          - github.com/athenianco/athenian-webapp
           stages:
           - wip
           with:
