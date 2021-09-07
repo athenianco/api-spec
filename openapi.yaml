@@ -7755,6 +7755,7 @@ components:
           items:
             enum:
             - release
+            - deployment
             type: string
           type: array
       required:
