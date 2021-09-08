@@ -6631,11 +6631,11 @@ components:
         * `epics`: Activates the epic flow.
         * `issues`: Activates the issue flow.
         * `issue_bodies`: Include the details about filtered issues.
-        * `labels`: Include the details aboud the mentioned issue labels.
-        * `issue_types`: Include the details aboud the mentioned issue types.
-        * `priorities`: Include the details aboud the mentioned issue priorities.
-        * `statuses`: Include the details aboud the mentioned issue statuses.
-        * `users`: Include the details aboud the issue participants.
+        * `labels`: Include the details about the mentioned issue labels.
+        * `issue_types`: Include the details about the mentioned issue types.
+        * `priorities`: Include the details about the mentioned issue priorities.
+        * `statuses`: Include the details about the mentioned issue statuses.
+        * `users`: Include the details about the issue participants.
         * `only_flying`: Exclude the epics' children and epics themselves from `issues`.
 
         If neither `epics` nor `issues` are specified, nothing is returned.
@@ -7370,6 +7370,8 @@ components:
         key: DEV
         avatar_url: https://athenianco.atlassian.net/secure/projectavatar?pid=10009&avatarId=10551
         enabled: true
+        issues_count: 100
+        last_update: 2021-08-10T12:47:00Z
       properties:
         name:
           description: Long name of the project.
@@ -7384,10 +7386,19 @@ components:
         enabled:
           description: Indicates whether this project is enabled for analysis.
           type: boolean
+        issues_count:
+          description: Total number of issues in the project.
+          type: integer
+        last_update:
+          description: Timestamp of the last event in the project.
+          format: date-time
+          type: string
       required:
       - avatar_url
       - enabled
+      - issues_count
       - key
+      - last_update
       - name
       type: object
     JIRAProjectsRequest:
