@@ -2522,41 +2522,6 @@ paths:
       x-openapi-router-controller: athenian.api.controllers.team_controller
       x-codegen-request-body-name: body
   /teams/{id}:
-    get:
-      operationId: list_teams
-      parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TeamList'
-          description: List of the teams belonging to the specified account.
-        404:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The user does not belong to the specified account.
-      security:
-      - bearerAuth: []
-      - apiKeyAuth: []
-      summary: List the teams belonging to the calling user.
-      tags:
-      - team
-# {% if False %}
-      - default
-# {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.team_controller
-      x-codegen-request-body-name: body
     delete:
       operationId: resync_teams
       parameters:
@@ -2585,8 +2550,43 @@ paths:
       - bearerAuth: []
       - apiKeyAuth: []
       summary: Delete all the teams belonging to the account and then clone from GitHub.
-        The "Bots" team will remain intact. The rest of the teams will be identical to
-        what's on GitHub.
+        The "Bots" team will remain intact. The rest of the teams will be identical
+        to what's on GitHub.
+      tags:
+      - team
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.team_controller
+      x-codegen-request-body-name: body
+    get:
+      operationId: list_teams
+      parameters:
+      - description: Numeric identifier of the account.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamList'
+          description: List of the teams belonging to the specified account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user does not belong to the specified account.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: List the teams belonging to the calling user.
       tags:
       - team
 # {% if False %}
@@ -3325,10 +3325,12 @@ components:
           description: Indicates whether the account is disabled.
           type: boolean
         has_jira:
-          description: Indicates whether the account installed the integration with JIRA.
+          description: Indicates whether the account installed the integration with
+            JIRA.
           type: boolean
         has_ci:
-          description: Indicates whether the account permitted the access to check suites.
+          description: Indicates whether the account permitted the access to check
+            suites.
           type: boolean
         has_deployments:
           description: Indicates whether the account has submitted at least one deployment.
@@ -7708,10 +7710,10 @@ components:
           type: object
       required:
       - components
-      - environment
-      - date_started
-      - date_finished
       - conclusion
+      - date_finished
+      - date_started
+      - environment
       type: object
     ReleaseNotification:
       additionalProperties: false
@@ -8820,8 +8822,7 @@ components:
           type: object
         releases:
           allOf:
-          - description: Deployed releases. The format matches the response from
-              `/filter/releases`.
+          - description: Deployed releases. The format matches the response from `/filter/releases`.
           - $ref: '#/components/schemas/ReleaseSet'
       required:
       - code
