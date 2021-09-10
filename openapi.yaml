@@ -8887,6 +8887,13 @@ components:
                 minimum: 0
                 type: integer
               type: object
+            jira:
+              description: JIRA issues mentioned in the deployed PRs.
+              additionalProperties:
+                items:
+                  type: string
+                type: array
+              type: object
           required:
           - commits_overall
           - commits_prs
@@ -8902,7 +8909,6 @@ components:
           type: array
       required:
       - code
-      - releases
       type: object
     FilteredDeployment:
       allOf:
