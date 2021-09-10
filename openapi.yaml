@@ -8772,12 +8772,86 @@ components:
       type: object
     FilteredDeployments:
       description: Found deployments, response from `/filter/deployments`.
-      items:
-        $ref: '#/components/schemas/FilteredDeployment'
-      type: array
+      example:
+        include:
+          users:
+            github.com/vmarkovtsev:
+              avatar: https://avatars0.githubusercontent.com/u/60340680?v=4
+            github.com/se7entyse7en:
+              avatar: https://avatars0.githubusercontent.com/u/60340680?v=4
+        deployments:
+        - components:
+          - repository: github.com/athenianco/athenian-api
+            reference: v0.0.93
+          environment: production
+          date_finished: 2020-03-25T11:11:00Z
+          date_started: 2020-03-25T11:04:00Z
+          conclusion: SUCCESS
+          labels:
+            helm_chart: 0.0.15
+          code:
+            prs: 1
+            lines_prs: 37
+            lines_overall: 1200
+            commits_prs: 2
+            commits_overall: 20
+          releases:
+          - added_lines: 1000
+            commits: 20
+            deleted_lines: 200
+            name: v0.0.93
+            published: 2020-03-25T10:57:00Z
+            publisher: github.com/vmarkovtsev
+            publisher_avatar: https://avatars0.githubusercontent.com/u/60340680?v=4
+            repository: github.com/athenianco/athenian-api
+            url: https://github.com/athenianco/athenian-api/releases/tag/v0.0.93
+            prs:
+            - number: 176
+              title: Fix first account creation
+              additions: 34
+              deletions: 3
+              author: github.com/se7entyse7en
+      properties:
+        include:
+          allOf:
+          - $ref: '#/components/schemas/IncludedNativeUsers'
+          - $ref: '#/components/schemas/IncludedJIRAIssues'
+          description: All people and JIRA issues mentioned in the deployments.
+        deployments:
+          description: List of matched deployments.
+          items:
+            $ref: '#/components/schemas/FilteredDeployment'
+          type: array
+      required:
+      - deployments
+      - include
+      type: object
     DeploymentAnalysis:
       additionalProperties: false
-      description: Result the analysis of the deployment.
+      description: Statistics and contents of the deployment.
+      example:
+        code:
+          prs: 1
+          lines_prs: 37
+          lines_overall: 1200
+          commits_prs: 2
+          commits_overall: 20
+        releases:
+        - added_lines: 1000
+          commits: 20
+          deleted_lines: 200
+          name: v0.0.93
+          published: 2020-03-25T10:57:00Z
+          publisher: github.com/vmarkovtsev
+          publisher_avatar: https://avatars0.githubusercontent.com/u/60340680?v=4
+          repository: github.com/athenianco/athenian-api
+          url: https://github.com/athenianco/athenian-api/releases/tag/v0.0.93
+          prs:
+          - number: 176
+            title: Fix first account creation
+            additions: 34
+            deletions: 3
+            author: github.com/se7entyse7en
       properties:
         code:
           additionalProperties: false
@@ -8821,9 +8895,11 @@ components:
           - prs
           type: object
         releases:
-          allOf:
-          - description: Deployed releases. The format matches the response from `/filter/releases`.
-          - $ref: '#/components/schemas/ReleaseSet'
+          description: Deployed releases. The format matches the response from `/filter/releases`.
+            `include` is always empty.
+          items:
+            $ref: '#/components/schemas/FilteredRelease'
+          type: array
       required:
       - code
       - releases
