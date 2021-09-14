@@ -908,7 +908,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/InvalidRequestError'
           description: Invalid query parameter values.
         404:
           content:
@@ -1218,7 +1218,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/InvalidRequestError'
           description: Something is wrong with the invitation URL.
         403:
           content:
@@ -2072,7 +2072,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/InvalidRequestError'
           description: Request is invalid.
         403:
           content:
@@ -2125,7 +2125,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/InvalidRequestError'
           description: Request is invalid.
         403:
           content:
@@ -2176,7 +2176,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/InvalidRequestError'
           description: Request is invalid.
         403:
           content:
@@ -2269,7 +2269,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/InvalidRequestError'
           description: Request is invalid.
         403:
           content:
@@ -2335,6 +2335,159 @@ paths:
       - bearerAuth: []
       - apiKeyAuth: []
       summary: List the current release matching settings.
+      tags:
+      - settings
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
+      x-codegen-request-body-name: body
+  /settings/work_type:
+    delete:
+      operationId: delete_work_type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkTypeGetRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Empty response indicates a successful operation.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: Request is invalid.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user or the account was not found. The work type was not
+            found.
+      security:
+      - bearerAuth: []
+      summary: Remove the work type given the name.
+      tags:
+      - settings
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
+      x-codegen-request-body-name: body
+    get:
+      operationId: get_work_type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkTypeGetRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkType'
+          description: Created or updated work type definition.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: Request is invalid.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user or the account was not found. The work type was not
+            found.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: Fetch the definition of the work type given the name.
+      tags:
+      - settings
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
+      x-codegen-request-body-name: body
+    put:
+      operationId: set_work_type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkTypePutRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkType'
+          description: Created or updated work type definition.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: Request is invalid.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user or the account was not found.
+      security:
+      - bearerAuth: []
+      summary: Create or update a work type - a rule set to group PRs, releases, etc.
+        together.
+      tags:
+      - settings
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
+      x-codegen-request-body-name: body
+  /settings/work_types/{id}:
+    get:
+      operationId: list_work_types
+      parameters:
+      - description: Numeric identifier of the account.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkTypes'
+          description: Existing work types in the account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user does not belong to the specified account.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: List the current work types - rule sets to group PRs, releases, etc.
+        together.
       tags:
       - settings
 # {% if False %}
@@ -3376,14 +3529,14 @@ components:
           login: jjdoe
           name: Jane Josephine Doe
           email: janedoe@exampleco.com
-          picture: http://exampleco.com/janedoe/me.jpg
+          picture: https://exampleco.com/janedoe/me.jpg
           updated: 2020-01-23T12:00:00Z
         - id: github|24828976
           native_id: 24828976
           login: jjdoe
           name: Jane Josephine Doe
           email: janedoe@exampleco.com
-          picture: http://exampleco.com/janedoe/me.jpg
+          picture: https://exampleco.com/janedoe/me.jpg
           updated: 2020-01-23T12:00:00Z
         admins:
         - id: github|24828976
@@ -3391,14 +3544,14 @@ components:
           login: jjdoe
           name: Jane Josephine Doe
           email: janedoe@exampleco.com
-          picture: http://exampleco.com/janedoe/me.jpg
+          picture: https://exampleco.com/janedoe/me.jpg
           updated: 2020-01-23T12:00:00Z
         - id: github|24828976
           native_id: 24828976
           login: jjdoe
           name: Jane Josephine Doe
           email: janedoe@exampleco.com
-          picture: http://exampleco.com/janedoe/me.jpg
+          picture: https://exampleco.com/janedoe/me.jpg
           updated: 2020-01-23T12:00:00Z
         organizations:
         - name: Athenian
@@ -4680,6 +4833,10 @@ components:
         releaser:
           $ref: '#/components/schemas/DeveloperSet'
       type: object
+    Color:
+      description: RGB 24-bit color in hex.
+      pattern: '^[0-9a-fA-F]{6}$'
+      type: string
     PullRequestLabel:
       additionalProperties: false
       description: Pull request label.
@@ -4692,7 +4849,7 @@ components:
         description:
           type: string
         color:
-          type: string
+          $ref: '#/components/schemas/Color'
       required:
       - color
       - name
@@ -5687,7 +5844,7 @@ components:
         description:
           type: string
         color:
-          type: string
+          $ref: '#/components/schemas/Color'
         used_prs:
           minimum: 0
           type: integer
@@ -6479,8 +6636,7 @@ components:
           minimum: 1
           type: integer
         color:
-          description: 24-bit hex RGB.
-          type: string
+          $ref: '#/components/schemas/Color'
       required:
       - color
       - image
@@ -8915,4 +9071,102 @@ components:
       - $ref: '#/components/schemas/DeploymentNotification'
       - $ref: '#/components/schemas/DeploymentAnalysis'
       description: Everything we know about the deployment.
+      type: object
+    WorkTypeName:
+      description: Work type name. It is unique within the account scope.
+      minLength: 3
+      type: string
+    WorkTypeGetRequest:
+      description: Identifier of a work type - a set of rules to group PRs, releases,
+        etc. together.
+      example:
+        account: 1
+        name: Bug Fixing
+      properties:
+        account:
+          description: User's account ID.
+          type: integer
+        name:
+          $ref: '#/components/schemas/WorkTypeName'
+      required:
+      - account
+      - name
+      type: object
+    WorkTypes:
+      description: |
+        List of work types. Response from `/settings/work_types/{account}`.
+      items:
+        $ref: '#/components/schemas/WorkType'
+      type: array
+    WorkType:
+      description: Definition of a work type - a set of rules to group PRs, releases,
+        etc. together.
+      example:
+        name: Bug Fixing
+        color: FF0000
+        rules:
+        - name: pull_request/label_include
+          body:
+            crazy_args:
+            - javascript
+            - really
+            sucks: true
+      properties:
+        name:
+          $ref: '#/components/schemas/WorkTypeName'
+        color:
+          $ref: '#/components/schemas/Color'
+        rules:
+          items:
+            $ref: '#/components/schemas/WorkTypeRule'
+          type: array
+      required:
+      - color
+      - name
+      - rules
+      type: object
+    WorkTypeRule:
+      description: 'Specific rule details: name and parameters.'
+      example:
+        name: pull_request/label_include
+        body:
+          crazy_args:
+          - javascript
+          - really
+          sucks: true
+      properties:
+        name:
+          description: Rule name - must be unique within the parent work type.
+          minLength: 1
+          type: string
+        body:
+          description: Freeform parameters of the rule.
+          type: object
+      required:
+      - body
+      - name
+      type: object
+    WorkTypePutRequest:
+      description: Request body of `PUT /settings/work_type`.
+      example:
+        work_type:
+          name: Bug Fixing
+          color: FF0000
+          rules:
+          - name: pull_request/label_include
+            body:
+              crazy_args:
+              - javascript
+              - really
+              sucks: true
+        account: 1
+      properties:
+        account:
+          description: Account ID.
+          type: integer
+        work_type:
+          $ref: '#/components/schemas/WorkType'
+      required:
+      - account
+      - work_type
       type: object
