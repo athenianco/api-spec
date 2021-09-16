@@ -9074,7 +9074,7 @@ components:
       type: object
     WorkTypeName:
       description: Work type name. It is unique within the account scope.
-      minLength: 3
+      minLength: 1
       type: string
     WorkTypeGetRequest:
       description: Identifier of a work type - a set of rules to group PRs, releases,
