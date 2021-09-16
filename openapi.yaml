@@ -2381,7 +2381,7 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
-    get:
+    post:
       operationId: get_work_type
       requestBody:
         content:
