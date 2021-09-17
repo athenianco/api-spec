@@ -4457,6 +4457,17 @@ components:
           users:
             key:
               avatar: https://avatars0.githubusercontent.com/u/60340680?v=4
+          deployments:
+            production-2020-03-26-W9J3uzHl:
+              components:
+              - repository: github.com/athenianco/athenian-api
+                reference: v0.10.34
+              environment: production
+              date_finished: 2022-01-23T05:01:07.000+00:00
+              date_started: 2022-01-23T04:56:07.000+00:00
+              conclusion: SUCCESS
+              labels:
+                helm_chart: 0.0.67
         data:
         - repository: github.com/athenianco/athenian-webapp
           number: 1111
@@ -4518,9 +4529,13 @@ components:
             - functionality
             - webapp
             type: Task
+          deployments:
+          - production-2020-03-26-W9J3uzHl
       properties:
         include:
-          $ref: '#/components/schemas/IncludedNativeUsers'
+          allOf:
+          - $ref: '#/components/schemas/IncludedNativeUsers'
+          - $ref: '#/components/schemas/IncludedDeployments'
         data:
           description: List of matched pull requests.
           items:
@@ -4558,6 +4573,27 @@ components:
           type: object
       required:
       - users
+      type: object
+    IncludedDeployments:
+      description: Mentioned deployments.
+      example:
+        deployments:
+          production-2020-03-26-W9J3uzHl:
+            components:
+            - repository: github.com/athenianco/athenian-api
+              reference: v0.10.34
+            environment: production
+            date_finished: 2022-01-23T05:01:07.000+00:00
+            date_started: 2022-01-23T04:56:07.000+00:00
+            conclusion: SUCCESS
+            labels:
+              helm_chart: 0.0.67
+      properties:
+        deployments:
+          additionalProperties:
+            $ref: '#/components/schemas/DeploymentNotification'
+          description: Mapping deployment names to their details.
+          type: object
       type: object
     PullRequest:
       additionalProperties: false
@@ -4625,6 +4661,8 @@ components:
           - functionality
           - webapp
           type: Task
+        deployments:
+        - production-2020-03-26-W9J3uzHl
       properties:
         repository:
           description: PR is/was open in this repository.
@@ -4747,6 +4785,11 @@ components:
           description: List of linked JIRA issues.
           items:
             $ref: '#/components/schemas/LinkedJIRAIssue'
+          type: array
+        deployments:
+          description: Deployments with this pull request.
+          items:
+            type: string
           type: array
       required:
       - comments
@@ -5458,7 +5501,17 @@ components:
           users:
             github.com/gkwillie:
               avatar: https://avatars0.githubusercontent.com/u/60340680?v=4
-          jira: null
+          deployments:
+            production-2020-03-26-W9J3uzHl:
+              components:
+              - repository: github.com/athenianco/athenian-api
+                reference: v0.10.34
+              environment: production
+              date_finished: 2022-01-23T05:01:07.000+00:00
+              date_started: 2022-01-23T04:56:07.000+00:00
+              conclusion: SUCCESS
+              labels:
+                helm_chart: 0.0.67
         data:
         - added_lines: 1000
           commits: 20
@@ -5483,6 +5536,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/IncludedNativeUsers'
           - $ref: '#/components/schemas/IncludedJIRAIssues'
+          - $ref: '#/components/schemas/IncludedDeployments'
         data:
           description: List of matching release metadata.
           items:
@@ -5508,6 +5562,8 @@ components:
           additions: 34
           deletions: 3
           author: github.com/se7entyse7en
+        deployments:
+        - production-2020-03-26-W9J3uzHl
       properties:
         name:
           description: Title of the release.
@@ -5550,6 +5606,11 @@ components:
           description: List of released pull requests.
           items:
             $ref: '#/components/schemas/ReleasedPullRequest'
+          type: array
+        deployments:
+          description: Deployments with this release.
+          items:
+            type: string
           type: array
       required:
       - added_lines
@@ -5632,8 +5693,6 @@ components:
             $ref: '#/components/schemas/LinkedJIRAIssue'
           description: Mapping JIRA issue ID -> details.
           type: object
-      required:
-      - jira
       type: object
     ReleaseMatchRequest:
       additionalProperties: false
@@ -8947,6 +9006,7 @@ components:
           conclusion: SUCCESS
           labels:
             helm_chart: 0.0.15
+          name: production-2020-03-26-W9J3uzHl
           code:
             prs: 1
             lines_prs: 37
