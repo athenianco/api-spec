@@ -578,8 +578,8 @@ paths:
       security:
       - bearerAuth: []
       - apiKeyAuth: []
-      summary: List the deployments that satisfy the provided filters. We submit new
-        deployments using `/events/deployments`.
+      summary: List the deployments that satisfy the provided filters. We accept new
+        deployment notifications at `/events/deployments`.
       tags:
       - filter
 # {% if False %}
@@ -3066,6 +3066,15 @@ components:
         * `pr-wait-first-review-time`: average time of waiting for the first review.
         * `pr-wait-first-review-count`: number of PRs used to calculate `pr-wait-first-review`. Note: this is *not* the same as the number of PRs waiting for the first review.
         * `pr-wait-first-review-count-q`: number of PRs used to calculate `pr-wait-first-review after applying the quantiles.
+        * `pr-deployment-time`: average time between when the PR was released and was deployed. We track deployments through `/events/deployments`. Requires setting `ForSet.environments`.
+        * `pr-deployment-count`: number of PRs used to calculate `pr-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given time window. Requires setting `ForSet.environments`.
+        * `pr-deployment-count-q`: number of PRs used to calculate `pr-deployment-time` after applying the quantiles. Requires setting `ForSet.environments`.
+        * `pr-lead-deployment-time`: extended Lead Time that includes the time passed since the PR was released until it was deployed. We discard PRs in repositories without deployments. Requires setting `ForSet.environments`.
+        * `pr-lead-deployment-count`: number of PRs used to calculate `pr-lead-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given window and duplicates `pr-deployment-count`. Requires setting `ForSet.environments`.
+        * `pr-lead-deployment-count-q`: number of PRs used to calculate `pr-lead-deployment-time` after applying the quantiles. Requires setting `ForSet.environments`.
+        * `pr-cycle-deployment-time`: extended Cycle Time that includes `pr-deployment-time`. We discard PRs in repositories without deployments. Requires setting `ForSet.environments`.
+        * `pr-cycle-deployment-count`: number of PRs used to calculate `pr-cycle-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given window and duplicates `pr-deployment-count` and `pr-lead-deployment-count`. Requires setting `ForSet.environments`.
+        * `pr-cycle-deployment-count-q`: number of PRs used to calculate `pr-cycle-deployment-time` after applying the quantiles. Requires setting `ForSet.environments`.
         * `pr-flow-ratio`: ratio of opened to closed PRs.
         * `pr-opened`: number of opened PRs.
         * `pr-reviewed`: number of PRs which received a review.
@@ -3109,6 +3118,15 @@ components:
       - pr-wait-first-review-time
       - pr-wait-first-review-count
       - pr-wait-first-review-count-q
+      - pr-deployment-time
+      - pr-deployment-count
+      - pr-deployment-count-q
+      - pr-lead-deployment-time
+      - pr-lead-deployment-count
+      - pr-lead-deployment-count-q
+      - pr-cycle-deployment-time
+      - pr-cycle-deployment-count
+      - pr-cycle-deployment-count-q
       - pr-flow-ratio
       - pr-opened
       - pr-reviewed
@@ -3778,14 +3796,20 @@ components:
           items:
             type: string
           type: array
-        jira:
-          $ref: '#/components/schemas/JIRAFilter'
         lines:
           description: Split by changed number of lines (inserted + removed).
           items:
             minimum: 0
             type: integer
           minLength: 2
+          type: array
+        jira:
+          $ref: '#/components/schemas/JIRAFilter'
+        environments:
+          description: Calculate deployment metrics separately for each environment
+            in the list. Required if any deployment metrics were requested.
+          items:
+            type: string
           type: array
       required:
       - repositories
