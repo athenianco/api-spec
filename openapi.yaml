@@ -1567,6 +1567,60 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.metrics_controller
       x-codegen-request-body-name: body
+  /metrics/deployments:
+    post:
+      operationId: calc_metrics_deployments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeploymentMetricsRequest'
+        description: Select the deployments of interest and the metrics to calculate.
+        required: true
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedDeploymentMetrics'
+          description: Calculated metrics.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: The request is invalid.
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user is forbidden to access the specified repositories
+            on behalf of the specified account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The specified account does not exist or the user is not a member.
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The account's installation has not finished yet.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: Calculate metrics on deployments submitted by `/events/deployments`.
+      tags:
+      - metrics
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.metrics_controller
+      x-codegen-request-body-name: body
   /metrics/developers:
     post:
       operationId: calc_metrics_developers
@@ -4288,7 +4342,7 @@ components:
             type: string
           type: array
         labels_exclude:
-          description: None of these labels must be present in each released PR.
+          description: PRs with these labels are excluded from `ReleaseSet.data.prs`.
           items:
             type: string
           type: array
@@ -7002,6 +7056,7 @@ components:
         * `release-age` - average timedelta between releases of the same alignment (as determined by the commit DAG). Quantiles are applied.
         * `release-tag-age` - average timedelta between releases by tag of the same alignment (as determined by the commit DAG). Quantiles are applied.
         * `release-branch-age` - average timedelta between releases by branch of the same alignment (as determined by the commit DAG). Quantiles are applied.
+        * `release-time-to-deploy` - average time passed since release happened until deployed.
       enum:
       - release-count
       - release-tag-count
@@ -7027,6 +7082,7 @@ components:
       - release-age
       - release-tag-age
       - release-branch-age
+      - release-time-to-deploy
       type: string
     CalculatedReleaseMetrics:
       description: Response from `/metrics/releases`.
@@ -8939,6 +8995,32 @@ components:
       - title
       - total_stats
       type: object
+    DeploymentWith:
+      additionalProperties: false
+      description: Deployment contribution roles. The aggregation is `OR` everywhere.
+      example:
+        pr_author:
+        - github.com/se7entyse7en
+        deployer:
+        - github.com/gkwillie
+      properties:
+        pr_author:
+          allOf:
+          - $ref: '#/components/schemas/DeveloperSet'
+          - description: Authors of deployed pull requests.
+        commit_author:
+          allOf:
+          - $ref: '#/components/schemas/DeveloperSet'
+          - description: Authors of deployed commits.
+        releaser:
+          allOf:
+          - $ref: '#/components/schemas/DeveloperSet'
+          - description: Deployed release publishers.
+        deployer:
+          allOf:
+          - $ref: '#/components/schemas/DeveloperSet'
+          - description: Deployment authors.
+      type: object
     FilterDeploymentsRequest:
       additionalProperties: false
       description: Filters to select the deployments in `/filter/deployments`.
@@ -8975,7 +9057,7 @@ components:
         in:
           $ref: '#/components/schemas/RepositorySet'
         with:
-          $ref: '#/components/schemas/ReleaseWith'
+          $ref: '#/components/schemas/DeploymentWith'
         pr_labels_include:
           description: At least one of these labels must be present in at least one
             deployed PR.
@@ -9259,3 +9341,151 @@ components:
       - account
       - work_type
       type: object
+    DeploymentMetricID:
+      description: |
+        Supported deployment metrics.
+        * `dep-count` - number of deployments in the time period.
+        * `dep-duration-all` - average deployment procedure time - the difference between `date_finished` and `date_started` of `DeploymentNotification`.
+        * `dep-duration-successful` - average successful deployment procedure time - the difference between `date_finished` and `date_started` of `DeploymentNotification` with `conclusion = 'SUCCESS'`.
+        * `dep-duration-failed` - average failed deployment procedure time - the difference between `date_finished` and `date_started` of `DeploymentNotification` with `conclusion = 'FAILURE'`.
+        * `dep-success-count` - number of successful deployments in the time period.
+        * `dep-failure-count` - number of failed deployments in the time period.
+        * `dep-success-ratio` - ratio between successful and all deployments.
+        * `dep-size-prs` - average number of deployed pull requests.
+        * `dep-size-releases` - average number of deployed releases.
+        * `dep-size-lines` - average number of deployed lines of code (changed = insertions + removals).
+        * `dep-size-commits` - average number of deployed commits.
+        * `dep-prs-count` - number of pull requests deployed in the time period.
+        * `dep-releases-count` - number of releases deployed in the time period.
+        * `dep-lines-count` - number of deployed lines of code (changed = insertions + removals).
+        * `dep-commits-count` - number of deployed commits.
+        * `dep-jira-issues-count` - number of JIRA issues mapped to deployed pull requests.
+        * `dep-jira-bug-fixes-count` - number of deployed bug fixes.
+      enum:
+      - dep-count
+      - dep-duration-all
+      - dep-duration-successful
+      - dep-duration-failed
+      - dep-success-count
+      - dep-failure-count
+      - dep-success-ratio
+      - dep-size-prs
+      - dep-size-releases
+      - dep-size-lines
+      - dep-size-commits
+      - dep-prs-count
+      - dep-releases-count
+      - dep-lines-count
+      - dep-commits-count
+      - dep-jira-issues-count
+      - dep-jira-bug-fixes-count
+      type: string
+    DeploymentMetricsRequest:
+      additionalProperties: false
+      description: Request body of `/metrics/deployments`, the deployments selector.
+      properties:
+        for:
+          description: List of repository groups for which to calculate the metrics.
+          items:
+            $ref: '#/components/schemas/RepositorySet'
+          type: array
+        with:
+          description: List of developer groups for which to calculate the metrics.
+          items:
+            $ref: '#/components/schemas/DeploymentWith'
+          type: array
+        metrics:
+          description: Requested metric identifiers.
+          items:
+            $ref: '#/components/schemas/DeploymentMetricID'
+          type: array
+        pr_labels_include:
+          description: At least one of these labels must be present in at least one
+            deployed PR.
+          items:
+            type: string
+          type: array
+        pr_labels_exclude:
+          description: None of these labels must be present in each deployed PR.
+          items:
+            type: string
+          type: array
+        jira:
+          $ref: '#/components/schemas/JIRAFilter'
+        with_labels:
+          description: Deployments should contain at least one of the specified label
+            values. `null` matches any label value and effectively checks the label
+            existence.
+          type: object
+        without_labels:
+          description: Deployments may not contain the specified label values. `null`
+            matches any label value and effectively ensures that the label does not
+            exist.
+          type: object
+        environments:
+          description: List of environment groups for which to calculate the metrics.
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+        date_from:
+          description: Date from when to start measuring the metrics.
+          format: date
+          type: string
+        date_to:
+          description: Date up to which to measure the metrics.
+          format: date
+          type: string
+        timezone:
+          $ref: '#/components/schemas/TimeZone'
+        granularities:
+          items:
+            $ref: '#/components/schemas/Granularity'
+          type: array
+        quantiles:
+          $ref: '#/components/schemas/Quantiles'
+        account:
+          description: Session account ID.
+          type: integer
+      required:
+      - account
+      - date_from
+      - date_to
+      - granularities
+      - metrics
+      type: object
+    CalculatedDeploymentMetric:
+      additionalProperties: false
+      description: Calculated metrics for a deployments group.
+      properties:
+        for:
+          $ref: '#/components/schemas/RepositorySet'
+        with:
+          $ref: '#/components/schemas/DeploymentWith'
+        environments:
+          items:
+            type: string
+          type: array
+        metrics:
+          items:
+            $ref: '#/components/schemas/DeploymentMetricID'
+          type: array
+        granularity:
+          $ref: '#/components/schemas/Granularity'
+        values:
+          description: The sequence steps from `date_from` till `date_to` by `granularity`.
+          items:
+            $ref: '#/components/schemas/CalculatedLinearMetricValues'
+          type: array
+      required:
+      - granularity
+      - metrics
+      - values
+      type: object
+    CalculatedDeploymentMetrics:
+      description: Response from `/metrics/deployments`, metrics calculated for each
+        selected deployments group.
+      items:
+         $ref: '#/components/schemas/CalculatedDeploymentMetric'
+      type: array
