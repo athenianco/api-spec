@@ -3865,8 +3865,8 @@ components:
             are only implemented for single environments.
           items:
             type: string
-          minLength: 1
           maxLength: 64
+          minLength: 1
           type: array
       required:
       - repositories
@@ -4481,6 +4481,10 @@ components:
           minimum: 1
           nullable: true
           type: integer
+        environment:
+          description: Target environment for the deployment events, impacts `events`
+            and `stages`.
+          type: string
       required:
       - account
       - date_from
@@ -4500,6 +4504,7 @@ components:
         * `merged`: Somebody merged the PR.
         * `released`: The PR was released.
         * `rejected`: Somebody closed the PR without merging.
+        * `deployed`: The PR was deployed. We respect this event only when `environment` was specified.
       enum:
       - created
       - committed
@@ -4510,6 +4515,7 @@ components:
       - merged
       - released
       - rejected
+      - deployed
       example: created
       type: string
     PullRequestStage:
@@ -4520,7 +4526,8 @@ components:
         * `merging`: The PR was approved and is waiting for merge.
         * `releasing`: The PR was merged but is not released yet.
         * `force_push_dropped`: The PR was closed but the Git commit history was rewritten and the PR's commits no longer exist.
-        * `done`: The PR was either closed without merging or released or force push dropped.
+        * `done`: The PR was either closed without merging or released or force push dropped. Deployed or not.
+        * `deployed`: The PR was deployed. So it's merged. Released or not. We respect this stage only when `environment` was specified.
       enum:
       - wip
       - reviewing
@@ -4528,6 +4535,7 @@ components:
       - releasing
       - force_push_dropped
       - done
+      - deployed
       example: created
       type: string
     PullRequestSet:
@@ -4890,19 +4898,29 @@ components:
       type: object
     StageTimings:
       additionalProperties: false
-      description: Time spent by the PR in each pipeline stage.
+      description: |
+        Time spent by the PR in each pipeline stage.
+        The deployments are independent of the releases. If the release happens before
+        the deployment, the deployment time measures from the release event. If the release
+        happens after the deployment, the two values are independent and both measure from
+        the PR merge event.
       example:
         wip: 120s
         review: 600s
       properties:
         wip:
-          type: string
+          $ref: '#/components/schemas/TimeDuration'
         review:
-          type: string
+          $ref: '#/components/schemas/TimeDuration'
         merge:
-          type: string
+          $ref: '#/components/schemas/TimeDuration'
         release:
-          type: string
+          $ref: '#/components/schemas/TimeDuration'
+        deploy:
+          additionalProperties:
+            $ref: '#/components/schemas/TimeDuration'
+          description: Map from target environments to the values.
+          type: object
       required:
       - wip
       type: object
@@ -4961,7 +4979,7 @@ components:
       type: object
     Color:
       description: RGB 24-bit color in hex.
-      pattern: '^[0-9a-fA-F]{6}$'
+      pattern: ^[0-9a-fA-F]{6}$
       type: string
     PullRequestLabel:
       additionalProperties: false
