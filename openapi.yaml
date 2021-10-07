@@ -4581,6 +4581,8 @@ components:
             wip: 12085s
             review: 86690s
             merge: 2374s
+            deploy:
+              production-2020-03-26-W9J3uzHl: 45321s
           events_now:
           - approved
           - changes_requested
@@ -4589,9 +4591,11 @@ components:
           - merged
           - review_requested
           - reviewed
+          - deployed
           stages_now:
           - done
           - force_push_dropped
+          - deployed
           participants:
           - id: github.com/akbarik
             status:
@@ -4618,8 +4622,6 @@ components:
             - functionality
             - webapp
             type: Task
-          deployments:
-          - production-2020-03-26-W9J3uzHl
       properties:
         include:
           allOf:
@@ -4713,6 +4715,8 @@ components:
           wip: 12085s
           review: 86690s
           merge: 2374s
+          deploy:
+            production-2020-03-26-W9J3uzHl: 45321s
         events_now:
         - approved
         - changes_requested
@@ -4721,9 +4725,11 @@ components:
         - merged
         - review_requested
         - reviewed
+        - deployed
         stages_now:
         - done
         - force_push_dropped
+        - deployed
         participants:
         - id: github.com/akbarik
           status:
@@ -4750,8 +4756,6 @@ components:
           - functionality
           - webapp
           type: Task
-        deployments:
-        - production-2020-03-26-W9J3uzHl
       properties:
         repository:
           description: PR is/was open in this repository.
@@ -4874,11 +4878,6 @@ components:
           description: List of linked JIRA issues.
           items:
             $ref: '#/components/schemas/LinkedJIRAIssue'
-          type: array
-        deployments:
-          description: Deployments with this pull request.
-          items:
-            type: string
           type: array
       required:
       - comments
