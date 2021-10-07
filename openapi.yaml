@@ -9400,6 +9400,26 @@ components:
     DeploymentMetricsRequest:
       additionalProperties: false
       description: Request body of `/metrics/deployments`, the deployments selector.
+      example:
+        for:
+        - - github.com/athenianco/athenian-webapp
+          - github.com/athenianco/athenian-api
+        with:
+        - pr_author:
+          - github.com/se7entyse7en
+          - github.com/vmarkovtsev
+        metrics:
+        - dep-duration-successful
+        - dep-success-ratio
+        environments:
+        - - production
+        - - staging
+        date_from: 2021-07-20
+        date_to: 2021-10-07
+        granularities:
+        - all
+        - 2 week
+        account: 1
       properties:
         for:
           description: List of repository groups for which to calculate the metrics.
@@ -9475,6 +9495,34 @@ components:
     CalculatedDeploymentMetric:
       additionalProperties: false
       description: Calculated metrics for a deployments group.
+      example:
+        for:
+        - github.com/athenianco/athenian-webapp
+        - github.com/athenianco/athenian-api
+        with:
+          pr_author:
+          - github.com/se7entyse7en
+          - github.com/vmarkovtsev
+        metrics:
+        - dep-duration-successful
+        - dep-success-ratio
+        environments:
+        - production
+        granularity: all
+        values:
+        - date: 2020-07-20
+          values:
+          - 600s
+          - 0.91
+          confidence_mins:
+          - 550s
+          - null
+          confidence_maxs:
+          - 630s
+          - null
+          confidence_scores:
+          - 84
+          - null
       properties:
         for:
           $ref: '#/components/schemas/RepositorySet'
