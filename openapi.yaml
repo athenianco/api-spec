@@ -5918,6 +5918,7 @@ components:
           - 483
           - 484
           - 485
+        environment: production
       properties:
         account:
           description: Account ID.
@@ -5927,6 +5928,9 @@ components:
           items:
             $ref: '#/components/schemas/PullRequestNumbers'
           type: array
+        environment:
+          description: Deployment environment to apply.
+          type: string
       required:
       - account
       - prs
