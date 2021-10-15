@@ -6574,6 +6574,8 @@ components:
           items:
             $ref: '#/components/schemas/JIRAUser'
           type: array
+        deployments:
+          $ref: '#/components/schemas/IncludedDeployments'
       type: object
     JIRAEpic:
       allOf:
