@@ -7693,6 +7693,7 @@ components:
       example:
         name: Product Development
         key: DEV
+        id: 10009
         avatar_url: https://athenianco.atlassian.net/secure/projectavatar?pid=10009&avatarId=10551
         enabled: true
         issues_count: 100
@@ -7703,6 +7704,12 @@ components:
           type: string
         key:
           description: Short prefix of the project.
+          type: string
+        id:
+          description: |
+            Internal project identifier that corresponds to `project` in `/filter/jira`.
+            Note: this is a string even though this looks like an integer. That's what JIRA API
+            sends us.
           type: string
         avatar_url:
           description: Avatar URL of the project.
@@ -7721,6 +7728,7 @@ components:
       required:
       - avatar_url
       - enabled
+      - id
       - issues_count
       - key
       - last_update
