@@ -9528,12 +9528,13 @@ components:
       description: Calculated metrics for a deployments group.
       example:
         for:
-        - github.com/athenianco/athenian-webapp
-        - github.com/athenianco/athenian-api
-        with:
-          pr_author:
-          - github.com/se7entyse7en
-          - github.com/vmarkovtsev
+          repositories:
+          - github.com/athenianco/athenian-webapp
+          - github.com/athenianco/athenian-api
+          with:
+            pr_author:
+            - github.com/se7entyse7en
+            - github.com/vmarkovtsev
         metrics:
         - dep-duration-successful
         - dep-success-ratio
@@ -9556,13 +9557,7 @@ components:
           - null
       properties:
         for:
-          $ref: '#/components/schemas/RepositorySet'
-        with:
-          $ref: '#/components/schemas/DeploymentWith'
-        environments:
-          items:
-            type: string
-          type: array
+          $ref: '#/components/schemas/ForSetDeployments'
         metrics:
           items:
             $ref: '#/components/schemas/DeploymentMetricID'
@@ -9575,6 +9570,7 @@ components:
             $ref: '#/components/schemas/CalculatedLinearMetricValues'
           type: array
       required:
+      - for
       - granularity
       - metrics
       - values
