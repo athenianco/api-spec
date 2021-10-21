@@ -9397,44 +9397,32 @@ components:
       - dep-jira-issues-count
       - dep-jira-bug-fixes-count
       type: string
-    DeploymentMetricsRequest:
+    ForSetDeployments:
       additionalProperties: false
-      description: Request body of `/metrics/deployments`, the deployments selector.
+      description: Filters for `/metrics/deployments`. Nothing is strictly required.
       example:
-        for:
-        - - github.com/athenianco/athenian-webapp
-          - github.com/athenianco/athenian-api
+        repositories:
+        - github.com/athenianco/athenian-webapp
+        - github.com/athenianco/athenian-api
         with:
         - pr_author:
           - github.com/se7entyse7en
           - github.com/vmarkovtsev
-        metrics:
-        - dep-duration-successful
-        - dep-success-ratio
-        environments:
-        - - production
-        - - staging
-        date_from: 2021-07-20
-        date_to: 2021-10-07
-        granularities:
-        - all
-        - 2 week
-        account: 1
+        jira:
+          labels_include:
+          - bug
       properties:
-        for:
-          description: List of repository groups for which to calculate the metrics.
-          items:
-            $ref: '#/components/schemas/RepositorySet'
-          type: array
+        repositories:
+          $ref: '#/components/schemas/RepositorySet'
+        repogroups:
+          $ref: '#/components/schemas/IndexedGroups'
         with:
-          description: List of developer groups for which to calculate the metrics.
+          $ref: '#/components/schemas/DeploymentWith'
+        with_groups:
+          description: Alternative to `with` - calculate metrics for distinct filters
+            separately.
           items:
             $ref: '#/components/schemas/DeploymentWith'
-          type: array
-        metrics:
-          description: Requested metric identifiers.
-          items:
-            $ref: '#/components/schemas/DeploymentMetricID'
           type: array
         pr_labels_include:
           description: At least one of these labels must be present in at least one
@@ -9466,6 +9454,48 @@ components:
               type: string
             type: array
           type: array
+      type: object
+    DeploymentMetricsRequest:
+      additionalProperties: false
+      description: Request body of `/metrics/deployments`, the deployments selector.
+      example:
+        for:
+        - repositories:
+          - github.com/athenianco/athenian-webapp
+          - github.com/athenianco/athenian-api
+          with:
+          - pr_author:
+            - github.com/se7entyse7en
+            - github.com/vmarkovtsev
+          jira:
+            labels_include:
+            - bug
+        metrics:
+        - dep-duration-successful
+        - dep-success-ratio
+        environments:
+        - - production
+        - - staging
+        date_from: 2021-07-20
+        date_to: 2021-10-07
+        granularities:
+        - all
+        - 2 week
+        account: 1
+      properties:
+        for:
+          description: |-
+            Sets of filters for which to calculate the metrics.
+            The aggregation is `AND` between individual properties like `repositories` or `with`.
+            The aggregation is `OR` inside each property.
+          items:
+            $ref: '#/components/schemas/ForSetDeployments'
+          type: array
+        metrics:
+          description: Requested metric identifiers.
+          items:
+            $ref: '#/components/schemas/DeploymentMetricID'
+          type: array
         date_from:
           description: Date from when to start measuring the metrics.
           format: date
@@ -9489,6 +9519,7 @@ components:
       - account
       - date_from
       - date_to
+      - for
       - granularities
       - metrics
       type: object
