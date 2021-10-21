@@ -9418,7 +9418,7 @@ components:
           $ref: '#/components/schemas/IndexedGroups'
         with:
           $ref: '#/components/schemas/DeploymentWith'
-        with_groups:
+        withgroups:
           description: Alternative to `with` - calculate metrics for distinct filters
             separately.
           items:
