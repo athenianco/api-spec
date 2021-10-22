@@ -4072,8 +4072,10 @@ components:
       type: array
     CalculatedPullRequestMetrics:
       additionalProperties: false
-      description: Response from `/metrics/pull_requests`. The dates start from `date_from`
+      description: |
+        Response from `/metrics/pull_requests`. The dates start from `date_from`
         and end earlier or equal to `date_to`.
+        The order of the items is *not* guaranteed to match any expectations.
       example:
         metrics:
         - pr-lead-time
@@ -5400,8 +5402,10 @@ components:
       type: string
     CalculatedDeveloperMetrics:
       additionalProperties: false
-      description: Response of `/metrics/developers`. The dates start from `date_from`
+      description: |
+        Response of `/metrics/developers`. The dates start from `date_from`
         and end earlier or equal to `date_to`.
+        The order of the items is *not* guaranteed to match any expectations.
       example:
         date_from: 2020-01-23
         date_to: 2020-01-24
@@ -7108,7 +7112,9 @@ components:
       - release-time-to-deploy
       type: string
     CalculatedReleaseMetrics:
-      description: Response from `/metrics/releases`.
+      description: |
+        Response from `/metrics/releases`.
+        The order of the items is *not* guaranteed to match any expectations.
       items:
         $ref: '#/components/schemas/CalculatedReleaseMetric'
       type: array
@@ -7445,7 +7451,9 @@ components:
           type: array
       type: object
     CalculatedJIRAMetrics:
-      description: Response from `/metrics/jira`.
+      description: |
+        Response from `/metrics/jira`.
+        The order of the items is *not* guaranteed to match any expectations.
       items:
         $ref: '#/components/schemas/CalculatedJIRAMetricValues'
       type: array
@@ -8355,8 +8363,10 @@ components:
       type: string
     CalculatedCodeCheckMetrics:
       additionalProperties: false
-      description: Response from `/metrics/code_checks`. The dates start from `date_from`
+      description: |
+        Response from `/metrics/code_checks`. The dates start from `date_from`
         and end earlier or equal to `date_to`.
+        The order of the items is *not* guaranteed to match any expectations.
       example:
         metrics:
         - chk-suites-count
@@ -9584,8 +9594,10 @@ components:
       - values
       type: object
     CalculatedDeploymentMetrics:
-      description: Response from `/metrics/deployments`, metrics calculated for each
+      description: |
+        Response from `/metrics/deployments`, metrics calculated for each
         selected deployments group.
+        The order of the items is *not* guaranteed to match any expectations.
       items:
          $ref: '#/components/schemas/CalculatedDeploymentMetric'
       type: array
