@@ -8341,6 +8341,9 @@ components:
         * `chk-concurrency-max` - maximum number of check runs of the same type executing in parallel. We consider check runs executing in parallel if their time intervals overlap ≥ 50%.
         * `chk-concurrency` - average number of check runs of the same type executing in parallel; we choose the check run type that corresponds to the maximum concurrency for each day. We consider check runs executing in parallel if their time intervals overlap ≥ 50%.
         * `chk-elapsed-time-per-concurrency` - cumulative time spent on each concurrency level across check runs. Only allowed for histograms.
+        * `chk-suite-occupancy` - average ratio between summed time of check runs in a check suite and the product of the number of check runs with the maximum check run time in that check suite. 1 means ideal resource utilization, down to 0 for absolute inefficiency. For example, there are one slow check run that executes in 10x seconds, and N fast check runs that execute in x seconds, in the same check suite. The metric value will be (10x + Nx) / (10*(N+1)*x) → 0.1 if N → +∞.
+        * `chk-suite-critical-occupancy` - `chk-suite-occupancy` calculated for critical check runs only. A critical check run is a check run of type that at least once dominated the check suite execution time on the time interval. This is the measure of check suite "trebble" when there are several slowest check runs that elapse time with some standard deviation.
+        * `chk-suite-imbalance` - average difference between the time of the slowest and the second slowest check runs in a check suite. High values signal unbalanced jobs and CI/CD inefficiency.
       enum:
       - chk-suites-count
       - chk-suites-in-prs-count
@@ -8359,6 +8362,9 @@ components:
       - chk-concurrency-max
       - chk-concurrency
       - chk-elapsed-time-per-concurrency
+      - chk-suite-occupancy
+      - chk-suite-critical-occupancy
+      - chk-suite-imbalance
       example: chk-suites-count
       type: string
     CalculatedCodeCheckMetrics:
@@ -8717,7 +8723,9 @@ components:
           total_stats:
             count: 100
             successes: 50
+            critical: true
             mean_execution_time: 200s
+            stddev_execution_time: 20s
             median_execution_time: 120s
             skips: 30
             flaky_count: 0
@@ -8752,7 +8760,9 @@ components:
           prs_stats:
             count: 100
             successes: 50
+            critical: true
             mean_execution_time: 200s
+            stddev_execution_time: 30s
             median_execution_time: 120s
             skips: 30
             flaky_count: 0
@@ -8817,7 +8827,9 @@ components:
       example:
         count: 100
         successes: 50
+        critical: true
         mean_execution_time: 200s
+        stddev_execution_time: 30s
         median_execution_time: 120s
         skips: 30
         flaky_count: 0
@@ -8859,9 +8871,21 @@ components:
             and `date_to`.
           minimum: 0
           type: integer
+        critical:
+          description: This code check dominated the overall check suite execution time
+            at least once.
+          type: boolean
         mean_execution_time:
           allOf:
           - description: Average elapsed execution time.
+            nullable: true
+          - $ref: '#/components/schemas/TimeDuration'
+        stddev_execution_time:
+          allOf:
+          - description: |
+              Standard deviation of the execution time.
+              Higher values for a `critical` code check indicate an optimization opportunity:
+              it is better to have a stable execution time with the same average.
             nullable: true
           - $ref: '#/components/schemas/TimeDuration'
         median_execution_time:
@@ -8907,12 +8931,14 @@ components:
       required:
       - count
       - count_timeline
+      - critical
       - flaky_count
       - mean_execution_time
       - mean_execution_time_timeline
       - median_execution_time
       - median_execution_time_timeline
       - skips
+      - stddev_execution_time
       - successes
       - successes_timeline
       type: object
@@ -8931,7 +8957,9 @@ components:
         total_stats:
           count: 100
           successes: 50
+          critical: true
           mean_execution_time: 200s
+          stddev_execution_time: 20s
           median_execution_time: 120s
           skips: 30
           flaky_count: 0
@@ -8966,7 +8994,9 @@ components:
         prs_stats:
           count: 100
           successes: 50
+          critical: true
           mean_execution_time: 200s
+          stddev_execution_time: 30s
           median_execution_time: 120s
           skips: 30
           flaky_count: 0
