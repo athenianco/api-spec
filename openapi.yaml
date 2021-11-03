@@ -8211,15 +8211,16 @@ components:
         - repositories:
           - github.com/athenianco/athenian-webapp
           - github.com/athenianco/athenian-api
-          pushers:
+          pusher_groups:
           - - github.com/vmarkovtsev
             - github.com/dpordomingo
+          - - github.com/se7entyse7en
         - repositories:
           - github.com/athenianco/metadata
           - github.com/athenianco/athenian-api
           pushers:
-          - - github.com/vmarkovtsev
-            - github.com/se7entyse7en
+          - github.com/vmarkovtsev
+          - github.com/se7entyse7en
         metrics:
         - chk-suites-count
         date_from: 2020-01-23
@@ -8298,9 +8299,7 @@ components:
             We aggregate by each group so that you can request metrics of several teams at once.
             We treat `pushers` as another group, if specified.
           items:
-            items:
-              $ref: '#/components/schemas/DeveloperID'
-            type: array
+            $ref: '#/components/schemas/CommitPushers'
           type: array
         labels_include:
           description: At least one of these labels must be present in the checked
