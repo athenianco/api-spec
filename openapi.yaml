@@ -12,7 +12,7 @@ info:
   license:
     name: CC-BY-4.0
   title: '{{ title }}'
-  version: 1.6.41
+  version: 2.0.0
 servers:
 - description: '{{ server_description }} - {{ server_url }}'
   url: '{{ server_url }}/v1'
@@ -1141,7 +1141,7 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.jira_controller
       x-codegen-request-body-name: body
-  /histograms/prs:
+  /histograms/pull_requests:
     post:
       operationId: calc_histogram_prs
       requestBody:
@@ -1729,7 +1729,7 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.jira_controller
       x-codegen-request-body-name: body
-  /metrics/prs:
+  /metrics/pull_requests:
     post:
       operationId: calc_metrics_prs
       requestBody:
@@ -3812,7 +3812,7 @@ components:
       type: object
     ForSet:
       additionalProperties: false
-      description: Filter for `/metrics/prs`.
+      description: Filter for `/metrics/pull_requests`.
       example:
         repositories:
         - github.com/athenianco/athenian-webapp
@@ -6262,7 +6262,7 @@ components:
       type: string
     PullRequestHistogramsRequest:
       additionalProperties: false
-      description: Request of `/histograms/prs`.
+      description: Request of `/histograms/pull_requests`.
       example:
         for:
         - repositories:
@@ -6372,7 +6372,7 @@ components:
       example: log
       type: string
     CalculatedPullRequestHistograms:
-      description: Response from `/histograms/prs`.
+      description: Response from `/histograms/pull_requests`.
       items:
         $ref: '#/components/schemas/CalculatedPullRequestHistogram'
       type: array
