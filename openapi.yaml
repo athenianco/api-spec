@@ -268,8 +268,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -319,7 +325,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - apiKeyAuth: []
@@ -369,7 +375,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - apiKeyAuth: []
@@ -419,7 +425,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -522,7 +528,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -573,7 +579,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -664,7 +670,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -715,8 +721,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -765,8 +777,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -817,8 +835,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -859,8 +883,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The installation has not started yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -920,8 +950,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The installation has not started yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -970,8 +1006,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -1020,8 +1062,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -1073,7 +1121,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -1128,7 +1176,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -1185,6 +1233,12 @@ paths:
                 $ref: '#/components/schemas/NoSourceDataError'
           description: No data is available to calculate histograms for the given
             repositories.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -1243,7 +1297,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: Account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -1398,7 +1452,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The installation has not started yet.
       security:
       - bearerAuth: []
@@ -1443,7 +1497,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -1499,7 +1553,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -1553,7 +1607,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -1608,7 +1662,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
       security:
       - bearerAuth: []
@@ -1662,8 +1716,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -1716,8 +1776,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -1772,6 +1838,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NoSourceDataError'
           description: No data is available to calculate metrics for the given repositories.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -1826,6 +1898,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NoSourceDataError'
           description: No data is available to calculate metrics for the given repositories.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -1875,8 +1953,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The account's installation has not finished yet.
+        424:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingSettingsError'
+          description: One or more logical repositories miss the release settings.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -2144,7 +2228,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The JIRA installation does not exist.
       security:
       - bearerAuth: []
@@ -2197,7 +2281,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The JIRA installation does not exist.
       security:
       - bearerAuth: []
@@ -2248,7 +2332,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The JIRA installation does not exist.
       security:
       - bearerAuth: []
@@ -2341,7 +2425,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The installation has not started yet.
       security:
       - bearerAuth: []
@@ -2383,7 +2467,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericError'
+                $ref: '#/components/schemas/NoSourceDataError'
           description: The installation has not started yet.
       security:
       - bearerAuth: []
@@ -3094,6 +3178,8 @@ components:
             type: string
         type: object
     NoSourceDataError:
+      $ref: '#/components/schemas/GenericError'
+    MissingSettingsError:
       $ref: '#/components/schemas/GenericError'
     PullRequestMetricID:
       description: |-
