@@ -4043,7 +4043,11 @@ components:
       type: object
     ForSet:
       additionalProperties: false
-      description: Filter for `/metrics/pull_requests`.
+      description: |
+        Filter for `/metrics/pull_requests` and `/histograms/pull_requests`.
+        Achieve the best performance by packing all your filters in a single `ForSet`
+        instead of sending multiple `ForSet`-s. For example, use `repogroups` and `withgroups`
+        to request separate metrics for several repository sets and teams.
       example:
         repositories:
         - github.com/athenianco/athenian-webapp
@@ -4104,7 +4108,11 @@ components:
       type: object
     ForSetDevelopers:
       additionalProperties: false
-      description: Filter for `/metrics/developers`.
+      description: |
+        Filter for `/metrics/developers`.
+        Achieve the best performance by packing all your filters in a single `ForSetDevelopers`
+        instead of sending multiple `ForSetDevelopers`-s. For example, use `repogroups`
+        to request separate metrics for several repository sets.
       example:
         repositories:
         - github.com/athenianco/athenian-webapp
@@ -6280,6 +6288,9 @@ components:
         issue_types:
         - Bug
         - Task
+        projects:
+        - DEV
+        - ENG
       properties:
         epics:
           description: PRs must be linked to at least one JIRA epic from the list.
@@ -6301,6 +6312,11 @@ components:
         issue_types:
           description: PRs must be linked to certain JIRA issue types, e.g. Bug, Task,
             Design Document, etc.
+          items:
+            type: string
+          type: array
+        projects:
+          description: PRs must be linked to any JIRA issue in the given project keys.
           items:
             type: string
           type: array
@@ -8508,7 +8524,11 @@ components:
       type: object
     ForSetCodeChecks:
       additionalProperties: false
-      description: Filters for `/metrics/code_checks` and `/histograms/code_checks`.
+      description: |
+        Filters for `/metrics/code_checks` and `/histograms/code_checks`.
+        Achieve the best performance by packing all your filters in a single `ForSetCodeChecks`
+        instead of sending multiple `ForSetCodeChecks`-s. For example, use `repogroups` and `pushers`
+        to request separate metrics for several repository sets and teams.
       example:
         repositories:
         - github.com/athenianco/athenian-webapp
@@ -9682,7 +9702,11 @@ components:
       type: string
     ForSetDeployments:
       additionalProperties: false
-      description: Filters for `/metrics/deployments`. Nothing is strictly required.
+      description: |
+        Filters for `/metrics/deployments`. Nothing is strictly required.
+        Achieve the best performance by packing all your filters in a single `ForSetDeployments`
+        instead of sending multiple `ForSetDeployments`-s. For example, use `repogroups` and `withgroups`
+        to request separate metrics for several repository sets and teams.
       example:
         repositories:
         - github.com/athenianco/athenian-webapp
