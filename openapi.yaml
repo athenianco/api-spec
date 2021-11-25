@@ -4086,7 +4086,7 @@ components:
           items:
             minimum: 0
             type: integer
-          minLength: 2
+          minItems: 2
           type: array
         jira:
           $ref: '#/components/schemas/JIRAFilter'
@@ -4096,8 +4096,8 @@ components:
             are only implemented for single environments.
           items:
             type: string
-          maxLength: 64
-          minLength: 1
+          maxItems: 64
+          minItems: 1
           type: array
       required:
       - repositories
@@ -7461,9 +7461,9 @@ components:
       - 1
       items:
         items:
-          minItems: 1
           minimum: 0
           type: integer
+        minItems: 1
         type: array
       minItems: 1
       type: array
@@ -8127,6 +8127,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/DeveloperID'
           - nullable: true
+            type: string
         developer_name:
           description: Full name of the mapped GitHub user.
           nullable: true
@@ -8421,6 +8422,7 @@ components:
         to:
           allOf:
           - nullable: true
+            type: string
           - $ref: '#/components/schemas/DeveloperID'
         confidence:
           description: Value from 0 to 1 indicating how similar are the users.
@@ -9109,6 +9111,7 @@ components:
           allOf:
           - description: Average elapsed execution time.
             nullable: true
+            type: string
           - $ref: '#/components/schemas/TimeDuration'
         stddev_execution_time:
           allOf:
@@ -9117,11 +9120,13 @@ components:
               Higher values for a `critical` code check indicate an optimization opportunity:
               it is better to have a stable execution time with the same average.
             nullable: true
+            type: string
           - $ref: '#/components/schemas/TimeDuration'
         median_execution_time:
           allOf:
           - description: Median elapsed execution time.
             nullable: true
+            type: string
           - $ref: '#/components/schemas/TimeDuration'
         skips:
           description: Number of times this check run was skipped.
