@@ -884,7 +884,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NoSourceDataError'
-          description: The installation has not started yet.
+          description: The installation has not finished yet.
         424:
           content:
             application/json:
@@ -951,7 +951,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NoSourceDataError'
-          description: The installation has not started yet.
+          description: The installation has not finished yet.
         424:
           content:
             application/json:
@@ -1453,7 +1453,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NoSourceDataError'
-          description: The installation has not started yet.
+          description: The installation has not finished yet.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -2387,6 +2387,148 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+  /settings/logical_repositories/{id}:
+    get:
+      operationId: list_logical_repositories
+      parameters:
+      - description: Numeric identifier of the account.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogicalRepositories'
+          description: Configured logical repositories belonging to the account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user does not belong to the specified account.
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSourceDataError'
+          description: The installation has not finished yet.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: |
+        List the currently configured logical repositories.
+        A logical repository is a set of rules to match PRs, releases, and deployments
+        that has a name and pretends to be a regular GitHub repository everywhere in UI
+        and API requests.
+        This feature is particularly useful to reap monorepos into separate, joint or disjoint
+        parts.
+      tags:
+      - settings
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
+      x-codegen-request-body-name: body
+  /settings/logical_repository:
+    delete:
+      operationId: delete_logical_repository
+      parameters:
+      - description: Full name of the logical repository.
+        example: github.com/athenianco/athenian-api/fixes
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          $ref: '#/components/schemas/RepositoryID'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Empty object indicates a successful removal.
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user is not an admin of the account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The specified logical repository does not exist.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: Delete a logical repository.
+      tags:
+      - settings
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
+      x-codegen-request-body-name: body
+    put:
+      operationId: set_logical_repository
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogicalRepository'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogicalRepository'
+          description: Created or updated logical repository.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: Request is invalid.
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user is not an admin of this account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user or the account was not found.
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSourceDataError'
+          description: The installation has not finished yet.
+      security:
+      - bearerAuth: []
+      summary: |
+        Insert or update a logical repository - a named set of rules to match PRs, releases,
+        and deployments that pretends to be a regular GitHub repository everywhere in UI and
+        API requests.
+      tags:
+      - settings
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
+      x-codegen-request-body-name: body
   /settings/release_match:
     put:
       operationId: set_release_match
@@ -2426,11 +2568,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NoSourceDataError'
-          description: The installation has not started yet.
+          description: The installation has not finished yet.
       security:
       - bearerAuth: []
-      summary: Set the release matching rule for a list of repositories. Only for
-        account admins.
+      summary: |
+        Set the release matching rule for a list of repositories. Only for account admins.
+        Release settings are rules by which to mark releases in GitHub repositories.
       tags:
       - settings
 # {% if False %}
@@ -2468,11 +2611,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NoSourceDataError'
-          description: The installation has not started yet.
+          description: The installation has not finished yet.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
-      summary: List the current release matching settings.
+      summary: |
+        List the current release matching settings.
+        Release settings are rules by which to mark releases in GitHub repositories.
       tags:
       - settings
 # {% if False %}
@@ -9716,3 +9861,13 @@ components:
       items:
          $ref: '#/components/schemas/CalculatedDeploymentMetric'
       type: array
+    LogicalRepositories:
+      description: List of configured logical repositories.
+      items:
+        $ref: '#/components/schemas/LogicalRepository'
+      type: array
+    LogicalRepository:
+      description: |
+        Set of rules to match PRs, releases, and deployments that has a name and
+        pretends to be a regular GitHub repository everywhere in UI and API requests.
+      type: object
