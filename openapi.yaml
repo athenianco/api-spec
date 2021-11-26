@@ -6058,14 +6058,14 @@ components:
             The match starts from the beginning of the string.
             Special value `{{ "{{default}}" }}` matches to the default branch name - usually, `main` or `master`.
             Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
-          example: '.*-production'
+          example: .*-production
           type: string
         tags:
           description: |
             Regular expression to match tag names.
             The match starts from the beginning of the string.
             Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
-          example: '.*'
+          example: .*
           type: string
         events:
           description: |
@@ -6113,14 +6113,14 @@ components:
             The match starts from the beginning of the string.
             Special value `{{ "{{default}}" }}` matches to the default branch name - usually, `main` or `master`.
             Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
-          example: '.*-production'
+          example: .*-production
           type: string
         tags:
           description: |
             Regular expression to match tag names.
             The match starts from the beginning of the string.
             Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
-          example: '.*'
+          example: .*
           type: string
         events:
           description: |
@@ -9919,7 +9919,7 @@ components:
         selected deployments group.
         The order of the items is *not* guaranteed to match any expectations.
       items:
-         $ref: '#/components/schemas/CalculatedDeploymentMetric'
+        $ref: '#/components/schemas/CalculatedDeploymentMetric'
       type: array
     LogicalRepositories:
       description: List of configured logical repositories.
@@ -9932,14 +9932,27 @@ components:
         Set of rules to match PRs, releases, and deployments that has a name and
         pretends to be a regular GitHub repository everywhere in UI and API requests.
         Release settings become visible in `/settings/release_match`.
+      example:
+        prs:
+          title: .*[Cc]omponent [Aa]lpha
+          labels_include:
+          - alpha
+          - webapp
+        parent: github.com/athenianco/athenian-monorepo
+        deployments: '{}'
+        name: Webapp
+        releases:
+          branches: '{{ "{{default}}" }}'
+          tags: webapp-.*
+          match: tag
       properties:
         name:
           description: |
             The logical part of the repository name.
             Compared to GitHub repository name requirements, we additionally allow /
             to express the hierarchy further.
-          pattern: '([a-zA-Z0-9-_]+/?)*[a-zA-Z0-9-_]+'
           maxLength: 100
+          pattern: ([a-zA-Z0-9-_]+/?)*[a-zA-Z0-9-_]+
           type: string
         parent:
           $ref: '#/components/schemas/RepositoryID'
