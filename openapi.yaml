@@ -6037,7 +6037,7 @@ components:
       type: object
     ReleaseMatchRequest:
       additionalProperties: false
-      description: Release matching rule setting.
+      description: Release matching rule update.
       example:
         account: 1
         repositories:
@@ -6053,10 +6053,25 @@ components:
         repositories:
           $ref: '#/components/schemas/RepositorySet'
         branches:
-          description: 'Regular expression to match branch names. Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP'
+          description: |
+            Regular expression to match branch names.
+            The match starts from the beginning of the string.
+            Special value `{{ "{{default}}" }}` matches to the default branch name - usually, `main` or `master`.
+            Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
+          example: '.*-production'
           type: string
         tags:
-          description: 'Regular expression to match tag names. Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP'
+          description: |
+            Regular expression to match tag names.
+            The match starts from the beginning of the string.
+            Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
+          example: '.*'
+          type: string
+        events:
+          description: |
+            Regular expression to match event releases (submitted by the user via `/events/releases`).
+            The match starts from the beginning of the string.
+            Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
           type: string
         match:
           $ref: '#/components/schemas/ReleaseMatchStrategy'
@@ -6093,19 +6108,35 @@ components:
         match: tag_or_branch
       properties:
         branches:
-          description: 'Regular expression to match branch names. Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP'
+          description: |
+            Regular expression to match branch names.
+            The match starts from the beginning of the string.
+            Special value `{{ "{{default}}" }}` matches to the default branch name - usually, `main` or `master`.
+            Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
+          example: '.*-production'
           type: string
         tags:
-          description: 'Regular expression to match tag names. Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP'
+          description: |
+            Regular expression to match tag names.
+            The match starts from the beginning of the string.
+            Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
+          example: '.*'
+          type: string
+        events:
+          description: |
+            Regular expression to match event releases (submitted by the user via `/events/releases`).
+            The match starts from the beginning of the string.
+            Reference: https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-SIMILARTO-REGEXP
           type: string
         match:
           $ref: '#/components/schemas/ReleaseMatchStrategy'
         default_branch:
-          description: Name of the default branch of this repository.
+          description: |
+            Name of the default branch of this repository.
+            Returned in responses and ignored in requests.
           type: string
       required:
       - branches
-      - default_branch
       - match
       - tags
       type: object
@@ -9896,7 +9927,51 @@ components:
         $ref: '#/components/schemas/LogicalRepository'
       type: array
     LogicalRepository:
+      additionalProperties: false
       description: |
         Set of rules to match PRs, releases, and deployments that has a name and
         pretends to be a regular GitHub repository everywhere in UI and API requests.
+        Release settings become visible in `/settings/release_match`.
+      properties:
+        name:
+          description: |
+            The logical part of the repository name.
+            Compared to GitHub repository name requirements, we additionally allow /
+            to express the hierarchy further.
+          pattern: '([a-zA-Z0-9-_]+/?)*[a-zA-Z0-9-_]+'
+          maxLength: 100
+          type: string
+        parent:
+          $ref: '#/components/schemas/RepositoryID'
+        prs:
+          $ref: '#/components/schemas/LogicalPRRules'
+        releases:
+          $ref: '#/components/schemas/ReleaseMatchSetting'
+        deployments:
+          $ref: '#/components/schemas/LogicalDeploymentRules'
+      type: object
+    LogicalPRRules:
+      additionalProperties: false
+      description: Rules to match PRs to logical repository.
+      example:
+        title: .*[Cc]omponent [Aa]lpha
+        labels_include:
+        - alpha
+        - webapp
+      properties:
+        title:
+          description: |
+            Regular expression to match the PR title. It must be a match starting from
+            the start of the string.
+          example: .*[Cc]omponent [Aa]lpha
+          type: string
+        labels_include:
+          description: Any matching label puts the PR into the logical repository.
+          items:
+            type: string
+          type: array
+      type: object
+    LogicalDeploymentRules:
+      additionalProperties: false
+      description: TODO
       type: object
