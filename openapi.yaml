@@ -2483,7 +2483,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LogicalRepository'
+              $ref: '#/components/schemas/LogicalRepositoryRequest'
         x-body-name: body
       responses:
         200:
@@ -9926,12 +9926,59 @@ components:
       items:
         $ref: '#/components/schemas/LogicalRepository'
       type: array
-    LogicalRepository:
+    LogicalRepositoryRequest:
       additionalProperties: false
       description: |
         Set of rules to match PRs, releases, and deployments that has a name and
         pretends to be a regular GitHub repository everywhere in UI and API requests.
         Release settings become visible in `/settings/release_match`.
+      example:
+        account: 1
+        prs:
+          title: .*[Cc]omponent [Aa]lpha
+          labels_include:
+          - alpha
+          - webapp
+        parent: github.com/athenianco/athenian-monorepo
+        deployments: '{}'
+        name: Webapp
+        releases:
+          branches: '{{ "{{default}}" }}'
+          tags: webapp-.*
+          match: tag
+      properties:
+        account:
+          description: Account ID.
+          type: integer
+        name:
+          description: |
+            The logical part of the repository name.
+            Compared to GitHub repository name requirements, we additionally allow /
+            to express the hierarchy further.
+          maxLength: 100
+          pattern: ^([a-zA-Z0-9-_]+/?)*[a-zA-Z0-9-_]+$
+          type: string
+        parent:
+          $ref: '#/components/schemas/RepositoryID'
+        prs:
+          $ref: '#/components/schemas/LogicalPRRules'
+        releases:
+          $ref: '#/components/schemas/ReleaseMatchSetting'
+        deployments:
+          $ref: '#/components/schemas/LogicalDeploymentRules'
+      required:
+      - account
+      - name
+      - parent
+      - prs
+      - releases
+      type: object
+    LogicalRepository:
+      additionalProperties: false
+      description: |
+        Set of rules to match PRs, releases, and deployments that has a name and
+        pretends to be a regular GitHub repository everywhere in UI and API requests.
+        Release settings are also visible in `/settings/release_match`.
       example:
         prs:
           title: .*[Cc]omponent [Aa]lpha
@@ -9952,7 +9999,7 @@ components:
             Compared to GitHub repository name requirements, we additionally allow /
             to express the hierarchy further.
           maxLength: 100
-          pattern: ([a-zA-Z0-9-_]+/?)*[a-zA-Z0-9-_]+
+          pattern: ^([a-zA-Z0-9-_]+/?)*[a-zA-Z0-9-_]+$
           type: string
         parent:
           $ref: '#/components/schemas/RepositoryID'
@@ -9962,6 +10009,11 @@ components:
           $ref: '#/components/schemas/ReleaseMatchSetting'
         deployments:
           $ref: '#/components/schemas/LogicalDeploymentRules'
+      required:
+      - name
+      - parent
+      - prs
+      - releases
       type: object
     LogicalPRRules:
       additionalProperties: false
