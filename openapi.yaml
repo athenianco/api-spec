@@ -2435,18 +2435,15 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
-  /settings/logical_repository:
-    delete:
+  /settings/logical_repository/delete:
+    post:
       operationId: delete_logical_repository
-      parameters:
-      - description: Full name of the logical repository.
-        example: github.com/athenianco/athenian-api/fixes
-        explode: true
-        in: query
-        name: name
-        required: true
-        schema:
-          $ref: '#/components/schemas/RepositoryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogicalRepositoryGetRequest'
+        x-body-name: body
       responses:
         200:
           content:
@@ -2477,6 +2474,7 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+  /settings/logical_repository:
     put:
       operationId: set_logical_repository
       requestBody:
@@ -10039,4 +10037,20 @@ components:
     LogicalDeploymentRules:
       additionalProperties: false
       description: TODO
+      type: object
+    LogicalRepositoryGetRequest:
+      additionalProperties: false
+      description: Pointer to a logical repository.
+      example:
+        account: 1
+        name: github.com/athenianco/athenian-api/alpha
+      properties:
+        account:
+          description: Account ID.
+          type: integer
+        name:
+          $ref: '#/components/schemas/RepositoryID'
+      required:
+      - account
+      - name
       type: object
