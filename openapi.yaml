@@ -5620,6 +5620,8 @@ components:
         * `dev-regular-pr-comments`: how many regular comments (not review suggestions!) this developer posted.
         * `dev-review-pr-comments`: how many review suggestions (summaries are not considered!) this developer posted.
         * `dev-active`: indicates whether this developer has made commits on more than X days during T days. `X / T = 0.2` at the moment.
+        * `dev-active0`: indicates whether this developer has made at least one commit.
+        * `dev-worked`: indicates whether this developer has shown any activity.
       enum:
       - dev-commits-pushed
       - dev-lines-changed
@@ -5635,6 +5637,8 @@ components:
       - dev-regular-pr-comments
       - dev-review-pr-comments
       - dev-active
+      - dev-active0
+      - dev-worked
       example: dev-prs-created
       type: string
     CalculatedDeveloperMetrics:
