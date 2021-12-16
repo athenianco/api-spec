@@ -6493,7 +6493,13 @@ components:
         name:
           type: string
         parameters:
-          type: object
+# {% if False %}
+          allOf:
+# {% else %}{{ "\n" }}          oneOf:{% endif %}
+          - type: integer
+          - type: number
+          - type: string
+          - type: object
       required:
       - name
       - parameters
