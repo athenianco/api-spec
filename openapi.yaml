@@ -143,6 +143,47 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.user_controller
       x-codegen-request-body-name: body
+    post:
+      operationId: set_account_features
+      parameters:
+      - description: Numeric identifier of the account.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductFeatures'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductFeatures'
+          description: List of the enabled product features for the account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The account was not found or the user does not have the permission.
+      security:
+      - bearerAuth: []
+      summary: '"God mode" ability to set account features. The calling user must be
+        marked internally as a super admin.'
+      tags:
+      - user
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.user_controller
+      x-codegen-request-body-name: body
   /become:
     get:
       operationId: become_user
