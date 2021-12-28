@@ -6474,6 +6474,8 @@ components:
     ProductFeatures:
       description: Enabled client-side product features.
       example:
+      - name: expires_at
+        parameters: '2030-01-01T00:00:00Z'
       - name: jira
         parameters:
           epics: true
