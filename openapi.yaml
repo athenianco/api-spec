@@ -9,6 +9,14 @@ info:
     Origin GitHub repository: [athenianco/api-spec](https://github.com/athenianco/api-spec).
 
     Authorization persists between sessions.
+    <details>
+    <summary>List of common server errors.</summary>
+    * __500__ endpoint crashed. We reported the incident to Sentry and will fix it soon! Please include the value of `instance` in the response if you contact the support. Repeating the request will not help, most probably.
+    * __501__ some functions are missing, either because they are not implemented yet or a non-critical runtime dependency is not satisfied. Repeating the request will not help, guaranteed.
+    * __502__ server crashed badly, either due to a memory access violation in native code or running out of memory. We reported this incident to Sentry and will fix it soon! Try repeating the request.
+    * __503__ server has not fully launched yet, e.g. hasn't connected to the database; server is shutting down; we are experiencing a partial outage. Try repeating the request.
+    * __504__ endpoint took too much time and was interrupted. We reported the incident to Sentry and will see how to improve the performance. Repeating the request will not help, most probably.
+    </details>
   license:
     name: CC-BY-4.0
   title: '{{ title }}'
