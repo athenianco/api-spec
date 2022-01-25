@@ -10101,7 +10101,28 @@ components:
       type: object
     LogicalDeploymentRules:
       additionalProperties: false
-      description: TODO
+      description: Rules to match deployments to logical repository.
+      example:
+        title: .*[Aa]lpha
+        labels_include:
+          repositories:
+          - alpha
+      properties:
+        title:
+          description: |
+            Regular expression to match the deployment name. It must be a match starting from
+            the start of the string.
+          example: .*[Aa]lpha
+          type: string
+        labels_include:
+          additionalProperties:
+            items:
+              type: string
+            minItems: 1
+            type: array
+          description: |
+            Match deployments labeled by any key and having at least one value in the list.
+          type: object
       type: object
     LogicalRepositoryGetRequest:
       additionalProperties: false
