@@ -3427,6 +3427,7 @@ components:
         * `pr-participants-per`: average number of PR particpants excluding the releasers and the bots.
         * `pr-review-comments-per`: average number of PR review comments for reviewed PRs, bots excluded.
         * `pr-reviews-per`: average number of PR reviews for reviewed PRs, bots excluded.
+        * `pr-comments-per`: average number of PR comments, both regular and review, for reviewed PRs, bots excluded.
       enum:
       - pr-wip-time
       - pr-wip-count
@@ -3479,6 +3480,7 @@ components:
       - pr-participants-per
       - pr-review-comments-per
       - pr-reviews-per
+      - pr-comments-per
       example: pr-lead-time
       type: string
     DeveloperID:
