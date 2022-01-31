@@ -94,10 +94,5 @@
     "schemas": {
       "json_or_param_binary_string": "warning"
     }
-  },
-  "spectral": {
-    "rules": {
-      "request-body-object": "warning"
-    }
   }
 }
