@@ -642,6 +642,51 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+  /filter/environments:
+    post:
+      operationId: filter_environments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterEnvironmentsRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteredEnvironments'
+          description: Deployment environments that satisfy the specified filters.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: The request is invalid.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The specified account does not exist or the user is not a member.
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSourceDataError'
+          description: The account hasn't submitted any deployment notifications.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: List the deployment environments.
+      tags:
+      - filter
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
+      x-codegen-request-body-name: body
   /filter/jira:
     post:
       operationId: filter_jira_stuff
@@ -4260,7 +4305,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the metrics.
+          description: Date until which to measure the metrics.
           format: date
           type: string
         timezone:
@@ -5634,7 +5679,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the metrics.
+          description: Date until which to measure the metrics.
           format: date
           type: string
         timezone:
@@ -6640,7 +6685,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the distribution.
+          description: Date until which to measure the distribution.
           format: date
           type: string
         timezone:
@@ -7373,7 +7418,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the metrics.
+          description: Date until which to measure the metrics.
           format: date
           type: string
         timezone:
@@ -7909,7 +7954,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the distribution.
+          description: Date until which to measure the distribution.
           format: date
           type: string
         timezone:
@@ -8592,7 +8637,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the metrics.
+          description: Date until which to measure the metrics.
           format: date
           type: string
         timezone:
@@ -8858,7 +8903,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the distribution.
+          description: Date until which to measure the distribution.
           format: date
           type: string
         timezone:
@@ -9034,7 +9079,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the metrics.
+          description: Date until which to measure the metrics.
           format: date
           type: string
         timezone:
@@ -9462,7 +9507,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to search for the deployments.
+          description: Date until which to search for the deployments.
           format: date
           type: string
         timezone:
@@ -9904,7 +9949,7 @@ components:
           format: date
           type: string
         date_to:
-          description: Date up to which to measure the metrics.
+          description: Date until which to measure the metrics.
           format: date
           type: string
         timezone:
@@ -10142,3 +10187,65 @@ components:
       - account
       - name
       type: object
+    FilterEnvironmentsRequest:
+      additionalProperties: false
+      description: Request body of `/filter/environments`. Filters for deployment
+        environments.
+      example:
+        repositories:
+        - github.com/athenianco/athenian-api
+        - github.com/athenianco/athenian-webapp
+        date_to: 2022-02-23
+        account: 1
+        date_from: 2022-01-23
+      properties:
+        account:
+          description: Account ID.
+          type: integer
+        repositories:
+          allOf:
+          - description: |
+              At least one repository in the list must be deployed in `[date_from, date_to)`.
+          - $ref: '#/components/schemas/RepositorySet'
+        date_from:
+          description: Date from when to start looking for deployments.
+          format: date
+          type: string
+        date_to:
+          description: Date until which to look for deployments.
+          format: date
+          type: string
+        timezone:
+          $ref: '#/components/schemas/TimeZone'
+      required:
+      - account
+      - date_from
+      - date_to
+      type: object
+    FilteredEnvironments:
+      description: List of distinct deployment environments.
+      items: 
+        $ref: '#/components/schemas/FilteredEnvironment'
+      type: array
+    FilteredEnvironment:
+      additionalProperties: false
+      description: Details about a deployment environment.
+      properties: 
+        name:
+          description: Name of the environment.
+          type: string
+        deployments_count:
+          description: Number of deployments (successful or not) in the specified time interval.
+          minimum: 1
+          type: integer
+        last_conclusion:
+          allOf:
+          - description: The conclusion of the most recent deployment before `time_to`.
+          - $ref: '#/components/schemas/DeploymentConclusion'
+      required:
+      - deployments_count
+      - last_conclusion
+      - name
+      type: object
+      
+      
