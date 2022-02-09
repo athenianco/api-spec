@@ -58,8 +58,6 @@ jobs:
     - name: lint-openapi
       run: |
         set -x
-        base_path=$(npm list -g -p '@ibm-cloud/openapi-ruleset')
-        sed -i 's\@ibm-cloud/openapi-ruleset\'$base_path'/src/ibm-oas.js\g' .spectral.yaml
         lint-openapi -p -v openapi_rendered.yaml
   no-confusion:
     name: No confusion
