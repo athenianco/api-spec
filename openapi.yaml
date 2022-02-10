@@ -10204,9 +10204,9 @@ components:
           type: integer
         repositories:
           allOf:
+          - $ref: '#/components/schemas/RepositorySet'
           - description: |
               At least one repository in the list must be deployed in `[date_from, date_to)`.
-          - $ref: '#/components/schemas/RepositorySet'
         date_from:
           description: Date from when to start looking for deployments.
           format: date
@@ -10230,6 +10230,10 @@ components:
     FilteredEnvironment:
       additionalProperties: false
       description: Details about a deployment environment.
+      example:
+        name: production
+        deployments_count: 100
+        last_conclusion: SUCCESS
       properties: 
         name:
           description: Name of the environment.
@@ -10240,8 +10244,8 @@ components:
           type: integer
         last_conclusion:
           allOf:
-          - description: The conclusion of the most recent deployment before `time_to`.
           - $ref: '#/components/schemas/DeploymentConclusion'
+          - description: The conclusion of the most recent deployment before `time_to`.
       required:
       - deployments_count
       - last_conclusion
