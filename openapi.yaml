@@ -8,7 +8,7 @@ info:
 
     Origin GitHub repository: [athenianco/api-spec](https://github.com/athenianco/api-spec).
 
-    Authorization persists between sessions.
+    Authorization persists between sessions. 🛡️ means that the endpoint requires account admin privileges. 👑 means that the endpoint is only accessible to Athenian authorities.
     <details>
     <summary>List of common server errors.</summary>
     * __500__ endpoint crashed. We reported the incident to Sentry and will fix it soon! Please include the value of `instance` in the response if you contact the support. Repeating the request will not help, most probably.
@@ -55,7 +55,7 @@ paths:
           description: The account was not found.
       security:
       - bearerAuth: []
-      summary: 'Change the status of an account member: regular, admin, or banished
+      summary: '🛡️ Change the status of an account member: regular, admin, or banished
         (deleted). This endpoint is allowed only for account admins.'
       tags:
       - user
@@ -183,8 +183,8 @@ paths:
           description: The account was not found or the user does not have the permission.
       security:
       - bearerAuth: []
-      summary: '"God mode" ability to set account features. The calling user must be
-        marked internally as a super admin.'
+      summary: |
+        👑 Change account features. The calling user must be marked internally as a super admin.
       tags:
       - user
 # {% if False %}
@@ -225,8 +225,8 @@ paths:
           description: Requested user does not exist.
       security:
       - bearerAuth: []
-      summary: '"God mode" ability to turn into any user. The calling user must be
-        marked internally as a super admin.'
+      summary: |
+        👑 Turn into arbitrary user. The calling user must be marked internally as a super admin.
       tags:
       - user
 # {% if False %}
@@ -2097,7 +2097,7 @@ paths:
           description: There is an existing reposet with the same contents.
       security:
       - bearerAuth: []
-      summary: Create a repository set.
+      summary: 🛡️ Create a repository set.
       tags:
       - reposet
 # {% if False %}
@@ -2138,7 +2138,7 @@ paths:
           description: The specified repository set was not found.
       security:
       - bearerAuth: []
-      summary: Delete a repository set. The user must be an admin of the account that
+      summary: 🛡️ Delete a repository set. The user must be an admin of the account that
         owns the reposet.
       tags:
       - reposet
@@ -2233,7 +2233,7 @@ paths:
           description: There is an existing reposet with the same contents.
       security:
       - bearerAuth: []
-      summary: Update a repository set. The user must be an admin of the account that
+      summary: 🛡️ Update a repository set. The user must be an admin of the account that
         owns the reposet.
       tags:
       - reposet
@@ -2326,7 +2326,7 @@ paths:
           description: The JIRA installation does not exist.
       security:
       - bearerAuth: []
-      summary: Add or override GitHub<>JIRA user identity mapping.
+      summary: 🛡️ Add or override GitHub<>JIRA user identity mapping.
       tags:
       - settings
 # {% if False %}
@@ -2430,7 +2430,7 @@ paths:
           description: The JIRA installation does not exist.
       security:
       - bearerAuth: []
-      summary: Set the enabled JIRA projects.
+      summary: 🛡️ Set the enabled JIRA projects.
       tags:
       - settings
 # {% if False %}
@@ -2560,7 +2560,7 @@ paths:
       security:
       - bearerAuth: []
       - apiKeyAuth: []
-      summary: Delete a logical repository.
+      summary: 🛡️ Delete a logical repository.
       tags:
       - settings
 # {% if False %}
@@ -2611,7 +2611,7 @@ paths:
       security:
       - bearerAuth: []
       summary: |
-        Insert or update a logical repository - a named set of rules to match PRs, releases,
+        🛡️ Insert or update a logical repository - a named set of rules to match PRs, releases,
         and deployments that pretends to be a regular GitHub repository everywhere in UI and
         API requests.
       tags:
@@ -3079,7 +3079,7 @@ paths:
       security:
       - bearerAuth: []
       - apiKeyAuth: []
-      summary: Delete all the teams belonging to the account and then clone from GitHub.
+      summary: 🛡️ Delete all the teams belonging to the account and then clone from GitHub.
         The "Bots" team will remain intact. The rest of the teams will be identical
         to what's on GitHub.
       tags:
