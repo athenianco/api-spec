@@ -1432,9 +1432,35 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.invitation_controller
       x-codegen-request-body-name: body
+  /invite/generate:
+    get:
+      operationId: gen_account_invitation
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationLink'
+          description: The invitation link has been generated successfully.
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user does not have enough permissions. They must be a 👑.
+      security:
+      - bearerAuth: []
+      summary: 👑 Create a new unique account registration link.
+      tags:
+      - registration
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.invitation_controller
+      x-codegen-request-body-name: body
   /invite/generate/{id}:
     get:
-      operationId: gen_invitation
+      operationId: gen_user_invitation
       parameters:
       - description: Numeric identifier of the account where to invite new users.
         explode: false
@@ -1464,9 +1490,11 @@ paths:
                 $ref: '#/components/schemas/GenericError'
           description: The account was not found.
       security:
-      - bearerAuth: []
-      summary: Generate an account invitation link for regular users. The caller must
-        be an admin of the specified account.
+      - bearerAuth: [ ]
+      summary: |
+        Create an account invitation link for regular users. The caller must
+        be an admin of the specified account. The link is persistent, so multiple
+        calls return the same result.
       tags:
       - registration
 # {% if False %}
