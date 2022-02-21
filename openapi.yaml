@@ -1544,11 +1544,11 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.invitation_controller
       x-codegen-request-body-name: body
-  /invite/progress/{id}:
+  /invite/jira_progress/{id}:
     get:
-      operationId: eval_invitation_progress
+      operationId: eval_jira_progress
       parameters:
-      - description: Numeric identifier of the account which the user has joined.
+      - description: Numeric identifier of the account that is installing JIRA.
         explode: false
         in: path
         name: id
@@ -1562,8 +1562,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InstallationProgress'
-          description: Status of installing Athenian for the calling user and the
-            given account.
+          description: Status of fetching JIRA data to Athenian.
         404:
           content:
             application/json:
@@ -1575,11 +1574,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NoSourceDataError'
-          description: The installation has not finished yet.
+          description: The installation has not started yet.
       security:
       - bearerAuth: []
       - apiKeyAuth: []
-      summary: Return the current Athenian GitHub app installation progress.
+      summary: Return the current JIRA installation progress in Athenian.
+      tags:
+      - registration
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.invitation_controller
+  /invite/progress/{id}:
+    get:
+      operationId: eval_metadata_progress
+      parameters:
+      - description: Numeric identifier of the account that is installing GitHub.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallationProgress'
+          description: Status of fetching GitHub data to Athenian.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The account does not exist or the user is not its member.
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSourceDataError'
+          description: The installation has not started yet.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: Return the current GitHub installation progress in Athenian.
       tags:
       - registration
 # {% if False %}
@@ -4090,7 +4130,9 @@ components:
       type: object
     InstallationProgress:
       additionalProperties: false
-      description: Data fetching progress of the Athenian metadata retrieval app.
+      description: |
+        Status of fetching data to Athenian.
+        GitHub progress always returns `owner` and `repositories`.
       example:
         tables:
         - fetched: 50
@@ -4133,8 +4175,6 @@ components:
           type: array
       required:
       - finished_date
-      - owner
-      - repositories
       - started_date
       - tables
       type: object
