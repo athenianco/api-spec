@@ -1351,7 +1351,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InvitationLink'
+              $ref: '#/components/schemas/AcceptedInvitation'
         description: Accepted invitation details.
         required: true
         x-body-name: body
@@ -4098,6 +4098,24 @@ components:
       example:
         url: https://app.athenian.co/i/deadf88d
       properties:
+        url:
+          description: Invitation URL. Users are supposed to click it and become admins
+            or regular account members.
+          format: url
+          type: string
+      required:
+      - url
+      type: object
+    AcceptedInvitation:
+      additionalProperties: false
+      example:
+        url: https://app.athenian.co/i/deadf88d
+        email: vadim@athenian.co
+      properties:
+        email:
+          description: Calling user's email address.
+          format: email
+          type: string
         url:
           description: Invitation URL. Users are supposed to click it and become admins
             or regular account members.
