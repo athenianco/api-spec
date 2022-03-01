@@ -4097,6 +4097,7 @@ components:
       additionalProperties: false
       example:
         url: https://app.athenian.co/i/deadf88d
+      description: Product invitation URL.
       properties:
         url:
           description: Invitation URL. Users are supposed to click it and become admins
@@ -4111,10 +4112,14 @@ components:
       example:
         url: https://app.athenian.co/i/deadf88d
         email: vadim@athenian.co
+      description: Request for entering the product.
       properties:
         email:
           description: Calling user's email address.
           format: email
+          type: string
+        name:
+          description: Calling user's name.
           type: string
         url:
           description: Invitation URL. Users are supposed to click it and become admins
