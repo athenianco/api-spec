@@ -7745,7 +7745,9 @@ components:
         * `jira-acknowledged-q` - number of issues that are "In Progress" or "Resolved". This number matches the issues considered to calculate `jira-acknowledge-time` after applying the quantiles.
         * `jira-life-time` - Mean Life Time - the time between min(issue creation, work began) and max(issue resolution, fixes released).
         * `jira-lead-time` - Mean Lead Time - the time between when the work began and max(issue resolution, fixes released).
-        * `jira-acknowledge-time` - Mean Acknowledge Time - the time between when the issue was created and the work began. It equals to 0 for retrofitted issues with PRs before their creation times.
+        * `jira-acknowledge-time` - Mean Acknowledge Time - the time between when the issue was created and the work began = `min(transitioned to "In Progress", PR created)`. It equals to 0 for retrofitted issues with PRs before their creation times.
+        * `jira-pr-lag-time` - the time between when the issue transitioned to "In Progress" and the first PR was created. It equals to 0 if the difference is negative or no PRs are mapped to the issue.
+        * `jira-backlog-time` - the time between when the issue was created and transitioned to "In Progress". 
         * `jira-resolution-rate` - ratio between the number of resolved issues to the number of raised issues.
       enum:
       - jira-open
@@ -7756,6 +7758,8 @@ components:
       - jira-life-time
       - jira-lead-time
       - jira-acknowledge-time
+      - jira-pr-lag-time
+      - jira-backlog-time
       - jira-resolution-rate
       example: jira-resolved
       type: string
@@ -9989,7 +9993,8 @@ components:
             exist.
           type: object
         environments:
-          description: List of environment groups for which to calculate the metrics.
+          description: |
+            List of environment groups for which to calculate the metrics.
           items:
             items:
               type: string
