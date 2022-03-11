@@ -1,3 +1,4 @@
 extends: '@ibm-cloud/openapi-ruleset'
 rules:
   request-body-object: off
+  enum-case-convention: off
