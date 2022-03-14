@@ -8808,6 +8808,13 @@ components:
           - description: Analyze only those check runs that belong to PRs mapped to
               JIRA issues that satisfy this filter.
           - $ref: '#/components/schemas/JIRAFilter'
+        lines:
+          description: Split by changed number of lines (inserted + removed) in pull requests.
+          items:
+            minimum: 0
+            type: integer
+          minItems: 2
+          type: array
       required:
       - repositories
       type: object
