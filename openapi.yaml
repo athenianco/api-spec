@@ -7747,7 +7747,7 @@ components:
         * `jira-lead-time` - Mean Lead Time - the time between when the work began and max(issue resolution, fixes released).
         * `jira-acknowledge-time` - Mean Acknowledge Time - the time between when the issue was created and the work began = `min(transitioned to "In Progress", PR created)`. It equals to 0 for retrofitted issues with PRs before their creation times.
         * `jira-pr-lag-time` - the time between when the issue transitioned to "In Progress" and the first PR was created. It equals to 0 if the difference is negative or no PRs are mapped to the issue.
-        * `jira-backlog-time` - the time between when the issue was created and transitioned to "In Progress". 
+        * `jira-backlog-time` - the time between when the issue was created and transitioned to "In Progress".
         * `jira-resolution-rate` - ratio between the number of resolved issues to the number of raised issues.
       enum:
       - jira-open
@@ -9956,6 +9956,8 @@ components:
         jira:
           labels_include:
           - bug
+        environments:
+        - production
       properties:
         repositories:
           $ref: '#/components/schemas/RepositorySet'
@@ -9994,6 +9996,13 @@ components:
           type: object
         environments:
           description: |
+            List of environments for which to calculate the metrics.
+            We calculate the metrics for each environment independently.
+          items:
+            type: string
+          type: array
+        envgroups:
+          description: |
             List of environment groups for which to calculate the metrics.
           items:
             items:
@@ -10020,8 +10029,8 @@ components:
         - dep-duration-successful
         - dep-success-ratio
         environments:
-        - - production
-        - - staging
+        - production
+        - staging
         date_from: 2021-07-20
         date_to: 2021-10-07
         granularities:
