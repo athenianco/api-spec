@@ -20,7 +20,7 @@ info:
   license:
     name: CC-BY-4.0
   title: '{{ title }}'
-  version: 2.0.31
+  version: 2.1.0
 servers:
 - description: '{{ server_description }} - {{ server_url }}'
   url: '{{ server_url }}/v1'
@@ -3511,15 +3511,15 @@ components:
         * `pr-wait-first-review-time`: average time of waiting for the first review.
         * `pr-wait-first-review-count`: number of PRs used to calculate `pr-wait-first-review`. Note: this is *not* the same as the number of PRs waiting for the first review.
         * `pr-wait-first-review-count-q`: number of PRs used to calculate `pr-wait-first-review after applying the quantiles.
-        * `pr-deployment-time`: average time between when the PR was released and was deployed. We track deployments through `/events/deployments`. Requires setting `ForSet.environments`.
-        * `pr-deployment-count`: number of PRs used to calculate `pr-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given time window. Requires setting `ForSet.environments`.
-        * `pr-deployment-count-q`: number of PRs used to calculate `pr-deployment-time` after applying the quantiles. Requires setting `ForSet.environments`.
-        * `pr-lead-deployment-time`: extended Lead Time that includes the time passed since the PR was released until it was deployed. We discard PRs in repositories without deployments. Requires setting `ForSet.environments`.
-        * `pr-lead-deployment-count`: number of PRs used to calculate `pr-lead-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given window and duplicates `pr-deployment-count`. Requires setting `ForSet.environments`.
-        * `pr-lead-deployment-count-q`: number of PRs used to calculate `pr-lead-deployment-time` after applying the quantiles. Requires setting `ForSet.environments`.
-        * `pr-cycle-deployment-time`: extended Cycle Time that includes `pr-deployment-time`. We discard PRs in repositories without deployments. Requires setting `ForSet.environments`.
-        * `pr-cycle-deployment-count`: number of PRs used to calculate `pr-cycle-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given window and duplicates `pr-deployment-count` and `pr-lead-deployment-count`. Requires setting `ForSet.environments`.
-        * `pr-cycle-deployment-count-q`: number of PRs used to calculate `pr-cycle-deployment-time` after applying the quantiles. Requires setting `ForSet.environments`.
+        * `pr-deployment-time`: average time between when the PR was released and was deployed. We track deployments through `/events/deployments`. Requires setting `ForSetPullRequests.environments`.
+        * `pr-deployment-count`: number of PRs used to calculate `pr-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given time window. Requires setting `ForSetPullRequests.environments`.
+        * `pr-deployment-count-q`: number of PRs used to calculate `pr-deployment-time` after applying the quantiles. Requires setting `ForSetPullRequests.environments`.
+        * `pr-lead-deployment-time`: extended Lead Time that includes the time passed since the PR was released until it was deployed. We discard PRs in repositories without deployments. Requires setting `ForSetPullRequests.environments`.
+        * `pr-lead-deployment-count`: number of PRs used to calculate `pr-lead-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given window and duplicates `pr-deployment-count`. Requires setting `ForSetPullRequests.environments`.
+        * `pr-lead-deployment-count-q`: number of PRs used to calculate `pr-lead-deployment-time` after applying the quantiles. Requires setting `ForSetPullRequests.environments`.
+        * `pr-cycle-deployment-time`: extended Cycle Time that includes `pr-deployment-time`. We discard PRs in repositories without deployments. Requires setting `ForSetPullRequests.environments`.
+        * `pr-cycle-deployment-count`: number of PRs used to calculate `pr-cycle-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given window and duplicates `pr-deployment-count` and `pr-lead-deployment-count`. Requires setting `ForSetPullRequests.environments`.
+        * `pr-cycle-deployment-count-q`: number of PRs used to calculate `pr-cycle-deployment-time` after applying the quantiles. Requires setting `ForSetPullRequests.environments`.
         * `pr-flow-ratio`: ratio of opened to closed PRs.
         * `pr-opened`: number of opened PRs.
         * `pr-reviewed`: number of PRs which received a review.
@@ -4226,12 +4226,12 @@ components:
       - name
       - total
       type: object
-    ForSet:
+    ForSetPullRequests:
       additionalProperties: false
       description: |
         Filter for `/metrics/pull_requests` and `/histograms/pull_requests`.
-        Achieve the best performance by packing all your filters in a single `ForSet`
-        instead of sending multiple `ForSet`-s. For example, use `repogroups` and `withgroups`
+        Achieve the best performance by packing all your filters in a single `ForSetPullRequests`
+        instead of sending multiple `ForSetPullRequests`-s. For example, use `repogroups` and `withgroups`
         to request separate metrics for several repository sets and teams.
       example:
         repositories:
@@ -4384,7 +4384,7 @@ components:
             The aggregation is `AND` between repositories and developers.
             The aggregation is `OR` inside both repositories and developers.
           items:
-            $ref: '#/components/schemas/ForSet'
+            $ref: '#/components/schemas/ForSetPullRequests'
           type: array
         metrics:
           description: Requested metric identifiers.
@@ -4468,7 +4468,7 @@ components:
         granularity: day
       properties:
         for:
-          $ref: '#/components/schemas/ForSet'
+          $ref: '#/components/schemas/ForSetPullRequests'
         granularity:
           $ref: '#/components/schemas/Granularity'
         values:
@@ -6766,7 +6766,7 @@ components:
             The aggregation is `AND` between repositories and developers.
             The aggregation is `OR` inside both repositories and developers.
           items:
-            $ref: '#/components/schemas/ForSet'
+            $ref: '#/components/schemas/ForSetPullRequests'
           type: array
         histograms:
           description: Histogram parameters for each wanted topic.
@@ -6883,7 +6883,7 @@ components:
           right: 76
       properties:
         for:
-          $ref: '#/components/schemas/ForSet'
+          $ref: '#/components/schemas/ForSetPullRequests'
         metric:
           $ref: '#/components/schemas/PullRequestMetricID'
         scale:
