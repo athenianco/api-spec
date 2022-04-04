@@ -400,8 +400,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-          description: Empty object indicates a successful notification.
+                $ref: '#/components/schemas/NotifyReleasesResponse'
+          description: Summary of the accepted and the rejected releases.
         400:
           content:
             application/json:
@@ -8441,9 +8441,29 @@ components:
         $ref: '#/components/schemas/DeploymentNotification'
       type: array
     NotifyReleasesRequest:
+      description: |
+        Request body of `/events/releases`: list of release notifications.
       items:
         $ref: '#/components/schemas/ReleaseNotification'
       type: array
+    NotifyReleasesResponse:
+      description: |
+        Response from `/events/releases`. The status of each release notification
+        in the order of `NotifyReleasesRequest`.
+      items:
+        $ref: '#/components/schemas/ReleaseNotificationStatus'
+      type: array
+    ReleaseNotificationStatus:
+      description: |
+        What happened to the notification:
+        - `accepted_resolved`: all is OK, we found the repository reference.
+        - `accepted_pending`: we haven't found the repository reference, it will take up to 1 hour for the release to become visible.
+        - `ignored_duplicate`: we found another release with the same name in the same repository in the request and hence skipped.
+      enum:
+      - accepted-resolved
+      - accepted-pending
+      - ignored-duplicate
+      type: string
     CommitHash:
       description: Commit hash, either short (7 chars) or long (40 chars) form.
       maxLength: 40
