@@ -4462,9 +4462,10 @@ components:
           repositories:
           - github.com/athenianco/athenian-webapp
           - github.com/athenianco/athenian-api
-          developers:
-          - github.com/vmarkovtsev
-          - github.com/dpordomingo
+          with:
+            author:
+            - github.com/vmarkovtsev
+            - github.com/dpordomingo
         granularity: day
       properties:
         for:
@@ -4538,9 +4539,10 @@ components:
             - 75
             - 75
           for:
-            developers:
-            - github.com/vmarkovtsev
-            - github.com/dpordomingo
+            with:
+              author:
+              - github.com/vmarkovtsev
+              - github.com/dpordomingo
             repositories:
             - github.com/athenianco/athenian-webapp
             - github.com/athenianco/athenian-api
@@ -4572,9 +4574,10 @@ components:
             - 75
             - 75
           for:
-            developers:
-            - github.com/vmarkovtsev
-            - github.com/dpordomingo
+            with:
+              author:
+              - github.com/vmarkovtsev
+              - ggithub.com/dpordomingo
             repositories:
             - github.com/athenianco/athenian-webapp
             - github.com/athenianco/athenian-api
