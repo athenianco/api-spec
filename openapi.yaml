@@ -10184,7 +10184,7 @@ components:
           - alpha
           - webapp
         parent: github.com/athenianco/athenian-monorepo
-        deployments: '{}'
+        deployments: {}
         name: Webapp
         releases:
           branches: '{{ "{{default}}" }}'
@@ -10230,7 +10230,7 @@ components:
           - alpha
           - webapp
         parent: github.com/athenianco/athenian-monorepo
-        deployments: '{}'
+        deployments: {}
         name: Webapp
         releases:
           branches: '{{ "{{default}}" }}'
