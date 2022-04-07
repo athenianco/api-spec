@@ -44,6 +44,7 @@ jobs:
       run: echo "$HOME/.local/bin" >> $GITHUB_PATH
     - name: install
       run: |
+        set -x
         pip3 install jinja2-cli
     - name: lint-openapi
       run: |

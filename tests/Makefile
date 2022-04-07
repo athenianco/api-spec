@@ -15,13 +15,19 @@ build/openapi_rendered.yaml: ../openapi.yaml
 	@mkdir -p build
 	jinja2 ../openapi.yaml -o build/openapi_rendered.yaml
 
+build/openapi_rendered_oas_validation.yaml: build/openapi_rendered.yaml
+	yq "del(.components.schemas.User.example)" \
+		< build/openapi_rendered.yaml \
+		> build/openapi_rendered_oas_validation.yaml
+
+
 .PHONY: lint-enforce
 lint-enforce: build/openapi_rendered.yaml
 	npm install openapi-enforcer-cli
 	npx openapi-enforcer validate build/openapi_rendered.yaml
 
 .PHONY: lint-ibm
-lint-ibm: build/openapi_rendered.yaml
+lint-ibm: build/openapi_rendered_oas_validation.yaml
 	npm install ibm-openapi-validator
-	npx lint-openapi -p -v $(LINT_OPENAPI_EXTRA_OPTS) build/openapi_rendered.yaml
+	npx lint-openapi -p -v $(LINT_OPENAPI_EXTRA_OPTS) build/openapi_rendered_oas_validation.yaml
 
