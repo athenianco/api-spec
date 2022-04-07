@@ -9794,7 +9794,6 @@ components:
       - include
       type: object
     DeploymentAnalysis:
-      additionalProperties: false
       description: Statistics and contents of the deployment.
       example:
         code:
