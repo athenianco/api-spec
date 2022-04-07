@@ -10058,9 +10058,6 @@ components:
         metrics:
         - dep-duration-successful
         - dep-success-ratio
-        environments:
-        - production
-        - staging
         date_from: 2021-07-20
         date_to: 2021-10-07
         granularities:
@@ -10123,8 +10120,6 @@ components:
         metrics:
         - dep-duration-successful
         - dep-success-ratio
-        environments:
-        - production
         granularity: all
         values:
         - date: 2020-07-20
