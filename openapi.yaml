@@ -7477,8 +7477,8 @@ components:
         - release-count
         granularities:
         - day
-        date_from: 2020-01-01T00:00:00Z
-        date_to: 2020-10-01T00:00:00Z
+        date_from: 2020-01-01
+        date_to: 2020-10-01
         account: 1
       properties:
         for:
