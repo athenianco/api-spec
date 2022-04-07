@@ -4649,9 +4649,7 @@ components:
 # {% if False %}
             allOf:
 # {% else %}{{ "\n" }}            oneOf:{% endif %}
-            - type: integer
-            - format: float
-              type: number
+            - type: number
             - $ref: '#/components/schemas/TimeDuration'
             - type: object
           type: array
@@ -4663,11 +4661,9 @@ components:
 # {% if False %}
             allOf:
 # {% else %}{{ "\n" }}            oneOf:{% endif %}
-            - type: integer
-            - format: float
-              type: number
-            - $ref: '#/components/schemas/TimeDuration'
+            - type: number
               nullable: true
+            - $ref: '#/components/schemas/TimeDuration'
           type: array
         confidence_maxs:
           description: Confidence interval @ p=0.8, maximum. The same order as `metrics`.
@@ -4677,11 +4673,9 @@ components:
 # {% if False %}
             allOf:
 # {% else %}{{ "\n" }}            oneOf:{% endif %}
-            - type: integer
-            - format: float
-              type: number
-            - $ref: '#/components/schemas/TimeDuration'
+            - type: number
               nullable: true
+            - $ref: '#/components/schemas/TimeDuration'
           type: array
         confidence_scores:
           description: Confidence score from 0 (random guess) to 100 (very confident).
@@ -6918,9 +6912,8 @@ components:
 # {% if False %}
             allOf:
 # {% else %}{{ "\n" }}            oneOf:{% endif %}
-            - minimum: 0
-              type: integer
             - type: number
+              minimum: 0
             - $ref: '#/components/schemas/TimeDuration'
           type: array
         interquartile:
