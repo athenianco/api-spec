@@ -16,6 +16,8 @@ build/openapi_rendered.yaml: ../openapi.yaml
 	jinja2 ../openapi.yaml -o build/openapi_rendered.yaml
 
 build/openapi_rendered_oas_validation.yaml: build/openapi_rendered.yaml
+#	Following example is problematic due to it including an `id` propery
+#	and multiple sub-schemas referencing it; remove it before calling openapi
 	yq "del(.components.schemas.User.example)" \
 		< build/openapi_rendered.yaml \
 		> build/openapi_rendered_oas_validation.yaml
