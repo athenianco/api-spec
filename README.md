@@ -22,6 +22,15 @@ a registered client.
 
 ### Contributing
 
+Sanity checks on the API specification can be executed with the included `Makefile`:
+
+```
+make -C tests
+```
+
+`jinja2` and `yq` are required to run tests.
+
+
 Please:
 
 - Suggest API changes.
