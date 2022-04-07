@@ -3970,12 +3970,12 @@ components:
       description: Details about the user who has accepted an invitation.
       example:
         user:
-          id: github|60340680
-          native_id: 60340680
+          id: github|60340681
+          native_id: '60340681'
           login: gkwillie
           name: Groundskeeper Willie
           email: bot@athenian.co
-          picture: https://avatars0.githubusercontent.com/u/60340680?v=4
+          picture: https://avatars0.githubusercontent.com/u/60340681?v=4
           updated: 2020-01-23T12:00:00Z
         account: 0
       properties:
@@ -3995,29 +3995,29 @@ components:
       example:
         regulars:
         - id: github|24828976
-          native_id: 24828976
+          native_id: '24828976'
           login: jjdoe
           name: Jane Josephine Doe
           email: janedoe@exampleco.com
           picture: https://exampleco.com/janedoe/me.jpg
           updated: 2020-01-23T12:00:00Z
-        - id: github|24828976
-          native_id: 24828976
+        - id: github|24828977
+          native_id: '24828977'
           login: jjdoe
           name: Jane Josephine Doe
           email: janedoe@exampleco.com
           picture: https://exampleco.com/janedoe/me.jpg
           updated: 2020-01-23T12:00:00Z
         admins:
-        - id: github|24828976
-          native_id: 24828976
+        - id: github|24828978
+          native_id: '24828978'
           login: jjdoe
           name: Jane Josephine Doe
           email: janedoe@exampleco.com
           picture: https://exampleco.com/janedoe/me.jpg
           updated: 2020-01-23T12:00:00Z
-        - id: github|24828976
-          native_id: 24828976
+        - id: github|24828979
+          native_id: '24828979'
           login: jjdoe
           name: Jane Josephine Doe
           email: janedoe@exampleco.com
@@ -6218,7 +6218,7 @@ components:
       example:
         jira:
           DEV-344:
-            id: DEV-344
+            id: DEV-3440
             title: Write the API specs to filter PRs by Jira epic, ticket type and
               label.
             epic: DEV-149
