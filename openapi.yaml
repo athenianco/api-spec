@@ -9234,7 +9234,7 @@ components:
         items:
         - title: Unit tests
           repository: github.com/src-d/athenian-api
-          last_execution_time: 2021-05-18
+          last_execution_time: 2021-05-18T11:47:42Z
           last_execution_url: https://github.com/athenianco/athenian-api/pull/1448/checks?check_run_id=2610787628
           size_groups:
           - 3
@@ -9471,7 +9471,7 @@ components:
       example:
         title: Unit tests
         repository: github.com/src-d/athenian-api
-        last_execution_time: 2021-05-18
+        last_execution_time: 2021-05-18T11:47:42Z
         last_execution_url: https://github.com/athenianco/athenian-api/pull/1448/checks?check_run_id=2610787628
         size_groups:
         - 3
