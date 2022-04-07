@@ -4667,7 +4667,7 @@ components:
             - format: float
               type: number
             - $ref: '#/components/schemas/TimeDuration'
-            - nullable: true
+              nullable: true
           type: array
         confidence_maxs:
           description: Confidence interval @ p=0.8, maximum. The same order as `metrics`.
@@ -4681,17 +4681,15 @@ components:
             - format: float
               type: number
             - $ref: '#/components/schemas/TimeDuration'
-            - nullable: true
+              nullable: true
           type: array
         confidence_scores:
           description: Confidence score from 0 (random guess) to 100 (very confident).
             The same order as `metrics`. May be `null` for exact metrics.
           items:
-# {% if False %}
             allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
             - type: integer
-            - nullable: true
+              nullable: true
           type: array
       required:
       - date
