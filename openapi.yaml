@@ -8757,7 +8757,9 @@ components:
         from:
           $ref: '#/components/schemas/ContributorIdentity'
         to:
+# {% if False %}
           allOf:
+# {% else %}{{ "\n" }}          anyOf:{% endif %}
           - nullable: true
             type: string
           - $ref: '#/components/schemas/DeveloperID'
