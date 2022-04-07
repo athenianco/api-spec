@@ -9253,29 +9253,21 @@ components:
             - 0
             - 20
             - 40
-            - 30
-            - 0
             - 10
             successes_timeline:
             - 0
             - 10
             - 20
-            - 15
-            - 0
             - 5
             mean_execution_time_timeline:
-            - null
+            - 150s
             - 160s
             - 210s
-            - 205s
-            - null
             - 180s
             median_execution_time_timeline:
-            - null
+            - 110s
             - 100s
             - 125s
-            - 120s
-            - null
             - 110s
           prs_stats:
             count: 100
@@ -9290,36 +9282,27 @@ components:
             - 0
             - 20
             - 40
-            - 30
             - 0
-            - 10
             successes_timeline:
             - 0
             - 10
             - 20
-            - 15
             - 0
-            - 5
             mean_execution_time_timeline:
-            - null
+            - 170s
             - 160s
             - 210s
             - 205s
-            - null
-            - 180s
             median_execution_time_timeline:
-            - null
+            - 175s
             - 100s
             - 125s
             - 120s
-            - null
-            - 110s
         timeline:
         - 2020-05-01
         - 2020-05-02
         - 2020-05-03
         - 2020-05-04
-        - 2020-05-05
       properties:
         timeline:
           description: |-
@@ -9368,18 +9351,18 @@ components:
         - 0
         - 5
         mean_execution_time_timeline:
-        - null
+        - 140s
         - 160s
         - 210s
         - 205s
-        - null
+        - 140s
         - 180s
         median_execution_time_timeline:
-        - null
+        - 90s
         - 100s
         - 125s
         - 120s
-        - null
+        - 105s
         - 110s
       properties:
         count:
@@ -9501,18 +9484,18 @@ components:
           - 0
           - 5
           mean_execution_time_timeline:
-          - null
+          - 110s
           - 160s
           - 210s
           - 205s
-          - null
+          - 120s
           - 180s
           median_execution_time_timeline:
-          - null
+          - 120s
           - 100s
           - 125s
           - 120s
-          - null
+          - 100s
           - 110s
         prs_stats:
           count: 100
@@ -9538,18 +9521,18 @@ components:
           - 0
           - 5
           mean_execution_time_timeline:
-          - null
+          - 110s
           - 160s
           - 210s
           - 205s
-          - null
+          - 200s
           - 180s
           median_execution_time_timeline:
-          - null
+          - 120s
           - 100s
           - 125s
           - 120s
-          - null
+          - 190s
           - 110s
       properties:
         title:
