@@ -7157,9 +7157,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/JIRAEpicIssueCommon'
       - properties:
-          type:
-            description: Name of the issue type. The details are returned in `FilteredJIRAStuff.issue_types`.
-            type: string
           subtasks:
             description: Number of sub-tasks.
             type: integer
@@ -7169,7 +7166,6 @@ components:
         required:
         - prs
         - subtasks
-        - type
       description: Details about a JIRA issue contained in an epic.
       example:
         id: DEV-157
@@ -7194,9 +7190,6 @@ components:
           project:
             description: Identifier of the project where this issue exists.
             type: string
-          type:
-            description: Name of the issue type. The details are returned in `FilteredJIRAStuff.issue_types`.
-            type: string
           prs:
             description: Details about the mapped PRs. `jira` field is unfilled.
             items:
@@ -7205,7 +7198,6 @@ components:
         required:
         - project
         - prs
-        - type
     JIRAEpicIssueCommon:
       description: Common properies if a JIRA issue or epic.
       properties:
@@ -7263,7 +7255,7 @@ components:
           description: Name of the status. The details are returned in `FilteredJIRAStuff.statuses`.
           type: string
         type:
-          description: Name of the issue type - it is not always "Epic".
+          description: Name of the issue type. The details are returned in `FilteredJIRAStuff.issue_types`.
           type: string
         url:
           description: Link to the issue in JIRA web application.
