@@ -6597,6 +6597,7 @@ components:
         image: https://athenianco.atlassian.net/secure/viewavatar?size=medium&avatarId=10303&avatarType=issuetype
         project: '10009'
         is_subtask: false
+        is_epic: false
       properties:
         name:
           description: Name of the issue type.
@@ -6620,9 +6621,13 @@ components:
         is_subtask:
           description: Value indicating whether this issue type refers to a sub-task.
           type: boolean
+        is_epic:
+          description: Value indicating whether this issue type refers to an epic.
+          type: boolean
       required:
       - count
       - image
+      - is_epic
       - is_subtask
       - name
       - normalized_name
@@ -6967,6 +6972,7 @@ components:
           prs: 0
           priority: Low
           status: Backlog
+          type: Epic
           life_time: '59172893s'
           url: https://example.com/?my-jira#DEV-158
           project: '10012'
@@ -7015,12 +7021,14 @@ components:
           image: https://athenianco.atlassian.net/secure/viewavatar?size=medium&avatarId=10303&avatarType=issuetype
           project: '10009'
           is_subtask: false
+          is_epic: false
         - name: Task
           normalized_name: task
           count: 6
           image: https://athenianco.atlassian.net/secure/viewavatar?size=medium&avatarId=10318&avatarType=issuetype
           project: '10009'
           is_subtask: false
+          is_epic: false
         priorities:
         - name: None
           image: https://athenianco.atlassian.net/images/icons/priorities/trivial.svg
@@ -7111,6 +7119,7 @@ components:
         prs: 0
         priority: Low
         status: Backlog
+        type: Epic
         life_time: 10000s
         url: https://example.com/?my-jira#DEV-158
         project: '1002'
@@ -7253,6 +7262,9 @@ components:
         status:
           description: Name of the status. The details are returned in `FilteredJIRAStuff.statuses`.
           type: string
+        type:
+          description: Name of the issue type - it is not always "Epic".
+          type: string
         url:
           description: Link to the issue in JIRA web application.
           format: url
@@ -7266,6 +7278,7 @@ components:
       - reporter
       - status
       - title
+      - type
       - updated
       - url
       type: object
