@@ -5383,6 +5383,7 @@ components:
         ```
         then the matched PRs will have **@vmarkovtsev** as the author or either
         **@gkwillie** or **@mcuadros** as the reviewers.
+        It is possible to mention whole teams using the syntax `{id}` where `id` is a team identifier (see `/teams`).
       example:
         author:
         - github.com/vmarkovtsev
@@ -7753,7 +7754,9 @@ components:
       type: array
     ReleaseWith:
       additionalProperties: false
-      description: Release contribution roles. The aggregation is `OR` everywhere.
+      description: |
+        Release contribution roles. The aggregation is `OR` everywhere.
+        It is possible to mention whole teams using the syntax `{id}` where `id` is a team identifier (see `/teams`).
       example:
         pr_author:
         - github.com/se7entyse7en
@@ -9219,9 +9222,11 @@ components:
       - ticks
       type: object
     CommitPushers:
-      description: Check runs must be triggered by commits pushed by these people.
+      description: |
+        Check runs must be triggered by commits pushed by these people.
         When it is impossible to determine who pushed, e.g. in legacy API based checks,
         they are committers.
+        It is possible to mention whole teams using the syntax `{id}` where `id` is a team identifier (see `/teams`).
       example:
       - github.com/vmarkovtsev
       - github.com/se7entyse7en
@@ -9636,7 +9641,9 @@ components:
       type: object
     DeploymentWith:
       additionalProperties: false
-      description: Deployment contribution roles. The aggregation is `OR` everywhere.
+      description: |
+        Deployment contribution roles. The aggregation is `OR` everywhere.
+        It is possible to mention whole teams using the syntax `{id}` where `id` is a team identifier (see `/teams`).
       example:
         pr_author:
         - github.com/se7entyse7en
