@@ -2940,6 +2940,73 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+  /share:
+    post:
+      operationId: save_share
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Saved share identifier.
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestError'
+          description: The request is invalid.
+      security:
+      - bearerAuth: []
+      summary: Save the state of UI views and return a reference.
+      tags:
+      - user
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.share_controller
+      x-codegen-request-body-name: body
+  /share/{id}:
+    get:
+      operationId: get_share
+      parameters:
+      - description: Reference to the share previously saved by `PUT /share`.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Share'
+          description: Saved state of the UI views.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: Share does not exist or the user is not allowed to access.
+      security:
+      - bearerAuth: []
+      summary: Load the previously saved state of the UI views.
+      tags:
+      - user
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.share_controller
+      x-codegen-request-body-name: body
   /team/create:
     post:
       operationId: create_team
@@ -10453,4 +10520,28 @@ components:
       - deployments_count
       - last_conclusion
       - name
+      type: object
+    Share:
+      additionalProperties: false
+      description: Saved UI views state with metadata.
+      example:
+        author: Vadim Markovtsev
+        created: 2022-05-05T12:00:00Z
+        data:
+          whatever: 777
+      properties:
+        author:
+          description: User name who submitted.
+          type: string
+        created:
+          description: Submission timestamp.
+          format: date-time
+          type: string
+        data:
+          description: Saved object.
+          type: object
+      required:
+      - author
+      - created
+      - data
       type: object
