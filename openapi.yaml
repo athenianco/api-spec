@@ -3628,6 +3628,9 @@ components:
       - pr-release-time
       - pr-release-count
       - pr-release-count-q
+      - pr-open-time
+      - pr-open-count
+      - pr-open-count-q
       - pr-lead-time
       - pr-lead-count
       - pr-lead-count-q
