@@ -3572,6 +3572,9 @@ components:
         * `pr-release-time`: average time spent in Release stage.
         * `pr-release-count`: number of PRs used to calculate `pr-release-time` disregarding the quantiles.
         * `pr-release-count-q`: number of PRs used to calculate `pr-release-time` after applying the quantiles.
+        * `pr-open-time`: average time the PR stayed open.
+        * `pr-open-count`: number of PRs used to calculate `pr-open-time` disregarding the quantiles.
+        * `pr-open-count-q`: number of PRs used to calculate `pr-open-time` after applying the quantiles.
         * `pr-lead-time`: average Lead Time - time between the work started and the release.
         * `pr-lead-count`: number of PRs used to calculate `pr-lead-time` disregarding the quantiles. It should be the same as `pr-release-count`.
         * `pr-lead-count-q`: number of PRs used to calculate `pr-lead-time` after applying the quantiles.
