@@ -351,6 +351,8 @@ paths:
             application/json:
               schema:
                 type: object
+                enum:
+                  - {}
           description: Empty object indicates a successful notification.
         400:
           content:
