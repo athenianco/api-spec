@@ -300,6 +300,8 @@ paths:
             application/json:
               schema:
                 type: object
+                enum:
+                  - {}
           description: Empty response indicates a successful operation.
         403:
           content:
