@@ -3603,7 +3603,7 @@ components:
         * `pr-reviewed`: number of PRs which received a review.
         * `pr-reviewed-closed`: number of closed (merged or rejected) PRs which received a review.
         * `pr-not-reviewed`: number of closed (merged or rejected) PRs without any review.
-        * `pr-reviewed-ratio`: ratio of `pr-reviewed-closed` to `pr-closed`.
+        * `pr-reviewed-ratio`: ratio of `pr-reviewed` to `pr-reviewed` + `pr-not-reviewed`.
         * `pr-merged`: number of merged PRs.
         * `pr-rejected`: number of rejected (closed unmerged) PRs.
         * `pr-closed`: number of closed PRs = `pr-merged` + `pr-rejected`.
