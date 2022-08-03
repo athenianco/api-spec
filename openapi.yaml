@@ -4766,9 +4766,8 @@ components:
           description: Confidence score from 0 (random guess) to 100 (very confident).
             The same order as `metrics`. May be `null` for exact metrics.
           items:
-            allOf:
-            - type: integer
-              nullable: true
+            nullable: true
+            type: integer
           type: array
       required:
       - date
@@ -6262,7 +6261,12 @@ components:
         deletions:
           type: integer
         author:
-          $ref: '#/components/schemas/DeveloperID'
+# {% if False %}
+          allOf:
+# {% else %}{{ "\n" }}          anyOf:{% endif %}
+          - $ref: '#/components/schemas/DeveloperID'
+          - nullable: true
+            type: string
         jira:
           description: Mapped JIRA issue IDs.
           items:
@@ -8525,7 +8529,9 @@ components:
         confidence: 1.0
       properties:
         developer_id:
+# {% if False %}
           allOf:
+# {% else %}{{ "\n" }}          anyOf:{% endif %}
           - $ref: '#/components/schemas/DeveloperID'
           - nullable: true
             type: string
@@ -9536,13 +9542,17 @@ components:
             at least once.
           type: boolean
         mean_execution_time:
+# {% if False %}
           allOf:
+# {% else %}{{ "\n" }}          anyOf:{% endif %}
           - description: Average elapsed execution time.
             nullable: true
             type: string
           - $ref: '#/components/schemas/TimeDuration'
         stddev_execution_time:
+# {% if False %}
           allOf:
+# {% else %}{{ "\n" }}          anyOf:{% endif %}
           - description: |
               Standard deviation of the execution time.
               Higher values for a `critical` code check indicate an optimization opportunity:
@@ -9551,7 +9561,9 @@ components:
             type: string
           - $ref: '#/components/schemas/TimeDuration'
         median_execution_time:
+# {% if False %}
           allOf:
+# {% else %}{{ "\n" }}          anyOf:{% endif %}
           - description: Median elapsed execution time.
             nullable: true
             type: string
