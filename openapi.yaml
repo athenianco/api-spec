@@ -1166,6 +1166,34 @@ paths:
       - default
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.filter_controller
+  /goal_template/create:
+    post:
+      operationId: create_goal_template
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoalTemplateCreateRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedIdentifier'
+          description: Identifier of the created goal template.
+        400:
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
+      security:
+      - bearerAuth: []
+      summary: Create a goal template.
+      tags:
+      - align
+# {% if False %}
+      - default
+# {% endif %}
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.goal_controller
   /goal_template/{id}:
     delete:
       operationId: delete_goal_template
@@ -3526,7 +3554,13 @@ components:
       schema:
         type: integer
       style: simple
-  # yamllint disable-line rule:key-ordering
+  responses:
+    InvalidRequestErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InvalidRequestError'
+      description: The request is invalid.
   schemas:
     # yamllint disable-line rule:key-ordering
     CreatedIdentifier:
@@ -3600,6 +3634,31 @@ components:
       - id
       - name
       - metric
+      type: object
+    GoalTemplateCreateRequest:
+      additionalProperties: false
+      description: Goal template creation request.
+      example:
+        account: 30
+        metric: pr-review-time
+        name: My New Goal Template
+      properties:
+        account:
+          description: Account identifier. That account will own the created goal template.
+          type: integer
+        metric:
+# {% if False %}
+          allOf:
+# {% else %}{{ "\n" }}          oneOf:{% endif %}
+          - $ref: '#/components/schemas/PullRequestMetricID'
+          - $ref: '#/components/schemas/JIRAMetricID'
+          - $ref: '#/components/schemas/ReleaseMetricID'
+        name:
+          $ref: '#/components/schemas/GoalTemplateName'
+      required:
+      - account
+      - metric
+      - name
       type: object
     GoalTemplateList:
       description: List of goal templates.
