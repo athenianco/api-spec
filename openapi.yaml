@@ -1167,6 +1167,32 @@ paths:
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.filter_controller
   /goal_template/{id}:
+    delete:
+      operationId: delete_goal_template
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                enum:
+                - {}
+                type: object
+          description: Empty object indicates a successful removal.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The goal template was not found.
+      security:
+      - bearerAuth: []
+      summary: Delete a goal template.
+      tags:
+      - align
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.goal_controller
     get:
       operationId: get_goal_template
       responses:
