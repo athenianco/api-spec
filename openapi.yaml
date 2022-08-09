@@ -1255,6 +1255,29 @@ paths:
       schema:
         type: integer
       style: simple
+    put:
+      operationId: update_goal_template
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoalTemplateUpdateRequest'
+        x-body-name: body
+      responses:
+        200:
+          $ref: '#/components/responses/EmptySuccessfulResponse'
+        400:
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
+      security:
+      - bearerAuth: []
+      summary: Update a goal template.
+      tags:
+      - align
+# {% if False %}
+      - default
+# {% endif %}
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.goal_controller
   /goal_templates/{id}:
     get:
       operationId: list_goal_templates
@@ -3555,6 +3578,14 @@ components:
         type: integer
       style: simple
   responses:
+    EmptySuccessfulResponse:
+      content:
+        application/json:
+          schema:
+            enum:
+            - {}
+            type: object
+      description: Empty object indicates a successful operation.
     InvalidRequestErrorResponse:
       content:
         application/json:
@@ -3677,6 +3708,17 @@ components:
       example: Untitled Template
       minLength: 1
       type: string
+    GoalTemplateUpdateRequest:
+      additionalProperties: false
+      description: Goal template creation request.
+      example:
+        name: New template name
+      properties:
+        name:
+          $ref: '#/components/schemas/GoalTemplateName'
+      required:
+      - name
+      type: object
     # yamllint disable-line rule:key-ordering
     InvalidRequestError:
       allOf:
