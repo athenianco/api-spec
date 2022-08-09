@@ -1,0 +1,15 @@
+extends: default
+
+rules:
+  braces:
+    forbid: non-empty
+  brackets:
+    forbid: non-empty
+  comments-indentation: disable
+  document-start:
+    present: false
+  key-ordering: enable
+  line-length: disable
+  indentation:
+    spaces: 2
+    indent-sequences: false

@@ -11,20 +11,37 @@ jobs:
   spec:
     name: OpenAPI in JS
     if: "!contains(github.event.head_commit.message, 'Bump version') || github.event_name != 'push'"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: actions/checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: openapitools/openapi-generator-cli
       run: |
         make -C tests spec
+  yamllint:
+    name: yamllint
+    if: "!contains(github.event.head_commit.message, 'Bump version') || github.event_name != 'push'"
+    runs-on: ubuntu-22.04
+    steps:
+    - name: actions/checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: path
+      run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - name: install
+      run: |
+        pip3 install yamllint
+    - name: yamllint
+      run: |
+        make -C tests yamllint-diff
   lint-enforce:
     name: openapi-enforcer
     if: "!contains(github.event.head_commit.message, 'Bump version') || github.event_name != 'push'"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: actions/checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: path
       run: echo "$HOME/.local/bin" >> $GITHUB_PATH
     - name: install
@@ -36,10 +53,10 @@ jobs:
   lint-ibm:
     name: ibm-openapi-validator
     if: "!contains(github.event.head_commit.message, 'Bump version') || github.event_name != 'push'"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: actions/checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: path
       run: echo "$HOME/.local/bin" >> $GITHUB_PATH
     - name: install
@@ -52,7 +69,7 @@ jobs:
   no-confusion:
     name: No confusion
     if: "!contains(github.event.head_commit.message, 'Bump version') || github.event_name != 'push'"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
     - uses: athenianco/no-confusion-action@1.1.1
@@ -63,10 +80,10 @@ jobs:
     name: Bump the version
     needs: [spec, no-confusion]
     if: "!contains(github.event.head_commit.message, 'Bump version') && github.ref == 'refs/heads/master' && github.event_name == 'push'"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: actions/checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 100
         persist-credentials: false
@@ -83,4 +100,3 @@ jobs:
         commit_email: bot@athenian.co
         login: gkwillie
         token: ${{ secrets.GKWILLIE_TOKEN }}
-
