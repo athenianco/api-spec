@@ -1,4 +1,5 @@
 LINT_OPENAPI_EXTRA_OPTS ?=
+OPENAPI_GENERATOR_VERSION ?= v6.0.1
 
 .PHONY: all-checks
 all-checks: spec lint-enforce lint-ibm
@@ -6,7 +7,9 @@ all-checks: spec lint-enforce lint-ibm
 .PHONY: spec
 spec: ../openapi.yaml
 	@mkdir -p build
-	docker run --rm -v `pwd`/..:/local --user `id -u`:`id -g` openapitools/openapi-generator-cli generate --input-spec=/local/openapi.yaml --generator-name=javascript --output=/local/tests/build/js-client
+	docker run --rm -v `pwd`/..:/local --user `id -u`:`id -g` \
+	  openapitools/openapi-generator-cli:$(OPENAPI_GENERATOR_VERSION) \
+	  generate --input-spec=/local/openapi.yaml --generator-name=javascript --output=/local/tests/build/js-client
 	npm --prefix build/js-client install
 	npm --prefix build/js-client test
 
