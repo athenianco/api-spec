@@ -154,14 +154,7 @@ paths:
     post:
       operationId: set_account_features
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       requestBody:
         content:
           application/json:
@@ -956,14 +949,7 @@ paths:
     get:
       operationId: get_contributors
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -2318,14 +2304,7 @@ paths:
     get:
       operationId: list_reposets
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -2410,14 +2389,7 @@ paths:
     get:
       operationId: get_jira_identities
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -2514,14 +2486,7 @@ paths:
     get:
       operationId: get_jira_projects
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -2557,14 +2522,7 @@ paths:
     get:
       operationId: list_logical_repositories
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -2749,14 +2707,7 @@ paths:
     get:
       operationId: list_release_match_settings
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -2911,14 +2862,7 @@ paths:
     get:
       operationId: list_work_types
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -3198,14 +3142,7 @@ paths:
     delete:
       operationId: resync_teams
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -3235,14 +3172,7 @@ paths:
     get:
       operationId: list_teams
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -3406,14 +3336,7 @@ paths:
     get:
       operationId: list_tokens
       parameters:
-      - description: Numeric identifier of the account.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
+      - $ref: '#/components/parameters/pathAccountID'
       responses:
         200:
           content:
@@ -3501,6 +3424,16 @@ components:
       in: header
       name: X-API-Key
       x-apikeyInfoFunc: athenian.api.controllers.security_controller.info_from_apiKeyAuth
+  parameters:
+    pathAccountID:
+      description: Numeric identifier of the account.
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+      style: simple
   schemas:
     CreatedIdentifier:
       additionalProperties: false
