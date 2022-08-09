@@ -1,4 +1,5 @@
 openapi: 3.0.3
+# yamllint disable-line rule:key-ordering
 info:
   contact:
     email: admin@athenian.co
@@ -24,6 +25,7 @@ info:
 servers:
 - description: '{{ server_description }} - {{ server_url }}'
   url: '{{ server_url }}/v1'
+# yamllint disable-line rule:key-ordering
 paths:
   /account/user:
     put:
@@ -62,8 +64,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.user_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.user_controller
   /account/{id}/details:
     get:
       operationId: get_account_details
@@ -106,8 +108,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.user_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.user_controller
   /account/{id}/features:
     get:
       operationId: get_account_features
@@ -149,8 +151,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.user_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.user_controller
     post:
       operationId: set_account_features
       parameters:
@@ -183,8 +185,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.user_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.user_controller
   /become:
     get:
       operationId: become_user
@@ -276,8 +278,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /events/clear_cache:
     post:
       operationId: clear_precomputed_events
@@ -292,9 +294,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 enum:
-                  - {}
+                - {}
+                type: object
           description: Empty response indicates a successful operation.
         403:
           content:
@@ -329,8 +331,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.events_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.events_controller
   /events/deployments:
     post:
       operationId: notify_deployments
@@ -345,9 +347,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 enum:
-                  - {}
+                - {}
+                type: object
           description: Empty object indicates a successful notification.
         400:
           content:
@@ -381,8 +383,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.events_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.events_controller
   /events/releases:
     post:
       operationId: notify_releases
@@ -431,8 +433,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.events_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.events_controller
   /filter/code_checks:
     post:
       operationId: filter_code_checks
@@ -483,8 +485,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /filter/commits:
     post:
       operationId: filter_commits
@@ -534,8 +536,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /filter/contributors:
     post:
       operationId: filter_contributors
@@ -585,8 +587,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /filter/deployments:
     post:
       operationId: filter_deployments
@@ -637,8 +639,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /filter/environments:
     post:
       operationId: filter_environments
@@ -682,8 +684,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /filter/jira:
     post:
       operationId: filter_jira_stuff
@@ -721,8 +723,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.jira_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.jira_controller
   /filter/labels:
     post:
       operationId: filter_labels
@@ -772,8 +774,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /filter/pull_requests:
     post:
       operationId: filter_prs
@@ -886,8 +888,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /filter/repositories:
     post:
       operationId: filter_repositories
@@ -943,8 +945,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.filter_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.filter_controller
   /get/contributors/{id}:
     get:
       operationId: get_contributors
@@ -984,8 +986,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.contributors_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.contributors_controller
   /get/export:
     get:
       operationId: get_everything
@@ -1217,8 +1219,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.histograms_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.histograms_controller
   /histograms/jira:
     post:
       operationId: calc_histogram_jira
@@ -1271,8 +1273,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.jira_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.jira_controller
   /histograms/pull_requests:
     post:
       operationId: calc_histogram_prs
@@ -1332,8 +1334,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.histograms_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.histograms_controller
   /invite/accept:
     put:
       operationId: accept_invitation
@@ -1392,8 +1394,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.invitation_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.invitation_controller
   /invite/check:
     post:
       operationId: check_invitation
@@ -1420,8 +1422,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.invitation_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.invitation_controller
   /invite/generate:
     get:
       operationId: gen_account_invitation
@@ -1446,8 +1448,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.invitation_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.invitation_controller
   /invite/generate/{id}:
     get:
       operationId: gen_user_invitation
@@ -1490,8 +1492,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.invitation_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.invitation_controller
   /invite/jira/{id}:
     get:
       operationId: gen_jira_link
@@ -1532,8 +1534,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.invitation_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.invitation_controller
   /invite/jira_progress/{id}:
     get:
       operationId: eval_jira_progress
@@ -1661,8 +1663,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.integrations_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.integrations_controller
   /metrics/code_bypassing_prs:
     post:
       operationId: calc_code_bypassing_prs
@@ -1716,8 +1718,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.metrics_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.metrics_controller
   /metrics/code_checks:
     post:
       operationId: calc_metrics_code_checks
@@ -1771,8 +1773,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.metrics_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.metrics_controller
   /metrics/deployments:
     post:
       operationId: calc_metrics_deployments
@@ -1825,8 +1827,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.metrics_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.metrics_controller
   /metrics/developers:
     post:
       operationId: calc_metrics_developers
@@ -1885,8 +1887,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.metrics_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.metrics_controller
   /metrics/jira:
     post:
       operationId: calc_metrics_jira_linear
@@ -1945,8 +1947,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.jira_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.jira_controller
   /metrics/pull_requests:
     post:
       operationId: calc_metrics_prs
@@ -2005,8 +2007,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.metrics_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.metrics_controller
   /metrics/releases:
     post:
       operationId: calc_metrics_releases
@@ -2065,8 +2067,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.metrics_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.metrics_controller
   /paginate/pull_requests:
     post:
       operationId: paginate_prs
@@ -2122,8 +2124,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.pagination_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.pagination_controller
   /reposet/create:
     post:
       operationId: create_reposet
@@ -2161,8 +2163,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.reposet_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.reposet_controller
   /reposet/{id}:
     delete:
       operationId: delete_reposet
@@ -2203,8 +2205,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.reposet_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.reposet_controller
     get:
       operationId: get_reposet
       parameters:
@@ -2245,8 +2247,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.reposet_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.reposet_controller
     put:
       operationId: update_reposet
       parameters:
@@ -2298,8 +2300,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.reposet_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.reposet_controller
   /reposets/{id}:
     get:
       operationId: list_reposets
@@ -2333,8 +2335,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.reposet_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.reposet_controller
   /settings/jira/identities:
     patch:
       operationId: set_jira_identities
@@ -2383,8 +2385,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/jira/identities/{id}:
     get:
       operationId: get_jira_identities
@@ -2430,8 +2432,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/jira/projects:
     put:
       operationId: set_jira_projects
@@ -2480,8 +2482,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/jira/projects/{id}:
     get:
       operationId: get_jira_projects
@@ -2516,8 +2518,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/logical_repositories/{id}:
     get:
       operationId: list_logical_repositories
@@ -2557,47 +2559,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
-  /settings/logical_repository/delete:
-    post:
-      operationId: delete_logical_repository
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LogicalRepositoryGetRequest'
-        x-body-name: body
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                type: object
-          description: Empty object indicates a successful removal.
-        403:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The user is not an admin of the account.
-        404:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The specified logical repository does not exist.
-      security:
-      - bearerAuth: []
-      - apiKeyAuth: []
-      summary: 🛡️ Delete a logical repository.
-      tags:
-      - settings
-# {% if False %}
-      - default
-# {% endif %}
       x-openapi-router-controller: athenian.api.controllers.settings_controller
-      x-codegen-request-body-name: body
   /settings/logical_repository:
     put:
       operationId: set_logical_repository
@@ -2649,8 +2612,47 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
+  /settings/logical_repository/delete:
+    post:
+      operationId: delete_logical_repository
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogicalRepositoryGetRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Empty object indicates a successful removal.
+        403:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user is not an admin of the account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The specified logical repository does not exist.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: 🛡️ Delete a logical repository.
+      tags:
+      - settings
+# {% if False %}
+      - default
+# {% endif %}
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/release_match:
     put:
       operationId: set_release_match
@@ -2701,8 +2703,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/release_match/{id}:
     get:
       operationId: list_release_match_settings
@@ -2738,8 +2740,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/work_type:
     put:
       operationId: set_work_type
@@ -2777,8 +2779,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/work_type/delete:
     post:
       operationId: delete_work_type
@@ -2816,8 +2818,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/work_type/get:
     post:
       operationId: get_work_type
@@ -2856,8 +2858,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /settings/work_types/{id}:
     get:
       operationId: list_work_types
@@ -2886,8 +2888,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.settings_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.settings_controller
   /share:
     post:
       operationId: save_share
@@ -2918,8 +2920,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.share_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.share_controller
   /share/{id}:
     get:
       operationId: get_share
@@ -2953,8 +2955,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.share_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.share_controller
   /team/create:
     post:
       operationId: create_team
@@ -2991,8 +2993,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.team_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.team_controller
   /team/{id}:
     delete:
       operationId: delete_team
@@ -3010,9 +3012,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 enum:
-                  - {}
+                - {}
+                type: object
           description: Empty object indicates a successful removal.
         403:
           content:
@@ -3034,8 +3036,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.team_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.team_controller
     get:
       operationId: get_team
       parameters:
@@ -3076,8 +3078,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.team_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.team_controller
     put:
       operationId: update_team
       parameters:
@@ -3100,9 +3102,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 enum:
-                  - {}
+                - {}
+                type: object
           description: Empty object indicates a successful operation.
         400:
           content:
@@ -3136,8 +3138,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.team_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.team_controller
   /teams/{id}:
     delete:
       operationId: resync_teams
@@ -3167,8 +3169,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.team_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.team_controller
     get:
       operationId: list_teams
       parameters:
@@ -3195,8 +3197,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.team_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.team_controller
   /token/create:
     post:
       operationId: create_token
@@ -3236,8 +3238,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.security_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.security_controller
   /token/{id}:
     delete:
       operationId: delete_token
@@ -3277,8 +3279,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.security_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.security_controller
     patch:
       operationId: patch_token
       parameters:
@@ -3330,8 +3332,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.security_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.security_controller
   /tokens/{id}:
     get:
       operationId: list_tokens
@@ -3361,8 +3363,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.security_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.security_controller
   /user:
     get:
       operationId: get_user
@@ -3382,8 +3384,8 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.user_controller
       x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.user_controller
   /versions:
     get:
       operationId: get_versions
@@ -3402,28 +3404,29 @@ paths:
       - default
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.status_controller
+# yamllint disable-line rule:key-ordering
 components:
   securitySchemes:
-    bearerAuth:
-      description: |-
-        Regular JSON Web Token authorization powered by Auth0.
-        The server expects an `Authorization: Bearer <token>` header and checks `<token>` by
-        sending it to Auth0. Visit [{{ server_url | replace("api", "app") }}/bearer]({{ server_url | replace("api", "app") }}/bearer)
-        to copy your current JWT that will expire within 24 hours.
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      x-bearerInfoFunc: athenian.api.controllers.security_controller.info_from_bearerAuth
     apiKeyAuth:
       description: |-
         Authorization by the value of `X-API-Key` header aka API token.
         The tokens are user- and account-specific. Create them by calling `/token/create`.
         The server automatically inserts `account` in the request's body if it was not
         supplied by the user.
-      type: apiKey
       in: header
       name: X-API-Key
+      type: apiKey
       x-apikeyInfoFunc: athenian.api.controllers.security_controller.info_from_apiKeyAuth
+    bearerAuth:
+      bearerFormat: JWT
+      description: |-
+        Regular JSON Web Token authorization powered by Auth0.
+        The server expects an `Authorization: Bearer <token>` header and checks `<token>` by
+        sending it to Auth0. Visit [{{ server_url | replace("api", "app") }}/bearer]({{ server_url | replace("api", "app") }}/bearer)
+        to copy your current JWT that will expire within 24 hours.
+      scheme: bearer
+      type: http
+      x-bearerInfoFunc: athenian.api.controllers.security_controller.info_from_bearerAuth
   parameters:
     pathAccountID:
       description: Numeric identifier of the account.
@@ -3434,7 +3437,9 @@ components:
       schema:
         type: integer
       style: simple
+  # yamllint disable-line rule:key-ordering
   schemas:
+    # yamllint disable-line rule:key-ordering
     CreatedIdentifier:
       additionalProperties: false
       example:
@@ -3447,25 +3452,14 @@ components:
       required:
       - id
       type: object
+    # yamllint disable-line rule:key-ordering
     GenericError:
       example:
-        type: /errors/InvalidRequestError
-        title: Bad request syntax or unsupported method.
-        status: 400
         detail: 'Unsupported metric: pr-xxx-time'
+        status: 400
+        title: Bad request syntax or unsupported method.
+        type: /errors/InvalidRequestError
       properties:
-        type:
-          description: URI reference that identifies the problem type (RFC 7807).
-          example: /errors/InvalidRequestError
-          type: string
-        title:
-          description: Short, human-readable summary of the problem type.
-          example: Bad request syntax or unsupported method.
-          type: string
-        status:
-          description: Duplicated HTTP status code.
-          example: 400
-          type: integer
         detail:
           description: Human-readable explanation specific to this occurrence of the
             problem.
@@ -3476,11 +3470,24 @@ components:
             problem. It is `null` for 4xx, Sentry event ID for 5xx.
           example: 2763c4eabd7240f59829ee1a02546293
           type: string
+        status:
+          description: Duplicated HTTP status code.
+          example: 400
+          type: integer
+        title:
+          description: Short, human-readable summary of the problem type.
+          example: Bad request syntax or unsupported method.
+          type: string
+        type:
+          description: URI reference that identifies the problem type (RFC 7807).
+          example: /errors/InvalidRequestError
+          type: string
       required:
       - status
       - title
       - type
       type: object
+    # yamllint disable-line rule:key-ordering
     InvalidRequestError:
       allOf:
       - $ref: '#/components/schemas/GenericError'
@@ -3490,10 +3497,13 @@ components:
             example: .granularity
             type: string
         type: object
-    NoSourceDataError:
-      $ref: '#/components/schemas/GenericError'
+    # yamllint disable-line rule:key-ordering
     MissingSettingsError:
       $ref: '#/components/schemas/GenericError'
+    # yamllint disable-line rule:key-ordering
+    NoSourceDataError:
+      $ref: '#/components/schemas/GenericError'
+    # yamllint disable-line rule:key-ordering
     PullRequestMetricID:
       description: |-
         Currently supported PR metric types.
@@ -3614,12 +3624,14 @@ components:
       - pr-comments-per
       example: pr-lead-time
       type: string
+    # yamllint disable-line rule:key-ordering
     DeveloperID:
       description: |
         User name which uniquely identifies any developer on any service provider.
         The format matches the profile URL without the protocol part.
       example: github.com/vmarkovtsev
       type: string
+    # yamllint disable-line rule:key-ordering
     RepositoryID:
       description: |
         Repository name which uniquely identifies any repository in any service provider.
@@ -3628,6 +3640,7 @@ components:
         from the given set.
       example: github.com/athenianco/athenian-webapp
       type: string
+    # yamllint disable-line rule:key-ordering
     DeveloperSet:
       description: A set of developers. An empty list disables the filter and includes
         everybody. Duplicates are automatically ignored.
@@ -3637,20 +3650,22 @@ components:
       items:
         $ref: '#/components/schemas/DeveloperID'
       type: array
+    # yamllint disable-line rule:key-ordering
     Contributors:
       description: List of contributors.
       example:
-      - login: github.com/gkwillie
+      - email: bot@athenian.co
+        login: github.com/gkwillie
         name: Groundskeeper Willie
-        email: bot@athenian.co
         picture: https://avatars0.githubusercontent.com/u/60340680?v=4
-      - login: github.com/se7entyse7en
+      - email: loumarvincaraig@gmail.com
+        login: github.com/se7entyse7en
         name: Lou Marvin Caraig
-        email: loumarvincaraig@gmail.com
         picture: https://avatars1.githubusercontent.com/u/5599208?v=4
       items:
         $ref: '#/components/schemas/Contributor'
       type: array
+    # yamllint disable-line rule:key-ordering
     Contributor:
       additionalProperties: false
       description: Details about a developer who contributed to some repositories
@@ -3678,6 +3693,7 @@ components:
       required:
       - login
       type: object
+    # yamllint disable-line rule:key-ordering
     TeamCreateRequest:
       additionalProperties: false
       description: Team creation request.
@@ -3707,6 +3723,7 @@ components:
       - name
       - parent
       type: object
+    # yamllint disable-line rule:key-ordering
     TeamUpdateRequest:
       additionalProperties: false
       description: Team update request.
@@ -3731,6 +3748,7 @@ components:
       - name
       - parent
       type: object
+    # yamllint disable-line rule:key-ordering
     Team:
       description: Definition of a team of several developers.
       example:
@@ -3765,6 +3783,7 @@ components:
       - name
       - parent
       type: object
+    # yamllint disable-line rule:key-ordering
     TeamList:
       description: List of teams of an account.
       example:
@@ -3799,6 +3818,7 @@ components:
       items:
         $ref: '#/components/schemas/Team'
       type: array
+    # yamllint disable-line rule:key-ordering
     RepositorySet:
       description: Set of repositories. An empty list raises a bad response 400. Duplicates
         are automatically ignored.
@@ -3808,6 +3828,7 @@ components:
       items:
         $ref: '#/components/schemas/RepositoryID'
       type: array
+    # yamllint disable-line rule:key-ordering
     RepositorySetWithName:
       additionalProperties: false
       description: A set of repositories. An empty list results an empty response
@@ -3828,11 +3849,13 @@ components:
         precomputed:
           type: boolean
       type: object
+    # yamllint disable-line rule:key-ordering
     RepositorySetList:
       description: List of repository sets owned by a user.
       items:
         $ref: '#/components/schemas/RepositorySetListItem'
       type: array
+    # yamllint disable-line rule:key-ordering
     RepositorySetCreateRequest:
       additionalProperties: false
       description: Repository set creation request.
@@ -3859,6 +3882,7 @@ components:
       - items
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     RepositorySetListItem:
       additionalProperties: false
       description: Element of RepositorySetList.
@@ -3888,6 +3912,7 @@ components:
           minimum: 1
           type: integer
       type: object
+    # yamllint disable-line rule:key-ordering
     User:
       additionalProperties: false
       description: User details. "updated" and "accounts" are populated only for the
@@ -3949,6 +3974,7 @@ components:
       - login
       - native_id
       type: object
+    # yamllint disable-line rule:key-ordering
     AccountStatus:
       additionalProperties: false
       description: Status of the user's account membership.
@@ -3983,6 +4009,7 @@ components:
       - has_jira
       - is_admin
       type: object
+    # yamllint disable-line rule:key-ordering
     InvitedUser:
       additionalProperties: false
       description: Details about the user who has accepted an invitation.
@@ -4006,6 +4033,7 @@ components:
       - account
       - user
       type: object
+    # yamllint disable-line rule:key-ordering
     Account:
       additionalProperties: false
       description: Account members ("updated" and "accounts" are not populated) and
@@ -4073,6 +4101,7 @@ components:
       - organizations
       - regulars
       type: object
+    # yamllint disable-line rule:key-ordering
     Organization:
       additionalProperties: false
       description: GitHub organization details.
@@ -4092,6 +4121,7 @@ components:
       - login
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAInstallation:
       additionalProperties: false
       description: Information about a link with JIRA.
@@ -4114,6 +4144,7 @@ components:
       - projects
       - url
       type: object
+    # yamllint disable-line rule:key-ordering
     InvitationLink:
       additionalProperties: false
       example:
@@ -4128,6 +4159,7 @@ components:
       required:
       - url
       type: object
+    # yamllint disable-line rule:key-ordering
     AcceptedInvitation:
       additionalProperties: false
       example:
@@ -4150,6 +4182,7 @@ components:
       required:
       - url
       type: object
+    # yamllint disable-line rule:key-ordering
     InvitationCheckResult:
       additionalProperties: false
       example:
@@ -4172,6 +4205,7 @@ components:
       required:
       - valid
       type: object
+    # yamllint disable-line rule:key-ordering
     InstallationProgress:
       additionalProperties: false
       description: |
@@ -4222,6 +4256,7 @@ components:
       - started_date
       - tables
       type: object
+    # yamllint disable-line rule:key-ordering
     TableFetchingProgress:
       additionalProperties: false
       description: Used in InstallationProgress.tables to indicate how much data has
@@ -4247,6 +4282,7 @@ components:
       - name
       - total
       type: object
+    # yamllint disable-line rule:key-ordering
     ForSetPullRequests:
       additionalProperties: false
       description: |
@@ -4312,6 +4348,7 @@ components:
       required:
       - repositories
       type: object
+    # yamllint disable-line rule:key-ordering
     ForSetDevelopers:
       additionalProperties: false
       description: |
@@ -4360,6 +4397,7 @@ components:
       - developers
       - repositories
       type: object
+    # yamllint disable-line rule:key-ordering
     Granularity:
       description: |-
         How often the metrics are reported. The value must satisfy the
@@ -4370,6 +4408,7 @@ components:
         the intervals will be `2020-01-15` - `2020-02-01` - `2020-03-01` - `2020-03-10`.
       example: 2 week
       type: string
+    # yamllint disable-line rule:key-ordering
     PullRequestMetricsRequest:
       additionalProperties: false
       description: Request for calculating metrics on top of pull requests data.
@@ -4447,6 +4486,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedPullRequestMetricsItem:
       additionalProperties: false
       description: Series of calculated metrics for a specific set of repositories
@@ -4502,6 +4542,7 @@ components:
       - for
       - values
       type: object
+    # yamllint disable-line rule:key-ordering
     Quantiles:
       description: |-
         Cut the distributions at certain quantiles.
@@ -4516,6 +4557,7 @@ components:
       maxItems: 2
       minItems: 2
       type: array
+    # yamllint disable-line rule:key-ordering
     CalculatedPullRequestMetrics:
       additionalProperties: false
       description: |
@@ -4640,6 +4682,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedLinearMetricValues:
       additionalProperties: false
       example:
@@ -4706,6 +4749,7 @@ components:
       - date
       - values
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterRepositoriesRequest:
       additionalProperties: false
       description: Filters for `/filter/repositories`.
@@ -4743,6 +4787,7 @@ components:
       - date_from
       - date_to
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterReleasesRequest:
       additionalProperties: false
       description: Filters for `/filter/releases`.
@@ -4794,6 +4839,7 @@ components:
       - date_from
       - date_to
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterContributorsRequest:
       additionalProperties: false
       description: Filters for `/filter/contributors`.
@@ -4844,6 +4890,7 @@ components:
       - date_from
       - date_to
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterPullRequestsRequest:
       additionalProperties: false
       description: Filters for `/filter/pull_requests`. Empty `properties` passes
@@ -4933,6 +4980,7 @@ components:
       - exclude_inactive
       - in
       type: object
+    # yamllint disable-line rule:key-ordering
     PullRequestEvent:
       description: |-
         PR's modelled lifecycle events.
@@ -4959,6 +5007,7 @@ components:
       - deployed
       example: created
       type: string
+    # yamllint disable-line rule:key-ordering
     PullRequestStage:
       description: |-
         PR's modelled lifecycle stages.
@@ -4981,6 +5030,7 @@ components:
       - deployed
       example: done
       type: string
+    # yamllint disable-line rule:key-ordering
     PullRequestSet:
       additionalProperties: false
       description: List of pull requests together with the participant profile pictures.
@@ -5079,6 +5129,7 @@ components:
       - data
       - include
       type: object
+    # yamllint disable-line rule:key-ordering
     IncludedNativeUser:
       additionalProperties: false
       description: User traits such as the avatar URL.
@@ -5091,6 +5142,7 @@ components:
       required:
       - avatar
       type: object
+    # yamllint disable-line rule:key-ordering
     IncludedNativeUsers:
       description: Mentioned GitHub users.
       example:
@@ -5108,6 +5160,7 @@ components:
       required:
       - users
       type: object
+    # yamllint disable-line rule:key-ordering
     IncludedDeployments:
       description: Mentioned deployments.
       example:
@@ -5129,6 +5182,7 @@ components:
           description: Mapping deployment names to their details.
           type: object
       type: object
+    # yamllint disable-line rule:key-ordering
     PullRequest:
       additionalProperties: false
       description: Details of a pull request. All the attributes, stats and events
@@ -5338,6 +5392,7 @@ components:
       - title
       - updated
       type: object
+    # yamllint disable-line rule:key-ordering
     StageTimings:
       additionalProperties: false
       description: |
@@ -5366,6 +5421,7 @@ components:
       required:
       - wip
       type: object
+    # yamllint disable-line rule:key-ordering
     PullRequestParticipant:
       additionalProperties: false
       description: Developer and their role in the PR.
@@ -5390,6 +5446,7 @@ components:
       - id
       - status
       type: object
+    # yamllint disable-line rule:key-ordering
     PullRequestWith:
       additionalProperties: false
       description: |-
@@ -5420,10 +5477,12 @@ components:
         releaser:
           $ref: '#/components/schemas/DeveloperSet'
       type: object
+    # yamllint disable-line rule:key-ordering
     Color:
       description: RGB 24-bit color in hex.
       pattern: ^[0-9a-fA-F]{6}$
       type: string
+    # yamllint disable-line rule:key-ordering
     PullRequestLabel:
       additionalProperties: false
       description: Pull request label.
@@ -5441,6 +5500,7 @@ components:
       - color
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterCommitsRequest:
       additionalProperties: false
       description: Filter for listing commits.
@@ -5495,6 +5555,7 @@ components:
       - in
       - property
       type: object
+    # yamllint disable-line rule:key-ordering
     CommitsList:
       additionalProperties: false
       description: List of commits metadata and related user details.
@@ -5551,6 +5612,7 @@ components:
       - data
       - include
       type: object
+    # yamllint disable-line rule:key-ordering
     Commit:
       additionalProperties: false
       description: Information about a commit.
@@ -5608,6 +5670,7 @@ components:
       - size_added
       - size_removed
       type: object
+    # yamllint disable-line rule:key-ordering
     CommitSignature:
       additionalProperties: false
       description: Git commit signature. It is guaranteed that `login` and/or `name`&`email`
@@ -5639,6 +5702,7 @@ components:
       - timestamp
       - timezone
       type: object
+    # yamllint disable-line rule:key-ordering
     CodeFilter:
       additionalProperties: false
       description: Filter for revealing code bypassing PRs.
@@ -5688,6 +5752,7 @@ components:
       - granularity
       - in
       type: object
+    # yamllint disable-line rule:key-ordering
     MeasuredCodeBypassingPRs:
       description: Statistics about code pushed outside of pull requests.
       example:
@@ -5704,6 +5769,7 @@ components:
       items:
         $ref: '#/components/schemas/CodeBypassingPRsMeasurement'
       type: array
+    # yamllint disable-line rule:key-ordering
     CodeBypassingPRsMeasurement:
       additionalProperties: false
       description: Statistics about code pushed outside of pull requests in a certain
@@ -5745,6 +5811,7 @@ components:
       - total_commits
       - total_lines
       type: object
+    # yamllint disable-line rule:key-ordering
     DeveloperMetricsRequest:
       additionalProperties: false
       description: Request for calculating metrics on top of developer activities.
@@ -5808,6 +5875,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     DeveloperMetricID:
       description: |-
         Currently supported developer metric types.
@@ -5846,6 +5914,7 @@ components:
       - dev-worked
       example: dev-prs-created
       type: string
+    # yamllint disable-line rule:key-ordering
     CalculatedDeveloperMetrics:
       additionalProperties: false
       description: |
@@ -5910,6 +5979,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedDeveloperMetricsItem:
       additionalProperties: false
       description: Measured developer metrics for each `DeveloperMetricsRequest.for`.
@@ -5950,6 +6020,7 @@ components:
       - granularity
       - values
       type: object
+    # yamllint disable-line rule:key-ordering
     DeveloperSummaries:
       description: List of developer activity statistics and profile details.
       example:
@@ -5964,6 +6035,7 @@ components:
       items:
         $ref: '#/components/schemas/DeveloperSummary'
       type: array
+    # yamllint disable-line rule:key-ordering
     DeveloperSummary:
       additionalProperties: false
       description: Developer activity statistics and profile details.
@@ -6001,6 +6073,7 @@ components:
       - name
       - updates
       type: object
+    # yamllint disable-line rule:key-ordering
     DeveloperUpdates:
       additionalProperties: false
       description: 'Various developer contributions statistics over the specified
@@ -6041,6 +6114,7 @@ components:
           minimum: 0
           type: integer
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleaseSet:
       additionalProperties: false
       description: Release metadata and contributor user details.
@@ -6097,6 +6171,7 @@ components:
             $ref: '#/components/schemas/FilteredRelease'
           type: array
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredRelease:
       additionalProperties: false
       description: Various information about a repository release.
@@ -6182,6 +6257,7 @@ components:
       - repository
       - url
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleasedPullRequest:
       additionalProperties: false
       description: Details about a pull request listed in `/filter/releases`.
@@ -6213,6 +6289,7 @@ components:
       - number
       - title
       type: object
+    # yamllint disable-line rule:key-ordering
     GetReleasesRequest:
       additionalProperties: false
       description: Request body of `/get/releases`. Declaration of which releases
@@ -6237,6 +6314,7 @@ components:
       - account
       - releases
       type: object
+    # yamllint disable-line rule:key-ordering
     IncludedJIRAIssues:
       description: Mentioned JIRA issues.
       example:
@@ -6256,6 +6334,7 @@ components:
           description: Mapping JIRA issue ID -> details.
           type: object
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleaseMatchRequest:
       additionalProperties: false
       description: Release matching rule update.
@@ -6301,6 +6380,7 @@ components:
       - match
       - repositories
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleaseMatchStrategy:
       description: |-
         Release workflow choice: how we should detect releases.
@@ -6314,11 +6394,13 @@ components:
       - tag
       - tag_or_branch
       type: string
+    # yamllint disable-line rule:key-ordering
     ReleaseMatchSettings:
       additionalProperties:
         $ref: '#/components/schemas/ReleaseMatchSetting'
       description: Mapping from repository names to their release match settings.
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleaseMatchSetting:
       additionalProperties: false
       description: Release matching setting for a specific repository.
@@ -6361,6 +6443,7 @@ components:
       - match
       - tags
       type: object
+    # yamllint disable-line rule:key-ordering
     AccountUserChangeRequest:
       additionalProperties: false
       description: Request to change an account member's status.
@@ -6387,6 +6470,7 @@ components:
       - status
       - user
       type: object
+    # yamllint disable-line rule:key-ordering
     Versions:
       additionalProperties: false
       example:
@@ -6401,6 +6485,7 @@ components:
       - api
       - metadata
       type: object
+    # yamllint disable-line rule:key-ordering
     GetPullRequestsRequest:
       additionalProperties: false
       description: Request body of `/get/pull_requests`. Declaration of which PRs
@@ -6430,6 +6515,7 @@ components:
       - account
       - prs
       type: object
+    # yamllint disable-line rule:key-ordering
     PullRequestNumbers:
       additionalProperties: false
       description: Repository name and a list of PR numbers in that repository.
@@ -6450,6 +6536,7 @@ components:
       - numbers
       - repository
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleaseNames:
       additionalProperties: false
       description: Repository name and a list of release names in that repository.
@@ -6471,6 +6558,7 @@ components:
       - names
       - repository
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterLabelsRequest:
       additionalProperties: false
       description: Request body of `/filter/labels`. Defines the account and the repositories
@@ -6489,6 +6577,7 @@ components:
       required:
       - account
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredLabel:
       additionalProperties: false
       description: Details about a label and some basic stats.
@@ -6511,6 +6600,7 @@ components:
       - name
       - used_prs
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredLabels:
       description: List of labels.
       example:
@@ -6524,6 +6614,7 @@ components:
       items:
         $ref: '#/components/schemas/FilteredLabel'
       type: array
+    # yamllint disable-line rule:key-ordering
     JIRAFilter:
       additionalProperties: false
       description: PR filters related to JIRA traits. The aggregation between each
@@ -6577,6 +6668,7 @@ components:
             specified with anything else.
           type: boolean
       type: object
+    # yamllint disable-line rule:key-ordering
     LinkedJIRAIssue:
       additionalProperties: false
       description: Brief details about a JIRA issue.
@@ -6610,6 +6702,7 @@ components:
       - title
       - type
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAIssueType:
       additionalProperties: false
       description: Details about a JIRA issue type.
@@ -6656,6 +6749,7 @@ components:
       - normalized_name
       - project
       type: object
+    # yamllint disable-line rule:key-ordering
     ProductFeatures:
       description: Enabled client-side product features.
       example:
@@ -6668,6 +6762,7 @@ components:
       items:
         $ref: '#/components/schemas/ProductFeature'
       type: array
+    # yamllint disable-line rule:key-ordering
     ProductFeature:
       additionalProperties: false
       description: Client-side product feature definition.
@@ -6691,6 +6786,7 @@ components:
       - name
       - parameters
       type: object
+    # yamllint disable-line rule:key-ordering
     CreateTokenRequest:
       additionalProperties: false
       description: Request body of `/token/create` - creating a new Personal Access
@@ -6708,6 +6804,7 @@ components:
       - account
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     CreatedToken:
       additionalProperties: false
       description: Value and ID of the generated Personal Access Token.
@@ -6725,10 +6822,12 @@ components:
       - id
       - token
       type: object
+    # yamllint disable-line rule:key-ordering
     ListedTokens:
       items:
         $ref: '#/components/schemas/ListedToken'
       type: array
+    # yamllint disable-line rule:key-ordering
     ListedToken:
       additionalProperties: false
       description: Details about a token - without the token itself, which is not
@@ -6753,6 +6852,7 @@ components:
       - last_used
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     PatchTokenRequest:
       additionalProperties: false
       description: Request body of `/token/{id}` PATCH. Allows changing the token
@@ -6764,16 +6864,19 @@ components:
           description: New name of the token.
           type: string
       type: object
+    # yamllint disable-line rule:key-ordering
     TimeZone:
       description: Local time zone offset in minutes, used to adjust `date_from` and
         `date_to`.
       maximum: 720
       minimum: -720
       type: integer
+    # yamllint disable-line rule:key-ordering
     TimeDuration:
       description: Time duration value.
       pattern: ^\d+s$
       type: string
+    # yamllint disable-line rule:key-ordering
     PullRequestHistogramsRequest:
       additionalProperties: false
       description: Request of `/histograms/pull_requests`.
@@ -6840,6 +6943,7 @@ components:
       - for
       - histograms
       type: object
+    # yamllint disable-line rule:key-ordering
     PullRequestHistogramDefinition:
       additionalProperties: false
       description: 'Histogram parameters: topic, bins.'
@@ -6878,6 +6982,7 @@ components:
       required:
       - metric
       type: object
+    # yamllint disable-line rule:key-ordering
     HistogramScale:
       description: 'X axis scale: linear or logarithmic.'
       enum:
@@ -6885,11 +6990,13 @@ components:
       - log
       example: log
       type: string
+    # yamllint disable-line rule:key-ordering
     CalculatedPullRequestHistograms:
       description: Response from `/histograms/pull_requests`.
       items:
         $ref: '#/components/schemas/CalculatedPullRequestHistogram'
       type: array
+    # yamllint disable-line rule:key-ordering
     CalculatedPullRequestHistogram:
       additionalProperties: false
       description: Calculated histogram over PR activities.
@@ -6955,6 +7062,7 @@ components:
       - scale
       - ticks
       type: object
+    # yamllint disable-line rule:key-ordering
     Interquartile:
       additionalProperties: false
       description: Middle 50% range.
@@ -6978,6 +7086,7 @@ components:
       - left
       - right
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredJIRAStuff:
       additionalProperties: false
       description: |-
@@ -7112,6 +7221,7 @@ components:
         deployments:
           $ref: '#/components/schemas/IncludedDeployments'
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAEpic:
       allOf:
       - $ref: '#/components/schemas/JIRAEpicIssueCommon'
@@ -7176,6 +7286,7 @@ components:
           life_time: 20000s
           subtasks: 2
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAEpicChild:
       allOf:
       - $ref: '#/components/schemas/JIRAEpicIssueCommon'
@@ -7206,6 +7317,7 @@ components:
         url: https://example.com/?my-jira#DEV-157
         subtasks: 2
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAIssue:
       allOf:
       - $ref: '#/components/schemas/JIRAEpicIssueCommon'
@@ -7221,6 +7333,7 @@ components:
         required:
         - project
         - prs
+    # yamllint disable-line rule:key-ordering
     JIRAEpicIssueCommon:
       description: Common properies if a JIRA issue or epic.
       properties:
@@ -7297,6 +7410,7 @@ components:
       - updated
       - url
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRALabel:
       additionalProperties: false
       description: Details about a JIRA label.
@@ -7324,6 +7438,7 @@ components:
       - last_used
       - title
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAPriority:
       additionalProperties: false
       description: JIRA issue priority details.
@@ -7352,6 +7467,7 @@ components:
       - name
       - rank
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAStatus:
       additionalProperties: false
       description: JIRA issue status details.
@@ -7378,6 +7494,7 @@ components:
       - project
       - stage
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAUser:
       additionalProperties: false
       description: Details about a JIRA user.
@@ -7412,6 +7529,7 @@ components:
       - name
       - type
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterJIRAStuff:
       additionalProperties: false
       description: Request of `/filter/jira` to retrieve epics, labels, types, priorities,
@@ -7492,6 +7610,7 @@ components:
       - date_to
       - exclude_inactive
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAFilterReturn:
       description: |-
         Requested chapter to return in `/filter/jira`.
@@ -7521,6 +7640,7 @@ components:
       - users
       - only_flying
       type: string
+    # yamllint disable-line rule:key-ordering
     ReleaseMetricsRequest:
       additionalProperties: false
       description: Request of `/metrics/releases` to calculate metrics on releases.
@@ -7596,6 +7716,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleaseMetricID:
       description: |-
         Currently supported release metric types.
@@ -7651,6 +7772,7 @@ components:
       - release-branch-age
       - release-time-to-deploy
       type: string
+    # yamllint disable-line rule:key-ordering
     CalculatedReleaseMetrics:
       description: |
         Response from `/metrics/releases`.
@@ -7658,6 +7780,7 @@ components:
       items:
         $ref: '#/components/schemas/CalculatedReleaseMetric'
       type: array
+    # yamllint disable-line rule:key-ordering
     CalculatedReleaseMetric:
       additionalProperties: false
       description: Calculated release metric values.
@@ -7672,19 +7795,19 @@ components:
           athenianco/athenian-api: branch
           athenianco/athenian-webapp: event
         values:
-          - date: 2020-01-23
-            values:
-            - 0.8008282
-            - 0.8008282
-            confidence_mins:
-            - 0.5
-            - 0.5
-            confidence_maxs:
-            - 1.0
-            - 1.0
-            confidence_scores:
-            - 75
-            - 75
+        - confidence_maxs:
+          - 1.0
+          - 1.0
+          confidence_mins:
+          - 0.5
+          - 0.5
+          confidence_scores:
+          - 75
+          - 75
+          date: 2020-01-23
+          values:
+          - 0.8008282
+          - 0.8008282
       properties:
         for:
           $ref: '#/components/schemas/RepositorySet'
@@ -7714,6 +7837,7 @@ components:
       - metrics
       - values
       type: object
+    # yamllint disable-line rule:key-ordering
     PaginatePullRequestsRequest:
       additionalProperties: false
       description: |-
@@ -7748,6 +7872,7 @@ components:
       - batch
       - request
       type: object
+    # yamllint disable-line rule:key-ordering
     PullRequestPaginationPlan:
       additionalProperties: false
       description: Response of `/paginate/pull_requests`. Computed split of the PR
@@ -7765,13 +7890,15 @@ components:
             type: string
           type: array
       type: object
+    # yamllint disable-line rule:key-ordering
     IndexedGroups:
       description: |-
         Lists of indexes in `repositories` or `developers` that define independent groups
         that must be processed individually. The groups may have intersections.
       example:
-      - [0, 1]
-      - [1]
+      - - 0
+        - 1
+      - - 1
       items:
         items:
           minimum: 0
@@ -7780,6 +7907,7 @@ components:
         type: array
       minItems: 1
       type: array
+    # yamllint disable-line rule:key-ordering
     ReleaseWith:
       additionalProperties: false
       description: |
@@ -7804,6 +7932,7 @@ components:
           - $ref: '#/components/schemas/DeveloperSet'
           - description: Release publishers.
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAMetricID:
       description: |-
         Currently supported JIRA activity metrics.
@@ -7832,6 +7961,7 @@ components:
       - jira-resolution-rate
       example: jira-resolved
       type: string
+    # yamllint disable-line rule:key-ordering
     JIRAMetricsRequest:
       additionalProperties: false
       description: Request body of `/metrics/jira`.
@@ -7933,6 +8063,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterJIRACommon:
       description: Common JIRA issue filters.
       example:
@@ -7976,6 +8107,7 @@ components:
       - account
       - exclude_inactive
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAFilterWith:
       additionalProperties: false
       description: Group of JIRA issue participant names split by role.
@@ -8000,6 +8132,7 @@ components:
             type: string
           type: array
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedJIRAMetrics:
       description: |
         Response from `/metrics/jira`.
@@ -8007,6 +8140,7 @@ components:
       items:
         $ref: '#/components/schemas/CalculatedJIRAMetricValues'
       type: array
+    # yamllint disable-line rule:key-ordering
     CalculatedJIRAMetricValues:
       additionalProperties: false
       description: Calculated JIRA metrics for a specific granularity.
@@ -8058,6 +8192,7 @@ components:
       - granularity
       - values
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAHistogramsRequest:
       additionalProperties: false
       description: Request of `/histograms/jira`.
@@ -8141,6 +8276,7 @@ components:
       - exclude_inactive
       - histograms
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAHistogramDefinition:
       additionalProperties: false
       description: 'Histogram parameters: topic, bins.'
@@ -8179,11 +8315,13 @@ components:
       required:
       - metric
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedJIRAHistograms:
       description: Response from `/histograms/jira`.
       items:
         $ref: '#/components/schemas/CalculatedJIRAHistogram'
       type: array
+    # yamllint disable-line rule:key-ordering
     CalculatedJIRAHistogram:
       additionalProperties: false
       description: Calculated histogram over JIRA issue activities.
@@ -8240,11 +8378,13 @@ components:
       - scale
       - ticks
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAProjects:
       description: List of JIRA project activity settings.
       items:
         $ref: '#/components/schemas/JIRAProject'
       type: array
+    # yamllint disable-line rule:key-ordering
     JIRAProject:
       additionalProperties: false
       description: JIRA project setting.
@@ -8292,6 +8432,7 @@ components:
       - last_update
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     JIRAProjectsRequest:
       additionalProperties: false
       description: Enable or disable a JIRA project.
@@ -8313,6 +8454,7 @@ components:
       - account
       - projects
       type: object
+    # yamllint disable-line rule:key-ordering
     DiffReleasesRequest:
       additionalProperties: false
       description: Request of `/diff/releases`. Define pairs of releases for several
@@ -8337,6 +8479,7 @@ components:
       - account
       - borders
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleasePair:
       additionalProperties: false
       description: A pair of release names within the same repository.
@@ -8354,6 +8497,7 @@ components:
       - new
       - old
       type: object
+    # yamllint disable-line rule:key-ordering
     DiffedReleases:
       additionalProperties: false
       description: Response of `/diff/releases` - the found inner releases for each
@@ -8407,6 +8551,7 @@ components:
       - data
       - include
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleaseDiff:
       additionalProperties: false
       description: Inner releases between `old` and `new`, including the latter.
@@ -8426,11 +8571,11 @@ components:
           commit_authors:
           - github.com/vmarkovtsev
           prs:
-            - number: 176
-              title: Bug fix
-              additions: 3
-              deletions: 3
-              author: github.com/vmarkovtsev
+          - additions: 3
+            author: github.com/vmarkovtsev
+            deletions: 3
+            number: 176
+            title: Bug fix
       properties:
         old:
           type: string
@@ -8446,6 +8591,7 @@ components:
       - old
       - releases
       type: object
+    # yamllint disable-line rule:key-ordering
     MappedJIRAIdentities:
       description: |-
         List of currently mapped GitHub<>JIRA users.
@@ -8453,6 +8599,7 @@ components:
       items:
         $ref: '#/components/schemas/MappedJIRAIdentity'
       type: array
+    # yamllint disable-line rule:key-ordering
     MappedJIRAIdentity:
       additionalProperties: false
       description: GitHub user (developer) mapped to a JIRA user.
@@ -8488,6 +8635,7 @@ components:
       - developer_name
       - jira_name
       type: object
+    # yamllint disable-line rule:key-ordering
     SetMappedJIRAIdentitiesRequest:
       additionalProperties: false
       description: Request body of `/settings/jira/identities`. Describes a patch
@@ -8512,6 +8660,7 @@ components:
       - account
       - changes
       type: object
+    # yamllint disable-line rule:key-ordering
     MappedJIRAIdentityChange:
       additionalProperties: false
       description: Individual GitHub<>JIRA user mapping change.
@@ -8529,16 +8678,19 @@ components:
       - developer_id
       - jira_name
       type: object
+    # yamllint disable-line rule:key-ordering
     NotifyDeploymentsRequest:
       items:
         $ref: '#/components/schemas/DeploymentNotification'
       type: array
+    # yamllint disable-line rule:key-ordering
     NotifyReleasesRequest:
       description: |
         Request body of `/events/releases`: list of release notifications.
       items:
         $ref: '#/components/schemas/ReleaseNotification'
       type: array
+    # yamllint disable-line rule:key-ordering
     NotifyReleasesResponse:
       description: |
         Response from `/events/releases`. The status of each release notification
@@ -8546,6 +8698,7 @@ components:
       items:
         $ref: '#/components/schemas/ReleaseNotificationStatus'
       type: array
+    # yamllint disable-line rule:key-ordering
     ReleaseNotificationStatus:
       description: |
         What happened to the notification:
@@ -8557,11 +8710,13 @@ components:
       - accepted-pending
       - ignored-duplicate
       type: string
+    # yamllint disable-line rule:key-ordering
     CommitHash:
       description: Commit hash, either short (7 chars) or long (40 chars) form.
       maxLength: 40
       minLength: 7
       type: string
+    # yamllint disable-line rule:key-ordering
     DeployedComponent:
       additionalProperties: false
       description: Definition of the deployed software unit.
@@ -8588,6 +8743,7 @@ components:
       - reference
       - repository
       type: object
+    # yamllint disable-line rule:key-ordering
     DeploymentConclusion:
       description: State of the completed deployment. Case-insensitive.
       enum:
@@ -8595,6 +8751,7 @@ components:
       - FAILURE
       - CANCELLED
       type: string
+    # yamllint disable-line rule:key-ordering
     DeploymentNotification:
       description: |
         Push message about a deployment. We remove unresolved components after 24h.
@@ -8653,6 +8810,7 @@ components:
       - date_started
       - environment
       type: object
+    # yamllint disable-line rule:key-ordering
     ReleaseNotification:
       additionalProperties: false
       description: Push message about a custom release event.
@@ -8686,6 +8844,7 @@ components:
       - commit
       - repository
       type: object
+    # yamllint disable-line rule:key-ordering
     DeleteEventsCacheRequest:
       additionalProperties: false
       description: Definition of the cache reset operation.
@@ -8714,6 +8873,7 @@ components:
       - repositories
       - targets
       type: object
+    # yamllint disable-line rule:key-ordering
     MatchIdentitiesRequest:
       additionalProperties: false
       description: Request body of `/match/identities`.
@@ -8737,6 +8897,7 @@ components:
       - account
       - identities
       type: object
+    # yamllint disable-line rule:key-ordering
     ContributorIdentity:
       additionalProperties: false
       description: Information about a contributor that may be utilized to match identities.
@@ -8761,6 +8922,7 @@ components:
             type: string
           type: array
       type: object
+    # yamllint disable-line rule:key-ordering
     MatchedIdentities:
       description: Response from `/match/identities` - mapping from supplied identities
         to GitHub organization members. The order matches the order of `MatchIdentitiesRequest.identities`.
@@ -8778,6 +8940,7 @@ components:
       items:
         $ref: '#/components/schemas/MatchedIdentity'
       type: array
+    # yamllint disable-line rule:key-ordering
     MatchedIdentity:
       description: Identity mapping of a specific contributor.
       example:
@@ -8807,6 +8970,7 @@ components:
       - from
       - to
       type: object
+    # yamllint disable-line rule:key-ordering
     CodeCheckMetricsRequest:
       additionalProperties: false
       description: Request for calculating metrics on top of code check runs (CI)
@@ -8878,6 +9042,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     ForSetCodeChecks:
       additionalProperties: false
       description: |
@@ -8936,6 +9101,7 @@ components:
       required:
       - repositories
       type: object
+    # yamllint disable-line rule:key-ordering
     CodeCheckMetricID:
       description: |-
         The mentioned terms such as "check suite" and "check run" belong to [the official documentation on GitHub](https://docs.github.com/en/rest/guides/getting-started-with-the-checks-api#about-check-runs).
@@ -8982,6 +9148,7 @@ components:
       - chk-suite-imbalance
       example: chk-suites-count
       type: string
+    # yamllint disable-line rule:key-ordering
     CalculatedCodeCheckMetrics:
       additionalProperties: false
       description: |
@@ -9045,6 +9212,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedCodeCheckMetricsItem:
       additionalProperties: false
       description: Series of calculated metrics for a specific set of repositories
@@ -9088,6 +9256,7 @@ components:
       - for
       - values
       type: object
+    # yamllint disable-line rule:key-ordering
     CodeCheckHistogramsRequest:
       additionalProperties: false
       description: Request of `/histograms/code_checks`.
@@ -9146,6 +9315,7 @@ components:
       - for
       - histograms
       type: object
+    # yamllint disable-line rule:key-ordering
     CodeCheckHistogramDefinition:
       additionalProperties: false
       description: 'Histogram parameters: topic, bins.'
@@ -9185,11 +9355,13 @@ components:
       required:
       - metric
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedCodeCheckHistograms:
       description: Response from `/histograms/code_checks`.
       items:
         $ref: '#/components/schemas/CalculatedCodeCheckHistogram'
       type: array
+    # yamllint disable-line rule:key-ordering
     CalculatedCodeCheckHistogram:
       additionalProperties: false
       description: Calculated histogram over code checks (CI).
@@ -9251,6 +9423,7 @@ components:
       - scale
       - ticks
       type: object
+    # yamllint disable-line rule:key-ordering
     CommitPushers:
       description: |
         Check runs must be triggered by commits pushed by these people.
@@ -9263,6 +9436,7 @@ components:
       items:
         $ref: '#/components/schemas/DeveloperID'
       type: array
+    # yamllint disable-line rule:key-ordering
     FilterCodeChecksRequest:
       additionalProperties: false
       description: Request body of `/filter/code_checks`.
@@ -9322,6 +9496,7 @@ components:
       - date_to
       - in
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredCodeCheckRuns:
       additionalProperties: false
       description: |-
@@ -9421,6 +9596,7 @@ components:
       - items
       - timeline
       type: object
+    # yamllint disable-line rule:key-ordering
     CodeCheckRunStatistics:
       additionalProperties: false
       description: Gathered statistics about a group of check runs.
@@ -9551,6 +9727,7 @@ components:
       - successes
       - successes_timeline
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredCodeCheckRun:
       additionalProperties: false
       description: Mined information about a code check run.
@@ -9675,6 +9852,7 @@ components:
       - title
       - total_stats
       type: object
+    # yamllint disable-line rule:key-ordering
     DeploymentWith:
       additionalProperties: false
       description: |
@@ -9697,6 +9875,7 @@ components:
           - $ref: '#/components/schemas/DeveloperSet'
           - description: Deployed release publishers.
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterDeploymentsRequest:
       additionalProperties: false
       description: Filters to select the deployments in `/filter/deployments`.
@@ -9772,6 +9951,7 @@ components:
       - date_from
       - date_to
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredDeployments:
       description: Found deployments, response from `/filter/deployments`.
       example:
@@ -9836,6 +10016,7 @@ components:
       - deployments
       - include
       type: object
+    # yamllint disable-line rule:key-ordering
     DeploymentAnalysis:
       description: Statistics and contents of the deployment.
       example:
@@ -9927,16 +10108,19 @@ components:
       required:
       - code
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredDeployment:
       allOf:
       - $ref: '#/components/schemas/DeploymentNotification'
       - $ref: '#/components/schemas/DeploymentAnalysis'
       description: Everything we know about the deployment.
       type: object
+    # yamllint disable-line rule:key-ordering
     WorkTypeName:
       description: Work type name. It is unique within the account scope.
       minLength: 1
       type: string
+    # yamllint disable-line rule:key-ordering
     WorkTypeGetRequest:
       description: Identifier of a work type - a set of rules to group PRs, releases,
         etc. together.
@@ -9953,12 +10137,14 @@ components:
       - account
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     WorkTypes:
       description: |
         List of work types. Response from `/settings/work_types/{account}`.
       items:
         $ref: '#/components/schemas/WorkType'
       type: array
+    # yamllint disable-line rule:key-ordering
     WorkType:
       description: Definition of a work type - a set of rules to group PRs, releases,
         etc. together.
@@ -9986,6 +10172,7 @@ components:
       - name
       - rules
       type: object
+    # yamllint disable-line rule:key-ordering
     WorkTypeRule:
       description: 'Specific rule details: name and parameters.'
       example:
@@ -10007,6 +10194,7 @@ components:
       - body
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     WorkTypePutRequest:
       description: Request body of `PUT /settings/work_type`.
       example:
@@ -10031,6 +10219,7 @@ components:
       - account
       - work_type
       type: object
+    # yamllint disable-line rule:key-ordering
     DeploymentMetricID:
       description: |
         Supported deployment metrics.
@@ -10070,6 +10259,7 @@ components:
       - dep-jira-issues-count
       - dep-jira-bug-fixes-count
       type: string
+    # yamllint disable-line rule:key-ordering
     ForSetDeployments:
       additionalProperties: false
       description: |
@@ -10142,6 +10332,7 @@ components:
             type: array
           type: array
       type: object
+    # yamllint disable-line rule:key-ordering
     DeploymentMetricsRequest:
       additionalProperties: false
       description: Request body of `/metrics/deployments`, the deployments selector.
@@ -10207,6 +10398,7 @@ components:
       - granularities
       - metrics
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedDeploymentMetric:
       additionalProperties: false
       description: Calculated metrics for a deployments group.
@@ -10257,6 +10449,7 @@ components:
       - metrics
       - values
       type: object
+    # yamllint disable-line rule:key-ordering
     CalculatedDeploymentMetrics:
       description: |
         Response from `/metrics/deployments`, metrics calculated for each
@@ -10265,11 +10458,13 @@ components:
       items:
         $ref: '#/components/schemas/CalculatedDeploymentMetric'
       type: array
+    # yamllint disable-line rule:key-ordering
     LogicalRepositories:
       description: List of configured logical repositories.
       items:
         $ref: '#/components/schemas/LogicalRepository'
       type: array
+    # yamllint disable-line rule:key-ordering
     LogicalRepositoryRequest:
       additionalProperties: false
       description: |
@@ -10317,6 +10512,7 @@ components:
       - prs
       - releases
       type: object
+    # yamllint disable-line rule:key-ordering
     LogicalRepository:
       additionalProperties: false
       description: |
@@ -10359,6 +10555,7 @@ components:
       - prs
       - releases
       type: object
+    # yamllint disable-line rule:key-ordering
     LogicalPRRules:
       additionalProperties: false
       description: Rules to match PRs to logical repository.
@@ -10380,6 +10577,7 @@ components:
             type: string
           type: array
       type: object
+    # yamllint disable-line rule:key-ordering
     LogicalDeploymentRules:
       additionalProperties: false
       description: Rules to match deployments to logical repository.
@@ -10405,6 +10603,7 @@ components:
             Match deployments labeled by any key and having at least one value in the list.
           type: object
       type: object
+    # yamllint disable-line rule:key-ordering
     LogicalRepositoryGetRequest:
       additionalProperties: false
       description: Pointer to a logical repository.
@@ -10421,6 +10620,7 @@ components:
       - account
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     FilterEnvironmentsRequest:
       additionalProperties: false
       description: Request body of `/filter/environments`. Filters for deployment
@@ -10456,22 +10656,21 @@ components:
       - date_from
       - date_to
       type: object
+    # yamllint disable-line rule:key-ordering
     FilteredEnvironments:
       description: List of distinct deployment environments.
-      items: 
+      items:
         $ref: '#/components/schemas/FilteredEnvironment'
       type: array
+    # yamllint disable-line rule:key-ordering
     FilteredEnvironment:
       additionalProperties: false
       description: Details about a deployment environment.
       example:
-        name: production
         deployments_count: 100
         last_conclusion: SUCCESS
-      properties: 
-        name:
-          description: Name of the environment.
-          type: string
+        name: production
+      properties:
         deployments_count:
           description: Number of deployments (successful or not) in the specified time interval.
           minimum: 1
@@ -10480,11 +10679,15 @@ components:
           allOf:
           - $ref: '#/components/schemas/DeploymentConclusion'
           - description: The conclusion of the most recent deployment before `time_to`.
+        name:
+          description: Name of the environment.
+          type: string
       required:
       - deployments_count
       - last_conclusion
       - name
       type: object
+    # yamllint disable-line rule:key-ordering
     Share:
       additionalProperties: false
       description: Saved UI views state with metadata.

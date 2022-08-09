@@ -36,3 +36,11 @@ lint-ibm: build/openapi_rendered_oas_validation.yaml
 	npm install ibm-openapi-validator
 	npx lint-openapi -p -v $(LINT_OPENAPI_EXTRA_OPTS) build/openapi_rendered_oas_validation.yaml
 
+.PHONY: yamllint-diff
+yamllint-diff: yamllint.yml
+	yamllint -c yamllint.yml ../openapi.yaml > yamllint.errors || true
+	./git-diff-changed-lines.sh origin/$$GITHUB_BASE_REF..HEAD ../openapi.yaml | sed -e 's/^/ /g' -e 's/$$/:/g' | (! grep -f - yamllint.errors)
+
+.PHONY: yamllint
+yamllint: yamllint.yml
+	yamllint -c yamllint.yml ../openapi.yaml
