@@ -3546,27 +3546,6 @@ paths:
       x-openapi-router-controller: athenian.api.controllers.status_controller
 # yamllint disable-line rule:key-ordering
 components:
-  securitySchemes:
-    apiKeyAuth:
-      description: |-
-        Authorization by the value of `X-API-Key` header aka API token.
-        The tokens are user- and account-specific. Create them by calling `/token/create`.
-        The server automatically inserts `account` in the request's body if it was not
-        supplied by the user.
-      in: header
-      name: X-API-Key
-      type: apiKey
-      x-apikeyInfoFunc: athenian.api.controllers.security_controller.info_from_apiKeyAuth
-    bearerAuth:
-      bearerFormat: JWT
-      description: |-
-        Regular JSON Web Token authorization powered by Auth0.
-        The server expects an `Authorization: Bearer <token>` header and checks `<token>` by
-        sending it to Auth0. Visit [{{ server_url | replace("api", "app") }}/bearer]({{ server_url | replace("api", "app") }}/bearer)
-        to copy your current JWT that will expire within 24 hours.
-      scheme: bearer
-      type: http
-      x-bearerInfoFunc: athenian.api.controllers.security_controller.info_from_bearerAuth
   parameters:
     pathAccountID:
       description: Numeric identifier of the account.
@@ -10944,3 +10923,24 @@ components:
       - created
       - data
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: |-
+        Authorization by the value of `X-API-Key` header aka API token.
+        The tokens are user- and account-specific. Create them by calling `/token/create`.
+        The server automatically inserts `account` in the request's body if it was not
+        supplied by the user.
+      in: header
+      name: X-API-Key
+      type: apiKey
+      x-apikeyInfoFunc: athenian.api.controllers.security_controller.info_from_apiKeyAuth
+    bearerAuth:
+      bearerFormat: JWT
+      description: |-
+        Regular JSON Web Token authorization powered by Auth0.
+        The server expects an `Authorization: Bearer <token>` header and checks `<token>` by
+        sending it to Auth0. Visit [{{ server_url | replace("api", "app") }}/bearer]({{ server_url | replace("api", "app") }}/bearer)
+        to copy your current JWT that will expire within 24 hours.
+      scheme: bearer
+      type: http
+      x-bearerInfoFunc: athenian.api.controllers.security_controller.info_from_bearerAuth
