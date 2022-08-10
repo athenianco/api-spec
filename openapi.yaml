@@ -1166,6 +1166,69 @@ paths:
       - default
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.filter_controller
+  /goal_template/{id}:
+    get:
+      operationId: get_goal_template
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalTemplate'
+          description: The retrieved goal template.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The goal template was not found.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: Retrieve a goal template.
+      tags:
+      - align
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.goal_controller
+    parameters:
+    - description: Numeric identifier of the goal template.
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+      style: simple
+  /goal_templates/{id}:
+    get:
+      operationId: list_goal_templates
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalTemplateList'
+          description: List of the goal templates for the account.
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: The user does not belong to the specified account.
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: List the goal templates for the account.
+      tags:
+      - align
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.goal_controller
+    parameters:
+    - $ref: '#/components/parameters/pathAccountID'
   /histograms/code_checks:
     post:
       operationId: calc_histogram_code_checks
@@ -3487,6 +3550,48 @@ components:
       - title
       - type
       type: object
+    GoalTemplate:
+      additionalProperties: false
+      description: A template to generate a goal.
+      example:
+        id: 42
+        metric: pr-release-time
+        name: Untitled Template
+      properties:
+        id:
+          description: Identifier of the template.
+          type: integer
+        metric:
+# {% if False %}
+          allOf:
+# {% else %}{{ "\n" }}          oneOf:{% endif %}
+          - $ref: '#/components/schemas/PullRequestMetricID'
+          - $ref: '#/components/schemas/JIRAMetricID'
+          - $ref: '#/components/schemas/ReleaseMetricID'
+        name:
+          $ref: '#/components/schemas/GoalTemplateName'
+      required:
+      - id
+      - name
+      - metric
+      type: object
+    GoalTemplateList:
+      description: List of goal templates.
+      example:
+      - id: 42
+        metric: pr-release-time
+        name: Untitled Template 0
+      - id: 43
+        metric: jira-raised
+        name: Untitled Template 1
+      items:
+        $ref: '#/components/schemas/GoalTemplate'
+      type: array
+    GoalTemplateName:
+      description: Name of the template.
+      example: Untitled Template
+      minLength: 1
+      type: string
     # yamllint disable-line rule:key-ordering
     InvalidRequestError:
       allOf:
