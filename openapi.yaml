@@ -246,11 +246,7 @@ paths:
           description: Releases between the two specified borders, excluding the first
             one and including the second one. Triaged by repository.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -352,11 +348,7 @@ paths:
                 type: object
           description: Empty object indicates a successful notification.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -402,11 +394,7 @@ paths:
                 $ref: '#/components/schemas/NotifyReleasesResponse'
           description: Summary of the accepted and the rejected releases.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -452,11 +440,7 @@ paths:
                 $ref: '#/components/schemas/FilteredCodeCheckRuns'
           description: Code check runs that satisfy the specified filters.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -504,11 +488,7 @@ paths:
                 $ref: '#/components/schemas/CommitsList'
           description: Commits that satisfy the specified filters grouped by date.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -555,11 +535,7 @@ paths:
                 $ref: '#/components/schemas/DeveloperSummaries'
           description: Repositories that were updated within the given timeframe.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -606,11 +582,7 @@ paths:
                 $ref: '#/components/schemas/FilteredDeployments'
           description: Deployments that satisfy the specified filters.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -658,11 +630,7 @@ paths:
                 $ref: '#/components/schemas/FilteredEnvironments'
           description: Deployment environments that satisfy the specified filters.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         404:
           content:
             application/json:
@@ -742,11 +710,7 @@ paths:
                 $ref: '#/components/schemas/FilteredLabels'
           description: List of labels.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -793,11 +757,7 @@ paths:
                 $ref: '#/components/schemas/PullRequestSet'
           description: List of pull requests satisfying the specified filters.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -849,11 +809,7 @@ paths:
                 $ref: '#/components/schemas/ReleaseSet'
           description: Repositories that were updated within the given timeframe.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -907,11 +863,7 @@ paths:
                 $ref: '#/components/schemas/RepositorySet'
           description: Repositories that were updated within the given timeframe.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1071,11 +1023,7 @@ paths:
                 $ref: '#/components/schemas/PullRequestSet'
           description: List of pull requests satisfying the specified filters.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1127,11 +1075,7 @@ paths:
                 $ref: '#/components/schemas/ReleaseSet'
           description: List of releases satisfying the specified filters.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1325,11 +1269,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedCodeCheckHistograms'
           description: Calculated histograms.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1380,11 +1320,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedJIRAHistograms'
           description: Calculated histograms.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1434,11 +1370,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedPullRequestHistograms'
           description: Calculated histograms.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1776,11 +1708,7 @@ paths:
                 $ref: '#/components/schemas/MatchedIdentities'
           description: Computed identities mapping.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         404:
           content:
             application/json:
@@ -1825,11 +1753,7 @@ paths:
                 $ref: '#/components/schemas/MeasuredCodeBypassingPRs'
           description: Calculated metrics.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1879,11 +1803,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedCodeCheckMetrics'
           description: Calculated metrics.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1934,11 +1854,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedDeploymentMetrics'
           description: Calculated metrics.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -1988,11 +1904,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedDeveloperMetrics'
           description: Calculated metrics.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -2048,11 +1960,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedJIRAMetrics'
           description: Calculated metrics.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -2108,11 +2016,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedPullRequestMetrics'
           description: Calculated metrics.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -2168,11 +2072,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedReleaseMetrics'
           description: Calculated metrics.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -2226,11 +2126,7 @@ paths:
                 $ref: '#/components/schemas/PullRequestPaginationPlan'
           description: Identifier of the created repository set.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
@@ -3047,11 +2943,7 @@ paths:
                 type: string
           description: Saved share identifier.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
       security:
       - bearerAuth: []
       summary: Save the state of UI views and return a reference.
@@ -3114,11 +3006,7 @@ paths:
                 $ref: '#/components/schemas/CreatedIdentifier'
           description: Identifier of the created team.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         409:
           content:
             application/json:
@@ -3247,11 +3135,7 @@ paths:
                 type: object
           description: Empty object indicates a successful operation.
         400:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestError'
-          description: The request is invalid.
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
           content:
             application/json:
