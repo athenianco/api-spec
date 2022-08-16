@@ -1,8 +1,9 @@
 LINT_OPENAPI_EXTRA_OPTS ?=
 OPENAPI_GENERATOR_VERSION ?= v6.0.1
+GITHUB_BASE_REF ?= master
 
 .PHONY: all-checks
-all-checks: spec lint-enforce lint-ibm
+all-checks: spec lint-enforce lint-ibm yamllint-diff
 
 .PHONY: spec
 spec: ../openapi.yaml
@@ -39,7 +40,7 @@ lint-ibm: build/openapi_rendered_oas_validation.yaml
 .PHONY: yamllint-diff
 yamllint-diff: yamllint.yml
 	yamllint -c yamllint.yml ../openapi.yaml > yamllint.errors || true
-	./git-diff-changed-lines.sh origin/$$GITHUB_BASE_REF..HEAD ../openapi.yaml | sed -e 's/^/ /g' -e 's/$$/:/g' | (! grep -f - yamllint.errors)
+	./git-diff-changed-lines.sh origin/$(GITHUB_BASE_REF)..HEAD ../openapi.yaml | sed -e 's/^/ /g' -e 's/$$/:/g' | (! grep -f - yamllint.errors)
 
 .PHONY: yamllint
 yamllint: yamllint.yml
