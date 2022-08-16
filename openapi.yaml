@@ -1175,11 +1175,7 @@ paths:
                 $ref: '#/components/schemas/GoalTemplate'
           description: The retrieved goal template.
         404:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The goal template was not found.
+          $ref: '#/components/responses/GoalTemplateNotFoundResponse'
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -1212,6 +1208,8 @@ paths:
           $ref: '#/components/responses/EmptySuccessfulResponse'
         400:
           $ref: '#/components/responses/InvalidRequestErrorResponse'
+        404:
+          $ref: '#/components/responses/GoalTemplateNotFoundResponse'
       security:
       - bearerAuth: []
       summary: Update a goal template.
@@ -1233,11 +1231,7 @@ paths:
                 $ref: '#/components/schemas/GoalTemplateList'
           description: List of the goal templates for the account.
         404:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The user does not belong to the specified account.
+          $ref: '#/components/responses/GoalTemplateNotFoundResponse'
       security:
       - bearerAuth: []
       - apiKeyAuth: []
@@ -3449,6 +3443,12 @@ components:
             - {}
             type: object
       description: Empty object indicates a successful operation.
+    GoalTemplateNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericError'
+      description: The goal template was not found.
     InvalidRequestErrorResponse:
       content:
         application/json:
