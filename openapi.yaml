@@ -3516,9 +3516,7 @@ components:
           description: Identifier of the template.
           type: integer
         metric:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          oneOf:{% endif %}
+          oneOf:
           - $ref: '#/components/schemas/PullRequestMetricID'
           - $ref: '#/components/schemas/JIRAMetricID'
           - $ref: '#/components/schemas/ReleaseMetricID'
@@ -3541,9 +3539,7 @@ components:
           description: Account identifier. That account will own the created goal template.
           type: integer
         metric:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          oneOf:{% endif %}
+          oneOf:
           - $ref: '#/components/schemas/PullRequestMetricID'
           - $ref: '#/components/schemas/JIRAMetricID'
           - $ref: '#/components/schemas/ReleaseMetricID'
@@ -4802,9 +4798,7 @@ components:
         values:
           description: Calculated metric values in the same order as `metrics`.
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
             - $ref: '#/components/schemas/TimeDuration'
             - type: object
@@ -4814,9 +4808,7 @@ components:
             It is optional because there can be exact metrics like "count open PRs
             per month".
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
               nullable: true
             - $ref: '#/components/schemas/TimeDuration'
@@ -4826,9 +4818,7 @@ components:
             It is optional because there can be exact metrics like "count open PRs
             per month".
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
               nullable: true
             - $ref: '#/components/schemas/TimeDuration'
@@ -6366,9 +6356,7 @@ components:
         deletions:
           type: integer
         author:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          anyOf:{% endif %}
+          anyOf:
           - $ref: '#/components/schemas/DeveloperID'
           - nullable: true
             type: string
@@ -6870,9 +6858,7 @@ components:
         name:
           type: string
         parameters:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          oneOf:{% endif %}
+          oneOf:
           - type: integer
           - type: number
           - type: string
@@ -7067,9 +7053,7 @@ components:
             Only one of two may be specified. The ticks are automatically prepended
             the distribution minimum and appended the distribution maximum.
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
             - $ref: '#/components/schemas/TimeDuration'
           minItems: 1
@@ -7131,18 +7115,14 @@ components:
           description: Series of horizontal bar borders aka X axis. Their count is
             `len(y) + 1` because there are `N` intervals between `(N + 1)` ticks.
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
             - $ref: '#/components/schemas/TimeDuration'
           type: array
         frequencies:
           description: Series of histogram bar heights aka Y axis.
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
               minimum: 0
             - $ref: '#/components/schemas/TimeDuration'
@@ -7166,15 +7146,11 @@ components:
         right: 76
       properties:
         left:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          oneOf:{% endif %}
+          oneOf:
           - type: number
           - $ref: '#/components/schemas/TimeDuration'
         right:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          oneOf:{% endif %}
+          oneOf:
           - type: number
           - $ref: '#/components/schemas/TimeDuration'
       required:
@@ -8400,9 +8376,7 @@ components:
             Only one of two may be specified. The ticks are automatically prepended
             the distribution minimum and appended the distribution maximum.
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
             - $ref: '#/components/schemas/TimeDuration'
           minItems: 1
@@ -8452,9 +8426,7 @@ components:
           description: Series of horizontal bar borders aka X axis. Their count is
             `len(y) + 1` because there are `N` intervals between `(N + 1)` ticks.
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
             - $ref: '#/components/schemas/TimeDuration'
           type: array
@@ -8705,9 +8677,7 @@ components:
         confidence: 1.0
       properties:
         developer_id:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          anyOf:{% endif %}
+          anyOf:
           - $ref: '#/components/schemas/DeveloperID'
           - nullable: true
             type: string
@@ -9048,9 +9018,7 @@ components:
         from:
           $ref: '#/components/schemas/ContributorIdentity'
         to:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          anyOf:{% endif %}
+          anyOf:
           - nullable: true
             type: string
           - $ref: '#/components/schemas/DeveloperID'
@@ -9440,9 +9408,7 @@ components:
             Only one of two may be specified. The ticks are automatically prepended
             the distribution minimum and appended the distribution maximum.
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
             - $ref: '#/components/schemas/TimeDuration'
           minItems: 1
@@ -9496,9 +9462,7 @@ components:
           description: Series of horizontal bar borders aka X axis. Their count is
             `len(y) + 1` because there are `N` intervals between `(N + 1)` ticks.
           items:
-# {% if False %}
-            allOf:
-# {% else %}{{ "\n" }}            oneOf:{% endif %}
+            oneOf:
             - type: number
             - $ref: '#/components/schemas/TimeDuration'
           type: array
@@ -9747,17 +9711,13 @@ components:
             at least once.
           type: boolean
         mean_execution_time:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          anyOf:{% endif %}
+          anyOf:
           - description: Average elapsed execution time.
             nullable: true
             type: string
           - $ref: '#/components/schemas/TimeDuration'
         stddev_execution_time:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          anyOf:{% endif %}
+          anyOf:
           - description: |
               Standard deviation of the execution time.
               Higher values for a `critical` code check indicate an optimization opportunity:
@@ -9766,9 +9726,7 @@ components:
             type: string
           - $ref: '#/components/schemas/TimeDuration'
         median_execution_time:
-# {% if False %}
-          allOf:
-# {% else %}{{ "\n" }}          anyOf:{% endif %}
+          anyOf:
           - description: Median elapsed execution time.
             nullable: true
             type: string

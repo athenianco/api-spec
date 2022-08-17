@@ -5,12 +5,15 @@ GITHUB_BASE_REF ?= master
 .PHONY: all-checks
 all-checks: spec lint-enforce lint-ibm yamllint-diff
 
+../openapi_js.yaml: ../openapi.yaml
+	sed -e 's/oneOf:/allOf:/g' -e 's/anyOf:/allOf:/g' ../openapi.yaml > ../openapi_js.yaml
+
 .PHONY: spec
-spec: ../openapi.yaml
+spec: ../openapi_js.yaml
 	@mkdir -p build
 	docker run --rm -v `pwd`/..:/local --user `id -u`:`id -g` \
 	  openapitools/openapi-generator-cli:$(OPENAPI_GENERATOR_VERSION) \
-	  generate --input-spec=/local/openapi.yaml --generator-name=javascript --output=/local/tests/build/js-client
+	  generate --input-spec=/local/openapi_js.yaml --generator-name=javascript --output=/local/tests/build/js-client
 	npm --prefix build/js-client install
 	npm --prefix build/js-client test
 
@@ -43,5 +46,5 @@ yamllint-diff: yamllint.yml
 	./git-diff-changed-lines.sh origin/$(GITHUB_BASE_REF)..HEAD ../openapi.yaml | sed -e 's/^/ /g' -e 's/$$/:/g' | (! grep -f - yamllint.errors)
 
 .PHONY: yamllint
-yamllint: yamllint.yml
+yamllint: yamllint.yml ../openapi.yaml
 	yamllint -c yamllint.yml ../openapi.yaml
