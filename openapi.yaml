@@ -3511,6 +3511,9 @@ components:
         id: 42
         metric: pr-release-time
         name: Untitled Template
+        repositories:
+        - github.com/athenianco/athenian-api
+        - github.com/athenianco/api-spec
       properties:
         id:
           description: Identifier of the template.
@@ -3522,6 +3525,8 @@ components:
           - $ref: '#/components/schemas/ReleaseMetricID'
         name:
           $ref: '#/components/schemas/GoalTemplateName'
+        repositories:
+          $ref: '#/components/schemas/RepositorySet'
       required:
       - id
       - name
@@ -3534,6 +3539,9 @@ components:
         account: 30
         metric: pr-review-time
         name: My New Goal Template
+        repositories:
+        - github.com/athenianco/api-spec
+        - github.com/athenianco/athenian-webapp
       properties:
         account:
           description: Account identifier. That account will own the created goal template.
@@ -3545,6 +3553,8 @@ components:
           - $ref: '#/components/schemas/ReleaseMetricID'
         name:
           $ref: '#/components/schemas/GoalTemplateName'
+        repositories:
+          $ref: '#/components/schemas/RepositorySet'
       required:
       - account
       - metric
@@ -3559,6 +3569,8 @@ components:
       - id: 43
         metric: jira-raised
         name: Untitled Template 1
+        repositories:
+        - github.com/athenianco/athenian-webapp
       items:
         $ref: '#/components/schemas/GoalTemplate'
       type: array
@@ -3575,6 +3587,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/GoalTemplateName'
+        repositories:
+          $ref: '#/components/schemas/RepositorySet'
       required:
       - name
       type: object
