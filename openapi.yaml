@@ -6873,7 +6873,6 @@ components:
           type: string
         parameters:
           oneOf:
-          - type: integer
           - type: number
           - type: string
           - type: object
