@@ -3163,6 +3163,14 @@ paths:
       operationId: resync_teams
       parameters:
       - $ref: '#/components/parameters/pathAccountID'
+      - description: Delete teams that are not backed by GitHub.
+        explode: false
+        in: query
+        name: unmapped
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         200:
           content:
