@@ -3534,7 +3534,7 @@ components:
       type: object
     GoalTemplateCreateRequest:
       additionalProperties: false
-      description: Goal template creation request.
+      description: Goal template creation request body.
       example:
         account: 30
         metric: pr-review-time
@@ -3581,16 +3581,23 @@ components:
       type: string
     GoalTemplateUpdateRequest:
       additionalProperties: false
-      description: Goal template creation request.
+      description: Goal template update request body. A missing property means removal.
       example:
         name: New template name
+        metric: pr-lead-time
       properties:
         name:
           $ref: '#/components/schemas/GoalTemplateName'
+        metric:
+          oneOf:
+          - $ref: '#/components/schemas/PullRequestMetricID'
+          - $ref: '#/components/schemas/JIRAMetricID'
+          - $ref: '#/components/schemas/ReleaseMetricID'
         repositories:
           $ref: '#/components/schemas/RepositorySet'
       required:
       - name
+      - metric
       type: object
     # yamllint disable-line rule:key-ordering
     InvalidRequestError:
