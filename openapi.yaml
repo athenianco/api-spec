@@ -5068,13 +5068,17 @@ components:
         jira:
           $ref: '#/components/schemas/JIRAFilter'
         updated_from:
-          description: 'Paginate the response: the returned PRs are updated no older
-            than this timestamp, including the beginning.'
+          description: 'Paginate the response: the returned PRs are updated on GitHub no older
+            than this timestamp, including the beginning. Note: "updated on GitHub" means that
+            we don´t consider release or deployment timestamps. Use this field only to
+            paginate after calling `/paginate/pull_requests`. Subject of future changes.'
           format: date
           type: string
         updated_to:
-          description: 'Paginate the response: the returned PRs are updated no later
-            than this timestamp, not including the ending.'
+          description: 'Paginate the response: the returned PRs are updated on GitHub no later
+            than this timestamp, not including the ending. Note: "updated on GitHub" means that
+            we don´t consider release or deployment timestamps. Use this field only to
+            paginate after calling `/paginate/pull_requests`. Subject of future changes.'
           format: date
           type: string
         limit:
@@ -10751,6 +10755,9 @@ components:
         deployments_count: 100
         last_conclusion: SUCCESS
         name: production
+        repositories:
+        - github.com/athenianco/athenian-api
+        - github.com/athenianco/athenian-webapp
       properties:
         deployments_count:
           description: Number of deployments (successful or not) in the specified time interval.
@@ -10763,10 +10770,15 @@ components:
         name:
           description: Name of the environment.
           type: string
+        repositories:
+          allOf:
+          - $ref: '#/components/schemas/RepositorySet'
+          - description: List of repositories which had at least one deployment.
       required:
       - deployments_count
       - last_conclusion
       - name
+      - repositories
       type: object
     # yamllint disable-line rule:key-ordering
     Share:
