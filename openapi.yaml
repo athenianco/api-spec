@@ -10773,7 +10773,7 @@ components:
         repositories:
           allOf:
           - $ref: '#/components/schemas/RepositorySet'
-          - description: List of repositories which had at least one deployment.
+          - description: List of repositories which had at least one deployment between date_from and date_to.
       required:
       - deployments_count
       - last_conclusion
