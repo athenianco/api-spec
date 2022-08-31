@@ -10766,7 +10766,7 @@ components:
         last_conclusion:
           allOf:
           - $ref: '#/components/schemas/DeploymentConclusion'
-          - description: The conclusion of the most recent deployment before `time_to`.
+          - description: The conclusion of the most recent deployment before `date_to`.
         name:
           description: Name of the environment.
           type: string
