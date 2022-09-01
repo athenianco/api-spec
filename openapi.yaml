@@ -5087,10 +5087,13 @@ components:
           minimum: 1
           nullable: true
           type: integer
-        environment:
-          description: Target environment for the deployment events, impacts `events`
-            and `stages`.
-          type: string
+        environments:
+          description: Target environments for the deployment events, impacts `events`
+            and `stages`. If omitted, we match any deployment in any environment.
+          items:
+            type: string
+          minItems: 1
+          type: array
       required:
       - account
       - date_from
@@ -5456,6 +5459,11 @@ components:
           description: URL of the earliest release that includes this merged PR.
           format: url
           type: string
+        deployments:
+          description: List of deployments that contain this PR.
+          items:
+            type: string
+          type: array
         stage_timings:
           $ref: '#/components/schemas/StageTimings'
         events_time_machine:
