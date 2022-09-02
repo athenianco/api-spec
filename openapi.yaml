@@ -5661,11 +5661,13 @@ components:
         property:
           description: |-
             Main trait of the commits - the core of the filter.
-            * no_pr_merges: select all the commits but PR merges by noreply@github.com
             * bypassing_prs: select commits that were pushed without creating a PR
+            * everything: select all the commits matched by the filters
+            * no_pr_merges: select all the commits but PR merges by noreply@github.com
           enum:
-          - no_pr_merges
           - bypassing_prs
+          - everything
+          - no_pr_merges
           type: string
         only_default_branch:
           description: |-
@@ -5733,7 +5735,9 @@ components:
             $ref: '#/components/schemas/Commit'
           type: array
         include:
-          $ref: '#/components/schemas/IncludedNativeUsers'
+          allOf:
+          - $ref: '#/components/schemas/IncludedDeployments'
+          - $ref: '#/components/schemas/IncludedNativeUsers'
       required:
       - data
       - include
@@ -5762,28 +5766,40 @@ components:
         size_removed: 1
         files_changed: 1
       properties:
-        repository:
-          $ref: '#/components/schemas/RepositoryID'
+        author:
+          $ref: '#/components/schemas/CommitSignature'
+        children:
+          description: |
+            Hashes of the children. Exists only if `property == everything`.
+            Note: the direction is from HEAD to the root, i.e. reversed compared to Git.
+          items:
+            type: string
+          type: array
+        committer:
+          $ref: '#/components/schemas/CommitSignature'
+        deployments:
+          description: Deployments of the commit.
+          items:
+            type: string
+          type: array
+        files_changed:
+          description: Number of files changed in this PR.
+          minimum: 0
+          type: integer
         hash:
           description: Git commit hash.
           type: string
-        author:
-          $ref: '#/components/schemas/CommitSignature'
-        committer:
-          $ref: '#/components/schemas/CommitSignature'
         message:
           description: Commit message.
           type: string
+        repository:
+          $ref: '#/components/schemas/RepositoryID'
         size_added:
           description: Overall number of lines added.
           minimum: 0
           type: integer
         size_removed:
           description: Overall number of lines removed.
-          minimum: 0
-          type: integer
-        files_changed:
-          description: Number of files changed in this PR.
           minimum: 0
           type: integer
       required:
