@@ -6622,7 +6622,8 @@ components:
           - 483
           - 484
           - 485
-        environment: production
+        environments:
+        - production
       properties:
         account:
           description: Account ID.
@@ -6632,9 +6633,12 @@ components:
           items:
             $ref: '#/components/schemas/PullRequestNumbers'
           type: array
-        environment:
-          description: Deployment environment to apply.
-          type: string
+        environments:
+          description: Deployment environments to apply. If omitted, any deployment counts.
+          items:
+            type: string
+          minItems: 1
+          type: array
       required:
       - account
       - prs
