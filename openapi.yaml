@@ -6281,6 +6281,7 @@ components:
           commits: 20
           deleted_lines: 200
           name: v0.0.93
+          sha: e337123fc32c38cf6a8149b518f2e58ae836c8e6
           published: 2020-03-25T10:57:00Z
           publisher: github.com/vmarkovtsev
           repository: github.com/athenianco/athenian-api
@@ -6293,6 +6294,7 @@ components:
           commits: 20
           deleted_lines: 200
           name: v0.0.93
+          sha: e337123fc32c38cf6a8149b518f2e58ae836c8e6
           published: 2020-03-25T10:57:00Z
           publisher: github.com/vmarkovtsev
           repository: github.com/athenianco/athenian-api
@@ -6322,6 +6324,7 @@ components:
         commits: 20
         deleted_lines: 200
         name: v0.0.93
+        sha: e337123fc32c38cf6a8149b518f2e58ae836c8e6
         published: 2020-03-25T10:57:00Z
         publisher: github.com/vmarkovtsev
         repository: github.com/athenianco/athenian-api
@@ -6338,54 +6341,59 @@ components:
         deployments:
         - production-2020-03-26-W9J3uzHl
       properties:
-        name:
-          description: Title of the release.
-          type: string
-        repository:
-          description: Name of the repository where the release exists.
-          type: string
-        url:
-          description: Link to the release.
-          format: url
-          type: string
-        published:
-          description: When the release was created.
-          format: date-time
-          type: string
-        age:
-          description: Time since the previous release /\d+s/.
-          type: string
         added_lines:
           description: Cumulative number of lines inserted since the previous release.
           minimum: 0
           type: integer
-        deleted_lines:
-          description: Cumulative number of lines removed since the previous release.
-          minimum: 0
-          type: integer
+        age:
+          description: Time since the previous release /\d+s/.
+          type: string
         commits:
           description: Number of commits since the previous release.
           minimum: 0
           type: integer
-        publisher:
-          description: Login of the person who created the release.
-          nullable: true
-          type: string
         commit_authors:
           description: List of released commit authors' logins.
           items:
             $ref: '#/components/schemas/DeveloperID'
           type: array
-        prs:
-          description: List of released pull requests.
-          items:
-            $ref: '#/components/schemas/ReleasedPullRequest'
-          type: array
+        deleted_lines:
+          description: Cumulative number of lines removed since the previous release.
+          minimum: 0
+          type: integer
         deployments:
           description: Deployments with this release.
           items:
             type: string
           type: array
+        name:
+          description: Title of the release.
+          type: string
+        prs:
+          description: List of released pull requests.
+          items:
+            $ref: '#/components/schemas/ReleasedPullRequest'
+          type: array
+        published:
+          description: When the release was created.
+          format: date-time
+          type: string
+        publisher:
+          description: Login of the person who created the release.
+          nullable: true
+          type: string
+        repository:
+          description: Name of the repository where the release exists.
+          type: string
+        sha:
+          description: Release commit hash.
+          minLength: 40
+          maxLength: 40
+          type: string
+        url:
+          description: Link to the release.
+          format: url
+          type: string
       required:
       - added_lines
       - age
@@ -6397,6 +6405,7 @@ components:
       - published
       - publisher
       - repository
+      - sha
       - url
       type: object
     # yamllint disable-line rule:key-ordering
@@ -8648,6 +8657,7 @@ components:
               commits: 20
               deleted_lines: 200
               name: v0.0.93
+              sha: e337123fc32c38cf6a8149b518f2e58ae836c8e6
               published: 2020-03-25T10:57:00Z
               publisher: github.com/vmarkovtsev
               repository: github.com/athenianco/athenian-api
@@ -8690,6 +8700,7 @@ components:
           commits: 20
           deleted_lines: 200
           name: v0.0.93
+          sha: e337123fc32c38cf6a8149b518f2e58ae836c8e6
           published: 2020-03-25T10:57:00Z
           publisher: github.com/vmarkovtsev
           repository: github.com/athenianco/athenian-api
@@ -10101,6 +10112,7 @@ components:
             commits: 20
             deleted_lines: 200
             name: v0.0.93
+            sha: e337123fc32c38cf6a8149b518f2e58ae836c8e6
             published: 2020-03-25T10:57:00Z
             publisher: github.com/vmarkovtsev
             repository: github.com/athenianco/athenian-api
@@ -10150,6 +10162,7 @@ components:
           commits: 20
           deleted_lines: 200
           name: v0.0.93
+          sha: e337123fc32c38cf6a8149b518f2e58ae836c8e6
           published: 2020-03-25T10:57:00Z
           publisher: github.com/vmarkovtsev
           repository: github.com/athenianco/athenian-api
