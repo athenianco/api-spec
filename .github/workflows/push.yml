@@ -78,7 +78,7 @@ jobs:
         exclude_patterns: '{"openapi.yaml": ["Sub-tásks"], ".github/workflows/push.yml": ["Sub-tásks"]}'
   bump_version:
     name: Bump the version
-    needs: [spec, no-confusion]
+    needs: [spec, yamllint, lint-enforce, lint-ibm, no-confusion]
     if: "!contains(github.event.head_commit.message, 'Bump version') && github.ref == 'refs/heads/master' && github.event_name == 'push'"
     runs-on: ubuntu-22.04
     steps:
