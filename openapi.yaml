@@ -1,5 +1,4 @@
 openapi: 3.0.3
-# yamllint disable-line rule:key-ordering
 info:
   contact:
     email: admin@athenian.co
@@ -9,7 +8,9 @@ info:
 
     Origin GitHub repository: [athenianco/api-spec](https://github.com/athenianco/api-spec).
 
-    Authorization persists between sessions. 🛡️ means that the endpoint requires account admin privileges. 👑 means that the endpoint is only accessible to Athenian authorities.
+    Authorization persists between sessions. Marks:
+    * 🛡️ endpoint requires account admin privileges.
+    * 👑 endpoint is only accessible to Athenian authorities.
     <details>
     <summary>List of common server errors.</summary>
     * __500__ endpoint crashed. We reported the incident to Sentry and will fix it soon! Please include the value of `instance` in the response if you contact the support. Repeating the request will not help, most probably.
@@ -4059,20 +4060,28 @@ components:
             has_ci: true
             has_deployments: false
       properties:
+        accounts:
+          additionalProperties:
+            $ref: '#/components/schemas/AccountStatus'
+          description: Mapping from user's account ID the membership status.
+          type: object
+        email:
+          description: Email of the user.
+          type: string
         id:
           description: Auth0 user identifier.
           type: string
-        native_id:
-          description: Auth backend user identifier.
+        impersonated_by:
+          description: 👑 Identifier of the super admin user who is acting on behalf of.
           type: string
         login:
           description: Auth backend user login name.
           type: string
+        native_id:
+          description: Auth backend user identifier.
+          type: string
         name:
           description: Full name of the user.
-          type: string
-        email:
-          description: Email of the user.
           type: string
         picture:
           description: Avatar URL of the user.
@@ -4080,14 +4089,6 @@ components:
         updated:
           description: Date and time of the last profile update.
           format: date-time
-          type: string
-        accounts:
-          additionalProperties:
-            $ref: '#/components/schemas/AccountStatus'
-          description: Mapping from user's account ID the membership status.
-          type: object
-        impersonated_by:
-          description: Identifier of the god user who is acting on behalf of.
           type: string
       required:
       - id
