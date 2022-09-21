@@ -7279,6 +7279,7 @@ components:
             url: https://example.com/?my-jira#DEV-156
             life_time: '59172891s'
             subtasks: 3
+        issues: []
         labels:
         - title: performance
           last_used: 2020-08-10T12:47:00Z
@@ -7334,15 +7335,15 @@ components:
           items:
             $ref: '#/components/schemas/JIRAIssue'
           type: array
-        labels:
-          description: Mentioned issue labels.
-          items:
-            $ref: '#/components/schemas/JIRALabel'
-          type: array
         issue_types:
           description: Mentioned issue types.
           items:
             $ref: '#/components/schemas/JIRAIssueType'
+          type: array
+        labels:
+          description: Mentioned issue labels.
+          items:
+            $ref: '#/components/schemas/JIRALabel'
           type: array
         priorities:
           description: Mentioned issue priorites sorted by importance in ascending
@@ -7362,6 +7363,14 @@ components:
           type: array
         deployments:
           $ref: '#/components/schemas/IncludedDeployments'
+      required:
+      - epics
+      - issues
+      - issue_types
+      - labels
+      - priorities
+      - statuses
+      - users
       type: object
     # yamllint disable-line rule:key-ordering
     JIRAEpic:
