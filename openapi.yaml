@@ -6199,6 +6199,7 @@ components:
         name:
           description: Developer's full name.
           example: Groundskeeper Willie
+          nullable: true
           type: string
         avatar:
           description: Developer's avatar URL.
