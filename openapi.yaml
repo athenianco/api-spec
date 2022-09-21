@@ -8558,8 +8558,10 @@ components:
           description: Total number of issues in the project.
           type: integer
         last_update:
-          description: Timestamp of the last event in the project.
+          description: |
+            Timestamp of the last event in the project. Can be `null` if there are no issues.
           format: date-time
+          nullable: true
           type: string
       required:
       - avatar_url
