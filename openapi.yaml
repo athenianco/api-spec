@@ -9783,7 +9783,6 @@ components:
       properties:
         count:
           description: Number of executions with respect to `date_from` and `date_to`.
-          minimum: 1
           type: integer
         successes:
           description: Number of successful executions with respect to `date_from`
