@@ -7537,6 +7537,7 @@ components:
           type: integer
         priority:
           description: Name of the priority. The details are returned in `FilteredJIRAStuff.priorities`.
+          nullable: true
           type: string
         status:
           description: Name of the status. The details are returned in `FilteredJIRAStuff.statuses`.
