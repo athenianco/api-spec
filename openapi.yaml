@@ -6335,11 +6335,12 @@ components:
         commit_authors:
         - github.com/vmarkovtsev
         prs:
-        - number: 176
-          title: Fix first account creation
-          additions: 34
-          deletions: 3
+        - additions: 34
           author: github.com/se7entyse7en
+          created: 2020-05-21T18:29:00Z
+          deletions: 3
+          number: 176
+          title: Fix first account creation
         deployments:
         - production-2020-03-26-W9J3uzHl
       properties:
@@ -6415,27 +6416,32 @@ components:
       additionalProperties: false
       description: Details about a pull request listed in `/filter/releases`.
       properties:
-        number:
-          type: integer
-        title:
-          type: string
         additions:
-          type: integer
-        deletions:
           type: integer
         author:
           anyOf:
           - $ref: '#/components/schemas/DeveloperID'
           - nullable: true
             type: string
+        created:
+          description: When this PR was created.
+          format: date-time
+          type: string
+        deletions:
+          type: integer
         jira:
           description: Mapped JIRA issue IDs.
           items:
             type: string
           type: array
+        number:
+          type: integer
+        title:
+          type: string
       required:
       - additions
       - author
+      - created
       - deletions
       - number
       - title
@@ -8680,11 +8686,12 @@ components:
               commit_authors:
               - github.com/vmarkovtsev
               prs:
-              - number: 176
-                title: Fix first account creation
-                additions: 34
-                deletions: 3
+              - additions: 34
                 author: github.com/se7entyse7en
+                created: 2020-05-21T18:29:00Z
+                deletions: 3
+                number: 176
+                title: Fix first account creation
       properties:
         include:
           allOf:
@@ -8725,6 +8732,7 @@ components:
           prs:
           - additions: 3
             author: github.com/vmarkovtsev
+            created: 2020-03-25T10:57:00Z
             deletions: 3
             number: 176
             title: Bug fix
@@ -10120,6 +10128,13 @@ components:
               github.com/athenianco/athenian-api: 2
             commits_overall:
               github.com/athenianco/athenian-api: 20
+          prs:
+          - additions: 34
+            author: github.com/se7entyse7en
+            created: 2020-05-21T18:29:00Z
+            deletions: 3
+            number: 176
+            title: Fix first account creation
           releases:
           - added_lines: 1000
             commits: 20
@@ -10133,12 +10148,7 @@ components:
             age: '1000s'
             commit_authors:
             - github.com/vmarkovtsev
-            prs:
-            - number: 176
-              title: Fix first account creation
-              additions: 34
-              deletions: 3
-              author: github.com/se7entyse7en
+            prs: []
       properties:
         include:
           allOf:
@@ -10170,6 +10180,13 @@ components:
             github.com/athenianco/athenian-api: 300
           commits_overall:
             github.com/athenianco/athenian-api: 200
+        prs:
+        - additions: 34
+          author: github.com/se7entyse7en
+          created: 2020-05-21T18:29:00Z
+          deletions: 3
+          number: 176
+          title: Fix first account creation
         releases:
         - added_lines: 1000
           commits: 20
@@ -10183,12 +10200,7 @@ components:
           age: '10000s'
           commit_authors:
           - github.com/vmarkovtsev
-          prs:
-          - number: 176
-            title: Fix first account creation
-            additions: 34
-            deletions: 3
-            author: github.com/se7entyse7en
+          prs: []
       properties:
         code:
           additionalProperties: false
@@ -10238,9 +10250,14 @@ components:
           - lines_prs
           - prs
           type: object
+        prs:
+          description: List of deployed pull requests.
+          items:
+            $ref: '#/components/schemas/ReleasedPullRequest'
+          type: array
         releases:
           description: Deployed releases. The format matches the response from `/filter/releases`.
-            `include` is always empty.
+            `include` and `prs` are always empty.
           items:
             $ref: '#/components/schemas/FilteredRelease'
           type: array
