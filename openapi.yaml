@@ -7638,11 +7638,12 @@ components:
           description: Exact status name.
           type: string
         stage:
-          description: One of the three status categories.
+          description: One of the status categories.
           enum:
           - To Do
           - In Progress
           - Done
+          - No Category
           type: string
         project:
           description: Identifier of the project where this status exists.
