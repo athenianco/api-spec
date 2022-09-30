@@ -9990,7 +9990,6 @@ components:
           type: array
       required:
       - last_execution_time
-      - last_execution_url
       - prs_stats
       - repository
       - size_groups
