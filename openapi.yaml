@@ -7020,7 +7020,7 @@ components:
     TimeZone:
       description: Local time zone offset in minutes, used to adjust `date_from` and
         `date_to`.
-      maximum: 720
+      maximum: 780
       minimum: -720
       type: integer
     # yamllint disable-line rule:key-ordering
