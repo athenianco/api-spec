@@ -228,7 +228,7 @@ paths:
 # {% if False %}
       - default
 # {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.user_controller
+      x-openapi-router-controller: athenian.api.controllers.backoffice_controller
   /diff/releases:
     post:
       operationId: diff_releases
