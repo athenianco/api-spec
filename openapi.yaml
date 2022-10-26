@@ -3643,6 +3643,7 @@ components:
         * `pr-review-time`: average time spent in Review stage.
         * `pr-review-count`: number of PRs used to calculate `pr-review-time` disregarding the quantiles.
         * `pr-review-count-q`: number of PRs used to calculate `pr-review-time` after applying the quantiles.
+        * `pr-review-time-below-threshold-ratio`: ratio of PRs with a `pr-review-time` below the threshold, disregarding the quantiles. The default threshold is 2 days.
         * `pr-merging-time`: average time spent in Merge stage.
         * `pr-merging-count`: number of PRs used to calculate `pr-merging-time` disregarding the quantiles.
         * `pr-merging-count-q`: number of PRs used to calculate `pr-merging-time` after applying the quantiles.
@@ -3652,6 +3653,7 @@ components:
         * `pr-open-time`: average time the PR stayed open.
         * `pr-open-count`: number of PRs used to calculate `pr-open-time` disregarding the quantiles.
         * `pr-open-count-q`: number of PRs used to calculate `pr-open-time` after applying the quantiles.
+        * `pr-open-time-below-threshold-ratio`: ratio of PRs with a `pr-open-time` below the threshold, disregarding the quantiles. The default threshold is 3 days.
         * `pr-lead-time`: average Lead Time - time between the work started and the release.
         * `pr-lead-count`: number of PRs used to calculate `pr-lead-time` disregarding the quantiles. It should be the same as `pr-release-count`.
         * `pr-lead-count-q`: number of PRs used to calculate `pr-lead-time` after applying the quantiles.
@@ -3661,7 +3663,8 @@ components:
         * `pr-all-count`: equals to the sum of `pr-cycle-count` with the number of PRs which are still not done on the specified time interval but don't have any stage-changing events. This metric should be exactly the same as the number of PRs returned by `/filter/prs`. The quantiles are ignored.
         * `pr-wait-first-review-time`: average time of waiting for the first review.
         * `pr-wait-first-review-count`: number of PRs used to calculate `pr-wait-first-review`. Note: this is *not* the same as the number of PRs waiting for the first review.
-        * `pr-wait-first-review-count-q`: number of PRs used to calculate `pr-wait-first-review after applying the quantiles.
+        * `pr-wait-first-review-count-q`: number of PRs used to calculate `pr-wait-first-review` after applying the quantiles.
+        * `pr-wait-first-review-time-below-threshold-ratio`: ratio of PRs with a `pr-wait-first-review` below the threshold, disregarding the quantiles. The default threshold is 6 hours.
         * `pr-deployment-time`: average time between when the PR was released and was deployed. We track deployments through `/events/deployments`. Requires setting `ForSetPullRequests.environments`.
         * `pr-deployment-count`: number of PRs used to calculate `pr-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given time window. Requires setting `ForSetPullRequests.environments`.
         * `pr-deployment-count-q`: number of PRs used to calculate `pr-deployment-time` after applying the quantiles. Requires setting `ForSetPullRequests.environments`.
@@ -3671,6 +3674,7 @@ components:
         * `pr-cycle-deployment-time`: extended Cycle Time that includes `pr-deployment-time`. We discard PRs in repositories without deployments. Requires setting `ForSetPullRequests.environments`.
         * `pr-cycle-deployment-count`: number of PRs used to calculate `pr-cycle-deployment-time` disregarding the quantiles. It equals to the overall number of deployed PRs in the given window and duplicates `pr-deployment-count` and `pr-lead-deployment-count`. Requires setting `ForSetPullRequests.environments`.
         * `pr-cycle-deployment-count-q`: number of PRs used to calculate `pr-cycle-deployment-time` after applying the quantiles. Requires setting `ForSetPullRequests.environments`.
+        * `pr-cycle-deployment-time-below-threshold-ratio`: ratio of PRs with a `pr-cycle-deployment-count` below the threshold, disregarding the quantiles. The default threshold is 5 days.
         * `pr-flow-ratio`: ratio of opened to closed PRs.
         * `pr-opened`: number of opened PRs.
         * `pr-reviewed`: number of PRs which received a review.
@@ -3682,6 +3686,7 @@ components:
         * `pr-closed`: number of closed PRs = `pr-merged` + `pr-rejected`.
         * `pr-done`: number of released, rejected, and force push dropped PRs.
         * `pr-size`: average size of PRs (added + deleted lines) which are active on the time interval after applying the quantiles.
+        * `pr-size-below-threshold-ratio`: ratio of PRs with a `pr-size` below or equal to the threshold, disregarding the quantiles. The default threshold is 100 lines.
         * `pr-median-size`: median size of PRs (added + deleted lines) which are active on the time interval ignoring the quantiles.
         * `pr-wip-pending-count`: number of PRs currently in Work In Progress stage.
         * `pr-review-pending-count`: number of PRs currently in Review stage.
@@ -3692,6 +3697,7 @@ components:
         * `pr-all-mapped-to-jira`: ratio of all observed PRs that are mapped to JIRA issues.
         * `pr-participants-per`: average number of PR particpants excluding the releasers and the bots.
         * `pr-review-comments-per`: average number of PR review comments for reviewed PRs, bots excluded.
+        * `pr-review-comments-per-above-threshold-ratio`: ratio of PRs with a `pr-review-comments-per` above or equal to the threshold, disregarding the quantiles. The threshold is 3 comments.
         * `pr-reviews-per`: average number of PR reviews for reviewed PRs, bots excluded.
         * `pr-comments-per`: average number of PR comments, both regular and review, for reviewed PRs, bots excluded.
       enum:
@@ -3701,6 +3707,7 @@ components:
       - pr-review-time
       - pr-review-count
       - pr-review-count-q
+      - pr-review-time-below-threshold-ratio
       - pr-merging-time
       - pr-merging-count
       - pr-merging-count-q
@@ -3710,6 +3717,7 @@ components:
       - pr-open-time
       - pr-open-count
       - pr-open-count-q
+      - pr-open-time-below-threshold-ratio
       - pr-lead-time
       - pr-lead-count
       - pr-lead-count-q
@@ -3720,6 +3728,7 @@ components:
       - pr-wait-first-review-time
       - pr-wait-first-review-count
       - pr-wait-first-review-count-q
+      - pr-wait-first-review-time-below-threshold-ratio
       - pr-deployment-time
       - pr-deployment-count
       - pr-deployment-count-q
@@ -3729,6 +3738,7 @@ components:
       - pr-cycle-deployment-time
       - pr-cycle-deployment-count
       - pr-cycle-deployment-count-q
+      - pr-cycle-deployment-time-below-threshold-ratio
       - pr-flow-ratio
       - pr-opened
       - pr-reviewed
@@ -3740,6 +3750,7 @@ components:
       - pr-closed
       - pr-done
       - pr-size
+      - pr-size-below-threshold-ratio
       - pr-median-size
       - pr-wip-pending-count
       - pr-review-pending-count
@@ -3750,6 +3761,7 @@ components:
       - pr-all-mapped-to-jira
       - pr-participants-per
       - pr-review-comments-per
+      - pr-review-comments-per-above-threshold-ratio
       - pr-reviews-per
       - pr-comments-per
       example: pr-lead-time
@@ -8191,6 +8203,7 @@ components:
         * `jira-acknowledged-q` - number of issues that are "In Progress" or "Resolved". This number matches the issues considered to calculate `jira-acknowledge-time` after applying the quantiles.
         * `jira-life-time` - Mean Life Time - the time between min(issue creation, work began) and max(issue resolution, fixes released).
         * `jira-lead-time` - Mean Lead Time - the time between when the work began and max(issue resolution, fixes released).
+        * `jira-lead-time-below-threshold-ratio` - ratio of issues with a `jira-lead-time` below the threshold, disregarding the quantiles. The default threshold is 5 days.
         * `jira-acknowledge-time` - Mean Acknowledge Time - the time between when the issue was created and the work began = `min(transitioned to "In Progress", PR created)`. It equals to 0 for retrofitted issues with PRs before their creation times.
         * `jira-pr-lag-time` - the time between when the issue transitioned to "In Progress" and the first PR was created. It equals to 0 if the difference is negative or no PRs are mapped to the issue.
         * `jira-backlog-time` - the time between when the issue was created and transitioned to "In Progress".
@@ -8203,6 +8216,7 @@ components:
       - jira-acknowledged-q
       - jira-life-time
       - jira-lead-time
+      - jira-lead-time-below-threshold-ratio
       - jira-acknowledge-time
       - jira-pr-lag-time
       - jira-backlog-time
