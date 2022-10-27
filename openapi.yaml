@@ -3532,6 +3532,8 @@ components:
           - $ref: '#/components/schemas/PullRequestMetricID'
           - $ref: '#/components/schemas/JIRAMetricID'
           - $ref: '#/components/schemas/ReleaseMetricID'
+        metric_params:
+          $ref: '#/components/schemas/GoalTemplateMetricParams'
         name:
           $ref: '#/components/schemas/GoalTemplateName'
         repositories:
@@ -3560,6 +3562,8 @@ components:
           - $ref: '#/components/schemas/PullRequestMetricID'
           - $ref: '#/components/schemas/JIRAMetricID'
           - $ref: '#/components/schemas/ReleaseMetricID'
+        metric_params:
+          $ref: '#/components/schemas/GoalTemplateMetricParams'
         name:
           $ref: '#/components/schemas/GoalTemplateName'
         repositories:
@@ -3583,6 +3587,9 @@ components:
       items:
         $ref: '#/components/schemas/GoalTemplate'
       type: array
+    GoalTemplateMetricParams:
+      description: The parameters used to compute `metric` for the goal.
+      type: object
     GoalTemplateName:
       description: Name of the template.
       example: Untitled Template
@@ -3602,6 +3609,8 @@ components:
           - $ref: '#/components/schemas/PullRequestMetricID'
           - $ref: '#/components/schemas/JIRAMetricID'
           - $ref: '#/components/schemas/ReleaseMetricID'
+        metric_params:
+          $ref: '#/components/schemas/GoalTemplateMetricParams'
         repositories:
           $ref: '#/components/schemas/RepositorySet'
       required:
