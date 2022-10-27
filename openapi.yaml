@@ -3589,6 +3589,11 @@ components:
       type: array
     GoalTemplateMetricParams:
       description: The parameters used to compute `metric` for the goal.
+      properties:
+        threshold:
+          oneOf:
+            - type: number
+            - $ref: '#/components/schemas/TimeDuration'
       type: object
     GoalTemplateName:
       description: Name of the template.
