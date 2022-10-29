@@ -3533,7 +3533,7 @@ components:
           - $ref: '#/components/schemas/JIRAMetricID'
           - $ref: '#/components/schemas/ReleaseMetricID'
         metric_params:
-          $ref: '#/components/schemas/GoalTemplateMetricParams'
+          $ref: '#/components/schemas/GoalMetricParams'
         name:
           $ref: '#/components/schemas/GoalTemplateName'
         repositories:
@@ -3563,7 +3563,7 @@ components:
           - $ref: '#/components/schemas/JIRAMetricID'
           - $ref: '#/components/schemas/ReleaseMetricID'
         metric_params:
-          $ref: '#/components/schemas/GoalTemplateMetricParams'
+          $ref: '#/components/schemas/GoalMetricParams'
         name:
           $ref: '#/components/schemas/GoalTemplateName'
         repositories:
@@ -3587,7 +3587,7 @@ components:
       items:
         $ref: '#/components/schemas/GoalTemplate'
       type: array
-    GoalTemplateMetricParams:
+    GoalMetricParams:
       description: The parameters used to compute `metric` for the goal.
       properties:
         threshold:
@@ -3615,7 +3615,7 @@ components:
           - $ref: '#/components/schemas/JIRAMetricID'
           - $ref: '#/components/schemas/ReleaseMetricID'
         metric_params:
-          $ref: '#/components/schemas/GoalTemplateMetricParams'
+          $ref: '#/components/schemas/GoalMetricParams'
         repositories:
           $ref: '#/components/schemas/RepositorySet'
       required:
