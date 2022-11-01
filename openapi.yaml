@@ -3524,6 +3524,9 @@ components:
         - github.com/athenianco/athenian-api
         - github.com/athenianco/api-spec
       properties:
+        description:
+          description: Default description of the goals generated from this template.
+          type: string
         id:
           description: Identifier of the template.
           type: integer
