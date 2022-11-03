@@ -1245,6 +1245,13 @@ paths:
       x-openapi-router-controller: athenian.api.controllers.goal_controller
     parameters:
     - $ref: '#/components/parameters/pathAccountID'
+    - description: Include templates for TLOs goals, i.e. goals based on parameterized metrics.
+      in: query
+      name: include_tlo
+      required: false
+      schema:
+        default: false
+        type: boolean
   /histograms/code_checks:
     post:
       operationId: calc_histogram_code_checks
