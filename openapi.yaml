@@ -6907,6 +6907,9 @@ components:
         issue_types:
         - Bug
         - Task
+        priorities:
+        - high
+        - low
         projects:
         - DEV
         - ENG
@@ -6931,6 +6934,11 @@ components:
         issue_types:
           description: PRs must be linked to certain JIRA issue types, e.g. Bug, Task,
             Design Document, etc.
+          items:
+            type: string
+          type: array
+        priorities:
+          description: PRs must be linked to any JIRA issue with a priority in the given list.
           items:
             type: string
           type: array
