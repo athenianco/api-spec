@@ -2417,7 +2417,7 @@ paths:
           description: The JIRA installation does not exist.
       security:
       - bearerAuth: []
-      summary: 🛡️ Add or override GitHub<>JIRA user identity mapping.
+      summary: Add, remove or override GitHub<>JIRA user identity mapping.
       tags:
       - settings
 # {% if False %}
