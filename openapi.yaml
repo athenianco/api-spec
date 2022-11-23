@@ -6528,7 +6528,6 @@ components:
       type: object
     # yamllint disable-line rule:key-ordering
     ReleasedPullRequest:
-      additionalProperties: false
       description: Details about a pull request listed in `/filter/releases`.
       properties:
         additions:
@@ -10260,6 +10259,7 @@ components:
             deletions: 3
             number: 176
             title: Fix first account creation
+            repository: github.com/athenianco/athenian-api
           releases:
           - added_lines: 1000
             commits: 20
@@ -10312,6 +10312,7 @@ components:
           deletions: 3
           number: 176
           title: Fix first account creation
+          repository: github.com/athenianco/athenian-api
         releases:
         - added_lines: 1000
           commits: 20
@@ -10378,11 +10379,11 @@ components:
         prs:
           description: List of deployed pull requests.
           items:
-            $ref: '#/components/schemas/ReleasedPullRequest'
+            $ref: '#/components/schemas/DeployedPullRequest'
           type: array
         releases:
-          description: Deployed releases. The format matches the response from `/filter/releases`.
-            `include` and `prs` are always empty.
+          description: Deployed releases. The format matches `FilteredRelease`
+            except that `prs` is the number of released pull requests instead of a list.
           items:
             $ref: '#/components/schemas/DeployedRelease'
           type: array
@@ -10395,6 +10396,18 @@ components:
       - $ref: '#/components/schemas/DeploymentNotification'
       - $ref: '#/components/schemas/DeploymentAnalysis'
       description: Everything we know about the deployment.
+      type: object
+    # yamllint disable-line rule:key-ordering
+    DeployedPullRequest:
+      allOf:
+      - properties:
+          repository:
+            $ref: '#/components/schemas/RepositoryID'
+        required:
+        - repository
+        type: object
+      - $ref: '#/components/schemas/ReleasedPullRequest'
+      description: Brief information about a deployed pull request.
       type: object
     # yamllint disable-line rule:key-ordering
     WorkTypeName:
