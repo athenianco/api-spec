@@ -1,0 +1,42 @@
+name: 👤 Review
+
+on:
+  pull_request:
+  pull_request_review:
+
+jobs:
+  require_reviewer:
+    name: require
+    runs-on: ubuntu-latest
+    steps:
+    - uses: tspascoal/get-user-teams-membership@v2
+      id: membership
+      name: Load teams of the user
+      if: ${{ github.actor != 'dependabot[bot]' }}
+      with:
+        username: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.READ_ORG_TOKEN }}
+    - uses: Automattic/action-required-review@v3
+      name: Require reviews - api
+      if: ${{ github.actor == 'dependabot[bot]' || !contains(steps.membership.outputs.teams, 'api') }}
+      with:
+        requirements: |
+          - name: openapi.yaml
+            paths:
+            - openapi.yaml
+            teams:
+            - api
+        status: Review by athenianco/api is required
+        token: ${{ secrets.GKWILLIE_REVIEW_TOKEN }}
+    - uses: Automattic/action-required-review@v3
+      name: Require reviews - webapp
+      if: ${{ github.actor != 'dependabot[bot]' && !contains(steps.membership.outputs.teams, 'webapp') }}
+      with:
+        requirements: |
+          - name: openapi.yaml
+            paths:
+            - openapi.yaml
+            teams:
+            - webapp
+        status: Review by athenianco/webapp is required
+        token: ${{ secrets.GKWILLIE_REVIEW_TOKEN }}
