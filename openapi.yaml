@@ -7378,6 +7378,7 @@ components:
           life_time: '59172893s'
           url: https://example.com/?my-jira#DEV-158
           project: '10012'
+          story_points: 5
           children:
           - id: DEV-157
             title: New repository for the precomputing service
@@ -7407,6 +7408,7 @@ components:
             url: https://example.com/?my-jira#DEV-156
             life_time: '59172891s'
             subtasks: 3
+            story_points: 5
         issues: []
         labels:
         - title: performance
@@ -7670,6 +7672,9 @@ components:
         status:
           description: Name of the status. The details are returned in `FilteredJIRAStuff.statuses`.
           type: string
+        story_points:
+          description: Value of the "story points" field.
+          type: integer
         type:
           description: Name of the issue type. The details are returned in `FilteredJIRAStuff.issue_types`.
           type: string
