@@ -7674,7 +7674,7 @@ components:
           type: string
         story_points:
           description: Value of the "story points" field.
-          type: integer
+          type: number
         type:
           description: Name of the issue type. The details are returned in `FilteredJIRAStuff.issue_types`.
           type: string
