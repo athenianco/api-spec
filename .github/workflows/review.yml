@@ -2,6 +2,7 @@ name: 👤 Review
 
 on:
   pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled]
   pull_request_review:
 
 jobs:
@@ -27,7 +28,7 @@ jobs:
             teams:
             - api
         status: Review by athenianco/api is required
-        fail: true
+        fail: ${{!contains(github.event.*.labels.*.name, 'review ignored')}}
         token: ${{ secrets.GKWILLIE_REVIEW_TOKEN }}
     - uses: Automattic/action-required-review@v3
       name: Require reviews - webapp
@@ -40,5 +41,5 @@ jobs:
             teams:
             - webapp
         status: Review by athenianco/webapp is required
-        fail: true
+        fail: ${{!contains(github.event.*.labels.*.name, 'review ignored')}}
         token: ${{ secrets.GKWILLIE_REVIEW_TOKEN }}
