@@ -27,6 +27,7 @@ jobs:
             teams:
             - api
         status: Review by athenianco/api is required
+        fail: true
         token: ${{ secrets.GKWILLIE_REVIEW_TOKEN }}
     - uses: Automattic/action-required-review@v3
       name: Require reviews - webapp
@@ -39,4 +40,5 @@ jobs:
             teams:
             - webapp
         status: Review by athenianco/webapp is required
+        fail: true
         token: ${{ secrets.GKWILLIE_REVIEW_TOKEN }}
