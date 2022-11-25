@@ -10171,11 +10171,11 @@ components:
           rollback: null
       properties:
         date_from:
-          description: Date from when to search for the deployments,
+          description: Search for the deployments since this date.
           format: date
           type: string
         date_to:
-          description: Date until which to search for the deployments.
+          description: Search for the deployments until this date.
           format: date
           type: string
         timezone:
