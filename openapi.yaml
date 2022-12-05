@@ -10,7 +10,7 @@ info:
 
     Authorization persists between sessions. Marks:
     * 🛡️ endpoint requires account admin privileges.
-    * 👑 endpoint is only accessible to Athenian authorities.
+    * 👤 endpoint only works with JWT authentication.
     <details>
     <summary>List of common server errors.</summary>
     * __500__ endpoint crashed. We reported the incident to Sentry and will fix it soon! Please include the value of `instance` in the response if you contact the support. Repeating the request will not help, most probably.
@@ -58,7 +58,7 @@ paths:
           description: The account was not found.
       security:
       - bearerAuth: []
-      summary: '🛡️ Change the status of an account member: regular, admin, or banished
+      summary: '🛡️👤 Change the status of an account member: regular, admin, or banished
         (deleted). This endpoint is allowed only for account admins.'
       tags:
       - user
@@ -154,81 +154,6 @@ paths:
 # {% endif %}
       x-codegen-request-body-name: body
       x-openapi-router-controller: athenian.api.controllers.user_controller
-    post:
-      operationId: set_account_features
-      parameters:
-      - $ref: '#/components/parameters/pathAccountID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProductFeatures'
-        x-body-name: body
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductFeatures'
-          description: List of the enabled product features for the account.
-        404:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The account was not found or the user does not have the permission.
-      security:
-      - bearerAuth: []
-      summary: |
-        👑 Change account features. The calling user must be marked internally as a super admin.
-      tags:
-      - user
-# {% if False %}
-      - default
-# {% endif %}
-      x-codegen-request-body-name: body
-      x-openapi-router-controller: athenian.api.controllers.user_controller
-  /become:
-    get:
-      operationId: become_user
-      parameters:
-      - description: Numeric identifier of the user to turn into.
-        explode: false
-        in: query
-        name: id
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: Details of the new active user, the same as `/user`.
-        403:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: Calling user is not allowed to mutate.
-        404:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: Requested user does not exist.
-      security:
-      - bearerAuth: []
-      summary: |
-        👑 Turn into arbitrary user. The calling user must be marked internally as a super admin.
-      tags:
-      - user
-# {% if False %}
-      - default
-# {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.backoffice_controller
   /diff/releases:
     post:
       operationId: diff_releases
@@ -1131,7 +1056,7 @@ paths:
           $ref: '#/components/responses/InvalidRequestErrorResponse'
       security:
       - bearerAuth: []
-      summary: Create a goal template.
+      summary: 👤 Create a goal template.
       tags:
       - align
 # {% if False %}
@@ -1159,7 +1084,7 @@ paths:
           description: The goal template was not found.
       security:
       - bearerAuth: []
-      summary: Delete a goal template.
+      summary: 👤 Delete a goal template.
       tags:
       - align
 # {% if False %}
@@ -1213,7 +1138,7 @@ paths:
           $ref: '#/components/responses/GoalTemplateNotFoundResponse'
       security:
       - bearerAuth: []
-      summary: Update a goal template.
+      summary: 👤 Update a goal template.
       tags:
       - align
 # {% if False %}
@@ -1461,7 +1386,7 @@ paths:
           description: Account's installation has not finished yet.
       security:
       - bearerAuth: []
-      summary: Accept the account membership invitation and finish registration. The
+      summary: 👤 Accept the account membership invitation and finish registration. The
         user must be already authorized in Auth0.
       tags:
       - registration
@@ -1491,32 +1416,6 @@ paths:
             it is correctly formed and is enabled.'
       summary: Given an invitation URL, get its type (admin or regular account member)
         and find whether it is correctly formed and is enabled or disabled.
-      tags:
-      - registration
-# {% if False %}
-      - default
-# {% endif %}
-      x-codegen-request-body-name: body
-      x-openapi-router-controller: athenian.api.controllers.invitation_controller
-  /invite/generate:
-    get:
-      operationId: gen_account_invitation
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvitationLink'
-          description: The invitation link has been generated successfully.
-        403:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The user does not have enough permissions. They must be a 👑.
-      security:
-      - bearerAuth: []
-      summary: 👑 Create a new unique account registration link.
       tags:
       - registration
 # {% if False %}
@@ -1558,7 +1457,7 @@ paths:
       security:
       - bearerAuth: []
       summary: |
-        Create an account invitation link for regular users. The caller must
+        👤 Create an account invitation link for regular users. The caller must
         be an admin of the specified account. The link is persistent, so multiple
         calls return the same result.
       tags:
@@ -1601,7 +1500,7 @@ paths:
           description: The account was not found.
       security:
       - bearerAuth: []
-      summary: Generate a JIRA integration installation link. The caller must be an
+      summary: 👤 Generate a JIRA integration installation link. The caller must be an
         admin of the specified account.
       tags:
       - registration
@@ -2195,7 +2094,7 @@ paths:
           description: There is an existing reposet with the same contents.
       security:
       - bearerAuth: []
-      summary: 🛡️ Create a repository set.
+      summary: 🛡️👤 Create a repository set.
       tags:
       - reposet
 # {% if False %}
@@ -2236,7 +2135,7 @@ paths:
           description: The specified repository set was not found.
       security:
       - bearerAuth: []
-      summary: 🛡️ Delete a repository set. The user must be an admin of the account that
+      summary: 🛡️👤 Delete a repository set. The user must be an admin of the account that
         owns the reposet.
       tags:
       - reposet
@@ -2331,7 +2230,7 @@ paths:
           description: There is an existing reposet with the same contents.
       security:
       - bearerAuth: []
-      summary: 🛡️ Update a repository set. The user must be an admin of the account that
+      summary: 🛡️👤 Update a repository set. The user must be an admin of the account that
         owns the reposet.
       tags:
       - reposet
@@ -2417,7 +2316,7 @@ paths:
           description: The JIRA installation does not exist.
       security:
       - bearerAuth: []
-      summary: Add, remove or override GitHub<>JIRA user identity mapping.
+      summary: 👤 Add, remove or override GitHub<>JIRA user identity mapping.
       tags:
       - settings
 # {% if False %}
@@ -2514,7 +2413,7 @@ paths:
           description: The JIRA installation does not exist.
       security:
       - bearerAuth: []
-      summary: 🛡️ Set the enabled JIRA projects.
+      summary: 🛡️👤 Set the enabled JIRA projects.
       tags:
       - settings
 # {% if False %}
@@ -2642,7 +2541,7 @@ paths:
       security:
       - bearerAuth: []
       summary: |
-        🛡️ Insert or update a logical repository - a named set of rules to match PRs, releases,
+        🛡️👤 Insert or update a logical repository - a named set of rules to match PRs, releases,
         and deployments that pretends to be a regular GitHub repository everywhere in UI and
         API requests.
       tags:
@@ -2734,7 +2633,7 @@ paths:
       security:
       - bearerAuth: []
       summary: |
-        Set the release matching rule for a list of repositories. Only for account admins.
+        👤 Set the release matching rule for a list of repositories. Only for account admins.
         Release settings are rules by which to mark releases in GitHub repositories.
       tags:
       - settings
@@ -2810,7 +2709,7 @@ paths:
           description: The user or the account was not found.
       security:
       - bearerAuth: []
-      summary: Create or update a work type - a rule set to group PRs, releases, etc.
+      summary: 👤 Create or update a work type - a rule set to group PRs, releases, etc.
         together.
       tags:
       - settings
@@ -2850,7 +2749,7 @@ paths:
             found.
       security:
       - bearerAuth: []
-      summary: Remove the work type given the name.
+      summary: 👤 Remove the work type given the name.
       tags:
       - settings
 # {% if False %}
@@ -2948,7 +2847,7 @@ paths:
           $ref: '#/components/responses/InvalidRequestErrorResponse'
       security:
       - bearerAuth: []
-      summary: Save the state of UI views and return a reference.
+      summary: 👤 Save the state of UI views and return a reference.
       tags:
       - user
 # {% if False %}
@@ -2983,7 +2882,7 @@ paths:
           description: Share does not exist or the user is not allowed to access.
       security:
       - bearerAuth: []
-      summary: Load the previously saved state of the UI views.
+      summary: 👤 Load the previously saved state of the UI views.
       tags:
       - user
 # {% if False %}
@@ -3017,7 +2916,7 @@ paths:
           description: There is an existing team with the same name.
       security:
       - bearerAuth: []
-      summary: Create a team. Admin is not required.
+      summary: 👤 Create a team. Admin is not required.
       tags:
       - team
 # {% if False %}
@@ -3060,7 +2959,7 @@ paths:
           description: The specified team was not found.
       security:
       - bearerAuth: []
-      summary: Delete a team.
+      summary: 👤 Delete a team.
       tags:
       - team
 # {% if False %}
@@ -3158,7 +3057,7 @@ paths:
           description: There is an existing team with the same contents.
       security:
       - bearerAuth: []
-      summary: Update a team.
+      summary: 👤 Update a team.
       tags:
       - team
 # {% if False %}
@@ -3265,7 +3164,7 @@ paths:
             user in the account.
       security:
       - bearerAuth: []
-      summary: Create a new Personal Access Token for the calling user and the specified
+      summary: 👤 Create a new Personal Access Token for the calling user and the specified
         account.
       tags:
       - security
@@ -3307,7 +3206,7 @@ paths:
           description: The token does not exist.
       security:
       - bearerAuth: []
-      summary: Delete a Personal Access Token belonging to the user.
+      summary: 👤 Delete a Personal Access Token belonging to the user.
       tags:
       - security
 # {% if False %}
@@ -3360,7 +3259,7 @@ paths:
             user in the account.
       security:
       - bearerAuth: []
-      summary: Change Personal Access Token's details.
+      summary: 👤 Change Personal Access Token's details.
       tags:
       - security
 # {% if False %}
@@ -4107,7 +4006,7 @@ components:
           description: Auth0 user identifier.
           type: string
         impersonated_by:
-          description: 👑 Identifier of the super admin user who is acting on behalf of.
+          description: Identifier of the super admin user who is acting on behalf of.
           type: string
         login:
           description: Auth backend user login name.
