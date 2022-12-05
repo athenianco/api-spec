@@ -154,81 +154,6 @@ paths:
 # {% endif %}
       x-codegen-request-body-name: body
       x-openapi-router-controller: athenian.api.controllers.user_controller
-    post:
-      operationId: set_account_features
-      parameters:
-      - $ref: '#/components/parameters/pathAccountID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProductFeatures'
-        x-body-name: body
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductFeatures'
-          description: List of the enabled product features for the account.
-        404:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The account was not found or the user does not have the permission.
-      security:
-      - bearerAuth: []
-      summary: |
-        👑 Change account features. The calling user must be marked internally as a super admin.
-      tags:
-      - user
-# {% if False %}
-      - default
-# {% endif %}
-      x-codegen-request-body-name: body
-      x-openapi-router-controller: athenian.api.controllers.user_controller
-  /become:
-    get:
-      operationId: become_user
-      parameters:
-      - description: Numeric identifier of the user to turn into.
-        explode: false
-        in: query
-        name: id
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: Details of the new active user, the same as `/user`.
-        403:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: Calling user is not allowed to mutate.
-        404:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: Requested user does not exist.
-      security:
-      - bearerAuth: []
-      summary: |
-        👑 Turn into arbitrary user. The calling user must be marked internally as a super admin.
-      tags:
-      - user
-# {% if False %}
-      - default
-# {% endif %}
-      x-openapi-router-controller: athenian.api.controllers.backoffice_controller
   /diff/releases:
     post:
       operationId: diff_releases
@@ -1491,32 +1416,6 @@ paths:
             it is correctly formed and is enabled.'
       summary: Given an invitation URL, get its type (admin or regular account member)
         and find whether it is correctly formed and is enabled or disabled.
-      tags:
-      - registration
-# {% if False %}
-      - default
-# {% endif %}
-      x-codegen-request-body-name: body
-      x-openapi-router-controller: athenian.api.controllers.invitation_controller
-  /invite/generate:
-    get:
-      operationId: gen_account_invitation
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvitationLink'
-          description: The invitation link has been generated successfully.
-        403:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericError'
-          description: The user does not have enough permissions. They must be a 👑.
-      security:
-      - bearerAuth: []
-      summary: 👑 Create a new unique account registration link.
       tags:
       - registration
 # {% if False %}
@@ -4107,7 +4006,7 @@ components:
           description: Auth0 user identifier.
           type: string
         impersonated_by:
-          description: 👑 Identifier of the super admin user who is acting on behalf of.
+          description: Identifier of the super admin user who is acting on behalf of.
           type: string
         login:
           description: Auth backend user login name.
