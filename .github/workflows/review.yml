@@ -15,7 +15,7 @@ jobs:
       name: Load teams of the user
       if: ${{ github.actor != 'dependabot[bot]' }}
       with:
-        username: ${{ github.actor }}
+        username: ${{ github.event.pull_request.user.login }}
         GITHUB_TOKEN: ${{ secrets.READ_ORG_TOKEN }}
     - uses: Automattic/action-required-review@v3
       name: Require reviews - api
