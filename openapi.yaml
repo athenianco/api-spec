@@ -3640,6 +3640,9 @@ components:
       - pr-cycle-time
       - pr-cycle-count
       - pr-cycle-count-q
+      - pr-live-cycle-time
+      - pr-live-cycle-count
+      - pr-live-cycle-count-q
       - pr-all-count
       - pr-wait-first-review-time
       - pr-wait-first-review-count
