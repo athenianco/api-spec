@@ -3565,13 +3565,14 @@ components:
         * `pr-open-count`: number of PRs used to calculate `pr-open-time` disregarding the quantiles.
         * `pr-open-count-q`: number of PRs used to calculate `pr-open-time` after applying the quantiles.
         * `pr-open-time-below-threshold-ratio`: ratio of PRs with a `pr-open-time` below the threshold, disregarding the quantiles. The default threshold is 3 days.
-        * `pr-lead-time`: average Lead Time - time between the work started and the release.
-        * `pr-lead-time-below-threshold-ratio`: ratio of PRs with a `pr-lead-time` below the threshold, disregarding the quantiles. The default threshold is 5 days.
-        * `pr-lead-count`: number of PRs used to calculate `pr-lead-time` disregarding the quantiles. It should be the same as `pr-release-count`.
-        * `pr-lead-count-q`: number of PRs used to calculate `pr-lead-time` after applying the quantiles.
-        * `pr-cycle-time`: Cycle Time - sum of correspodning `pr-wip-time`, `pr-review-time`, `pr-merging-time`, and `pr-release-time`.
-        * `pr-cycle-count`: number of PRs used to calculate `pr-cycle-time` disregarding the quantiles. It equals to the overall number of PRs observed in the given time window.
+        * `pr-cycle-time`: average PR Cycle - time between the work started and the release.
+        * `pr-cycle-time-below-threshold-ratio`: ratio of PRs with a `pr-cycle-time` below the threshold, disregarding the quantiles. The default threshold is 5 days.
+        * `pr-cycle-count`: number of PRs used to calculate `pr-cycle-time` disregarding the quantiles. It should be the same as `pr-release-count`.
         * `pr-cycle-count-q`: number of PRs used to calculate `pr-cycle-time` after applying the quantiles.
+        * `pr-lead-time`: deprecated alias for `pr-cycle-time`
+        * `pr-lead-time-below-threshold-ratio`: deprecated alias for `pr-cycle-time-below-threshold-ratio`
+        * `pr-lead-count`: deprecated alias for `pr-cycle-count`
+        * `pr-lead-count-q`: deprecated alias for `pr-cycle-count-q`
         * `pr-live-cycle-time`: Live Cycle Time - sum of corresponding `pr-wip-time`, `pr-review-time`, `pr-merging-time`, and `pr-release-time`.
         * `pr-live-cycle-count`: number of PRs used to calculate `pr-cycle-time` disregarding the quantiles. It equals to the overall number of PRs observed in the given time window.
         * `pr-live-cycle-count-q`: number of PRs used to calculate `pr-cycle-time` after applying the quantiles.
@@ -3638,6 +3639,7 @@ components:
       - pr-lead-count
       - pr-lead-count-q
       - pr-cycle-time
+      - pr-cycle-time-below-threshold-ratio
       - pr-cycle-count
       - pr-cycle-count-q
       - pr-live-cycle-time
