@@ -947,7 +947,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PullRequestSet'
-          description: List of pull requests satisfying the specified filters.
+          description: List of pull requests, in the requested order.
         400:
           $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
@@ -6666,8 +6666,9 @@ components:
     # yamllint disable-line rule:key-ordering
     GetPullRequestsRequest:
       additionalProperties: false
-      description: Request body of `/get/pull_requests`. Declaration of which PRs
-        the user wants to list.
+      description: |
+        Request body of `/get/pull_requests`. Declaration of which PRs the user wants to list.
+        The order of the requested PRs will be preserved in the response.
       example:
         account: 1
         prs:
