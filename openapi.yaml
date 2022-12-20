@@ -4365,7 +4365,11 @@ components:
         - bug
       properties:
         repositories:
-          $ref: '#/components/schemas/RepositorySet'
+          allOf:
+          - $ref: '#/components/schemas/RepositorySet'
+          - description: |
+              Repositories for which to calculate the metrics.
+              When property is missing metrics will be calculated across all repositories.
         repogroups:
           $ref: '#/components/schemas/IndexedGroups'
         with:
@@ -4408,8 +4412,6 @@ components:
           maxItems: 64
           minItems: 1
           type: array
-      required:
-      - repositories
       type: object
     # yamllint disable-line rule:key-ordering
     ForSetDevelopers:
