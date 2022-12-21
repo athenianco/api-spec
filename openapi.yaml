@@ -7858,9 +7858,17 @@ components:
         account: 1
       properties:
         for:
-          description: List of repository groups for which to calculate the metrics.
+          description: |
+            List of repository groups for which to calculate the metrics.
+            An empty repository (empty array) group will match nothing.
+            Use `null` as repository group to match every repository.
           items:
-            $ref: '#/components/schemas/RepositorySet'
+            oneOf:
+            - $ref: '#/components/schemas/RepositorySet'
+            - enum:
+              - null
+              nullable: true
+              type: string
           type: array
         with:
           description: List of developer groups for which to calculate the metrics.
@@ -8027,7 +8035,6 @@ components:
             $ref: '#/components/schemas/CalculatedLinearMetricValues'
           type: array
       required:
-      - for
       - granularity
       - matches
       - metrics
