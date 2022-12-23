@@ -4365,7 +4365,11 @@ components:
         - bug
       properties:
         repositories:
-          $ref: '#/components/schemas/RepositorySet'
+          allOf:
+          - $ref: '#/components/schemas/RepositorySet'
+          - description: |
+              Repositories for which to calculate the metrics.
+              When property is missing metrics will be calculated across all repositories.
         repogroups:
           $ref: '#/components/schemas/IndexedGroups'
         with:
@@ -4408,8 +4412,6 @@ components:
           maxItems: 64
           minItems: 1
           type: array
-      required:
-      - repositories
       type: object
     # yamllint disable-line rule:key-ordering
     ForSetDevelopers:
@@ -7856,9 +7858,17 @@ components:
         account: 1
       properties:
         for:
-          description: List of repository groups for which to calculate the metrics.
+          description: |
+            List of repository groups for which to calculate the metrics.
+            An empty repository (empty array) group will match nothing.
+            Use `null` as repository group to match every repository.
           items:
-            $ref: '#/components/schemas/RepositorySet'
+            oneOf:
+            - $ref: '#/components/schemas/RepositorySet'
+            - enum:
+              - null
+              nullable: true
+              type: string
           type: array
         with:
           description: List of developer groups for which to calculate the metrics.
@@ -8025,7 +8035,6 @@ components:
             $ref: '#/components/schemas/CalculatedLinearMetricValues'
           type: array
       required:
-      - for
       - granularity
       - matches
       - metrics
