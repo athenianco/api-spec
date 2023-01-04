@@ -3549,6 +3549,7 @@ components:
       description: |-
         Currently supported PR metric types.
         * `pr-wip-time`: average time spent in Work In Progress stage.
+        * `pr-wip-time-below-threshold-ratio`: ratio of PRs with a `pr-wip-time` below the threshold, disregarding the quantiles. The default threshold is 1 day.
         * `pr-wip-count`: number of PRs used to calculate `pr-wip-time` disregarding the quantiles.
         * `pr-wip-count-q`: number of PRs used to calculate `pr-wip-time` after applying the quantiles.
         * `pr-review-time`: average time spent in Review stage.
@@ -3618,6 +3619,7 @@ components:
         * `pr-comments-per`: average number of PR comments, both regular and review, for reviewed PRs, bots excluded.
       enum:
       - pr-wip-time
+      - pr-wip-time-below-threshold-ratio
       - pr-wip-count
       - pr-wip-count-q
       - pr-review-time
