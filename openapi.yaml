@@ -8150,6 +8150,7 @@ components:
         * `jira-acknowledged` - number of issues that are "In Progress" or "Resolved". This number matches the issues considered to calculate `jira-acknowledge-time` before applying the quantiles.
         * `jira-acknowledged-q` - number of issues that are "In Progress" or "Resolved". This number matches the issues considered to calculate `jira-acknowledge-time` after applying the quantiles.
         * `jira-life-time` - Mean Life Time - the time between min(issue creation, work began) and max(issue resolution, fixes released).
+        * `jira-life-time-below-threshold-ratio` - ratio of issues with a `jira-life-time` below the threshold, disregarding the quantiles. The default threshold is 5 days.
         * `jira-lead-time` - Mean Lead Time - the time between when the work began and max(issue resolution, fixes released).
         * `jira-lead-time-below-threshold-ratio` - ratio of issues with a `jira-lead-time` below the threshold, disregarding the quantiles. The default threshold is 5 days.
         * `jira-acknowledge-time` - Mean Acknowledge Time - the time between when the issue was created and the work began = `min(transitioned to "In Progress", PR created)`. It equals to 0 for retrofitted issues with PRs before their creation times.
@@ -8163,6 +8164,7 @@ components:
       - jira-acknowledged
       - jira-acknowledged-q
       - jira-life-time
+      - jira-life-time-below-threshold-ratio
       - jira-lead-time
       - jira-lead-time-below-threshold-ratio
       - jira-acknowledge-time
