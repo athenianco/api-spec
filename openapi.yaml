@@ -3557,6 +3557,7 @@ components:
         * `pr-review-count-q`: number of PRs used to calculate `pr-review-time` after applying the quantiles.
         * `pr-review-time-below-threshold-ratio`: ratio of PRs with a `pr-review-time` below the threshold, disregarding the quantiles. The default threshold is 2 days.
         * `pr-merging-time`: average time spent in Merge stage.
+        * `pr-merging-time-below-threshold-ratio`: ratio of PRs with a `pr-merging-time` below the threshold, disregarding the quantiles. The default threshold is 4 hours.
         * `pr-merging-count`: number of PRs used to calculate `pr-merging-time` disregarding the quantiles.
         * `pr-merging-count-q`: number of PRs used to calculate `pr-merging-time` after applying the quantiles.
         * `pr-release-time`: average time spent in Release stage.
@@ -3627,6 +3628,7 @@ components:
       - pr-review-count-q
       - pr-review-time-below-threshold-ratio
       - pr-merging-time
+      - pr-merging-time-below-threshold-ratio
       - pr-merging-count
       - pr-merging-count-q
       - pr-release-time
