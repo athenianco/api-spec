@@ -3549,6 +3549,7 @@ components:
       description: |-
         Currently supported PR metric types.
         * `pr-wip-time`: average time spent in Work In Progress stage.
+        * `pr-wip-time-below-threshold-ratio`: ratio of PRs with a `pr-wip-time` below the threshold, disregarding the quantiles. The default threshold is 1 day.
         * `pr-wip-count`: number of PRs used to calculate `pr-wip-time` disregarding the quantiles.
         * `pr-wip-count-q`: number of PRs used to calculate `pr-wip-time` after applying the quantiles.
         * `pr-review-time`: average time spent in Review stage.
@@ -3556,6 +3557,7 @@ components:
         * `pr-review-count-q`: number of PRs used to calculate `pr-review-time` after applying the quantiles.
         * `pr-review-time-below-threshold-ratio`: ratio of PRs with a `pr-review-time` below the threshold, disregarding the quantiles. The default threshold is 2 days.
         * `pr-merging-time`: average time spent in Merge stage.
+        * `pr-merging-time-below-threshold-ratio`: ratio of PRs with a `pr-merging-time` below the threshold, disregarding the quantiles. The default threshold is 4 hours.
         * `pr-merging-count`: number of PRs used to calculate `pr-merging-time` disregarding the quantiles.
         * `pr-merging-count-q`: number of PRs used to calculate `pr-merging-time` after applying the quantiles.
         * `pr-release-time`: average time spent in Release stage.
@@ -3618,6 +3620,7 @@ components:
         * `pr-comments-per`: average number of PR comments, both regular and review, for reviewed PRs, bots excluded.
       enum:
       - pr-wip-time
+      - pr-wip-time-below-threshold-ratio
       - pr-wip-count
       - pr-wip-count-q
       - pr-review-time
@@ -3625,6 +3628,7 @@ components:
       - pr-review-count-q
       - pr-review-time-below-threshold-ratio
       - pr-merging-time
+      - pr-merging-time-below-threshold-ratio
       - pr-merging-count
       - pr-merging-count-q
       - pr-release-time
@@ -8146,6 +8150,7 @@ components:
         * `jira-acknowledged` - number of issues that are "In Progress" or "Resolved". This number matches the issues considered to calculate `jira-acknowledge-time` before applying the quantiles.
         * `jira-acknowledged-q` - number of issues that are "In Progress" or "Resolved". This number matches the issues considered to calculate `jira-acknowledge-time` after applying the quantiles.
         * `jira-life-time` - Mean Life Time - the time between min(issue creation, work began) and max(issue resolution, fixes released).
+        * `jira-life-time-below-threshold-ratio` - ratio of issues with a `jira-life-time` below the threshold, disregarding the quantiles. The default threshold is 5 days.
         * `jira-lead-time` - Mean Lead Time - the time between when the work began and max(issue resolution, fixes released).
         * `jira-lead-time-below-threshold-ratio` - ratio of issues with a `jira-lead-time` below the threshold, disregarding the quantiles. The default threshold is 5 days.
         * `jira-acknowledge-time` - Mean Acknowledge Time - the time between when the issue was created and the work began = `min(transitioned to "In Progress", PR created)`. It equals to 0 for retrofitted issues with PRs before their creation times.
@@ -8159,6 +8164,7 @@ components:
       - jira-acknowledged
       - jira-acknowledged-q
       - jira-life-time
+      - jira-life-time-below-threshold-ratio
       - jira-lead-time
       - jira-lead-time-below-threshold-ratio
       - jira-acknowledge-time
