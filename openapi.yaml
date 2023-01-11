@@ -3423,6 +3423,7 @@ components:
       additionalProperties: false
       description: A template to generate a goal.
       example:
+        available: true
         id: 42
         metric: pr-release-time
         name: Untitled Template
@@ -3430,6 +3431,9 @@ components:
         - github.com/athenianco/athenian-api
         - github.com/athenianco/api-spec
       properties:
+        available:
+          description: Whether the templates is avaiable for use.
+          type: boolean
         id:
           description: Identifier of the template.
           type: integer
@@ -3445,6 +3449,7 @@ components:
         repositories:
           $ref: '#/components/schemas/RepositorySet'
       required:
+      - available
       - id
       - name
       - metric
@@ -3482,10 +3487,12 @@ components:
     GoalTemplateList:
       description: List of goal templates.
       example:
-      - id: 42
+      - available: false
+        id: 42
         metric: pr-release-time
         name: Untitled Template 0
-      - id: 43
+      - available: true
+        id: 43
         metric: jira-raised
         name: Untitled Template 1
         repositories:
