@@ -4147,6 +4147,9 @@ components:
         - name: Athenian
           login: athenianco
           avatar_url: https://avatars3.githubusercontent.com/u/58329504?s=200&v=4
+        datasources:
+        - github
+        - jira
         jira:
           url: https://athenianco.atlassian.net
           projects:
@@ -4168,14 +4171,25 @@ components:
           items:
             $ref: '#/components/schemas/Organization'
           type: array
+        datasources:
+          description: The list of datasources configured for the account.
+          items:
+            $ref: '#/components/schemas/Datasource'
+          type: array
         jira:
           $ref: '#/components/schemas/JIRAInstallation'
       required:
       - admins
       - organizations
       - regulars
+      - datasources
       type: object
     # yamllint disable-line rule:key-ordering
+    Datasource:
+      description: A datasource configured for the account.
+      enum:
+      - github
+      - jira
     Organization:
       additionalProperties: false
       description: GitHub organization details.
