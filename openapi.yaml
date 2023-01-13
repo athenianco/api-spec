@@ -8968,10 +8968,9 @@ components:
         name:
           description: Name of the deployment. If is not specified, we generate our
             own by the template `<environment shortcut>-<date>-<hash of the components>`.
-            The value may not contain '\n' - the new line character.
-          minLength: 1
-          maxLength: 100
+            The value may not contain \n - new line character, and ' - single quote.
           nullable: true
+          pattern: ^([^'\s]| ){1,100}$
           type: string
         url:
           description: URL pointing at the internal details of the deployment.
@@ -9014,7 +9013,11 @@ components:
         commit:
           $ref: '#/components/schemas/CommitHash'
         name:
-          description: Release name.
+          description: |
+            Release name.
+            The value may not contain \n - new line character, and ' - single quote.
+          nullable: true
+          pattern: ^([^'\s]| ){1,100}$
           type: string
         author:
           description: Release author.
