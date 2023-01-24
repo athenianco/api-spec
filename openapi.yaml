@@ -4388,6 +4388,14 @@ components:
           - github.com/dpordomingo
         labels_include:
         - bug
+      not:
+        properties:
+          jira: {}
+          jiragroups: {}
+        required:
+        - jira
+        - jiragroups
+        type: object
       properties:
         repositories:
           allOf:
@@ -4428,6 +4436,13 @@ components:
           type: array
         jira:
           $ref: '#/components/schemas/JIRAFilter'
+        jiragroups:
+          description: |
+            Calculate metrics separately for each JIRA Filter in the list.
+            Not compatible with `jira` field.
+          items:
+            $ref: '#/components/schemas/JIRAFilter'
+          type: array
         environments:
           description: Calculate deployment metrics separately for each environment
             in the list. Required if any deployment metrics were requested. Histograms
