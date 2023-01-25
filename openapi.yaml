@@ -3585,7 +3585,7 @@ components:
         * `pr-live-cycle-time`: Live Cycle Time - sum of corresponding `pr-wip-time`, `pr-review-time`, `pr-merging-time`, and `pr-release-time`.
         * `pr-live-cycle-count`: number of PRs used to calculate `pr-cycle-time` disregarding the quantiles. It equals to the overall number of PRs observed in the given time window.
         * `pr-live-cycle-count-q`: number of PRs used to calculate `pr-cycle-time` after applying the quantiles.
-        * `pr-all-count`: equals to the sum of `pr-live-cycle-count` with the number of PRs which are still not done on the specified time interval but don't have any stage-changing events. This metric should be exactly the same as the number of PRs returned by `/filter/prs`. The quantiles are ignored.
+        * `pr-all-count`: equals to the sum of `pr-live-cycle-count` with the number of PRs which are still not done on the specified time interval but don't have any stage-changing events. This metric should be exactly the same as the number of PRs returned by `/filter/pull_requests`. The quantiles are ignored.
         * `pr-wait-first-review-time`: average time of waiting for the first review.
         * `pr-wait-first-review-count`: number of PRs used to calculate `pr-wait-first-review`. Note: this is *not* the same as the number of PRs waiting for the first review.
         * `pr-wait-first-review-count-q`: number of PRs used to calculate `pr-wait-first-review` after applying the quantiles.
@@ -4388,6 +4388,14 @@ components:
           - github.com/dpordomingo
         labels_include:
         - bug
+      not:
+        properties:
+          jira: {}
+          jiragroups: {}
+        required:
+        - jira
+        - jiragroups
+        type: object
       properties:
         repositories:
           allOf:
@@ -4428,6 +4436,13 @@ components:
           type: array
         jira:
           $ref: '#/components/schemas/JIRAFilter'
+        jiragroups:
+          description: |
+            Calculate metrics separately for each JIRA Filter in the list.
+            Not compatible with `jira` field.
+          items:
+            $ref: '#/components/schemas/JIRAFilter'
+          type: array
         environments:
           description: Calculate deployment metrics separately for each environment
             in the list. Required if any deployment metrics were requested. Histograms
