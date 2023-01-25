@@ -4389,13 +4389,7 @@ components:
         labels_include:
         - bug
       not:
-        properties:
-          jira: {}
-          jiragroups: {}
-        required:
-        - jira
-        - jiragroups
-        type: object
+        $ref: '#/components/schemas/WithBothJiraAndJiragroups'
       properties:
         repositories:
           allOf:
@@ -10981,6 +10975,15 @@ components:
       - author
       - created
       - data
+      type: object
+    WithBothJiraAndJiragroups:
+      description: An object having both jira and jiragroups fields.
+      properties:
+        jira: {}
+        jiragroups: {}
+      required:
+        - jira
+        - jiragroups
       type: object
   securitySchemes:
     apiKeyAuth:
