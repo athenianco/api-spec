@@ -7893,6 +7893,8 @@ components:
         date_from: 2020-01-01
         date_to: 2020-10-01
         account: 1
+      not:
+        $ref: '#/components/schemas/WithBothJiraAndJiragroups'
       properties:
         for:
           description: |
@@ -7925,6 +7927,8 @@ components:
           type: array
         jira:
           $ref: '#/components/schemas/JIRAFilter'
+        jiragroups:
+          $ref: '#/components/schemas/JIRAGroups'
         metrics:
           description: List of desired release metrics.
           items:
