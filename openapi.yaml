@@ -8058,6 +8058,8 @@ components:
           $ref: '#/components/schemas/RepositorySet'
         with:
           $ref: '#/components/schemas/ReleaseWith'
+        jira:
+          $ref: '#/components/schemas/JIRAFilter'
         matches:
           additionalProperties:
             $ref: '#/components/schemas/ReleaseMatchStrategy'
