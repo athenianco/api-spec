@@ -4389,13 +4389,7 @@ components:
         labels_include:
         - bug
       not:
-        properties:
-          jira: {}
-          jiragroups: {}
-        required:
-        - jira
-        - jiragroups
-        type: object
+        $ref: '#/components/schemas/WithBothJiraAndJiragroups'
       properties:
         repositories:
           allOf:
@@ -4437,12 +4431,7 @@ components:
         jira:
           $ref: '#/components/schemas/JIRAFilter'
         jiragroups:
-          description: |
-            Calculate metrics separately for each JIRA Filter in the list.
-            Not compatible with `jira` field.
-          items:
-            $ref: '#/components/schemas/JIRAFilter'
-          type: array
+          $ref: '#/components/schemas/JIRAGroups'
         environments:
           description: Calculate deployment metrics separately for each environment
             in the list. Required if any deployment metrics were requested. Histograms
@@ -6902,6 +6891,13 @@ components:
             specified with anything else.
           type: boolean
       type: object
+    JIRAGroups:
+      description: |
+        Calculate metrics separately for each JIRA Filter in the list.
+        Not compatible with `jira` field.
+      items:
+        $ref: '#/components/schemas/JIRAFilter'
+      type: array
     # yamllint disable-line rule:key-ordering
     LinkedJIRAIssue:
       additionalProperties: false
@@ -7897,6 +7893,8 @@ components:
         date_from: 2020-01-01
         date_to: 2020-10-01
         account: 1
+      not:
+        $ref: '#/components/schemas/WithBothJiraAndJiragroups'
       properties:
         for:
           description: |
@@ -7929,6 +7927,8 @@ components:
           type: array
         jira:
           $ref: '#/components/schemas/JIRAFilter'
+        jiragroups:
+          $ref: '#/components/schemas/JIRAGroups'
         metrics:
           description: List of desired release metrics.
           items:
@@ -8058,6 +8058,8 @@ components:
           $ref: '#/components/schemas/RepositorySet'
         with:
           $ref: '#/components/schemas/ReleaseWith'
+        jira:
+          $ref: '#/components/schemas/JIRAFilter'
         matches:
           additionalProperties:
             $ref: '#/components/schemas/ReleaseMatchStrategy'
@@ -10981,6 +10983,15 @@ components:
       - author
       - created
       - data
+      type: object
+    WithBothJiraAndJiragroups:
+      description: An object having both jira and jiragroups fields.
+      properties:
+        jira: {}
+        jiragroups: {}
+      required:
+        - jira
+        - jiragroups
       type: object
   securitySchemes:
     apiKeyAuth:
