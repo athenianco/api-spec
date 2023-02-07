@@ -8434,6 +8434,8 @@ components:
       properties:
         granularity:
           $ref: '#/components/schemas/Granularity'
+        group:
+          $ref: '#/components/schemas/JIRAFilter'
         jira_label:
           description: Title of the assigned JIRA label, if `group_by_jira_label`
             was previously set to `true`. If is missing and `group_by_jira_label`
