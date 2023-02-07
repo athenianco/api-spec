@@ -8242,6 +8242,14 @@ components:
           description: Issues must be created before this date.
           format: date
           type: string
+        for:
+          description: |
+            Calculate metrics separately for each JIRA Filter in the list.
+            Not compatible with other jira filters in the request:
+              `priorities`, `types`, `labels_include`, `labels_exclude`, `epics`, `projects`.
+          items:
+            $ref: '#/components/schemas/JIRAFilter'
+          type: array
         timezone:
           $ref: '#/components/schemas/TimeZone'
         priorities:
