@@ -7712,13 +7712,7 @@ components:
           description: Exact status name.
           type: string
         stage:
-          description: One of the status categories.
-          enum:
-          - To Do
-          - In Progress
-          - Done
-          - No Category
-          type: string
+          $ref: '#/components/schemas/JIRAStatusCategory'
         project:
           description: Identifier of the project where this status exists.
           type: string
@@ -7728,6 +7722,14 @@ components:
       - stage
       type: object
     # yamllint disable-line rule:key-ordering
+    JIRAStatusCategory:
+      description: The category of a JIRA issue status.
+      enum:
+      - To Do
+      - In Progress
+      - Done
+      - No Category
+      type: string
     JIRAUser:
       additionalProperties: false
       description: Details about a JIRA user.
