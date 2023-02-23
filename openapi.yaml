@@ -7945,9 +7945,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
         quantiles:
           $ref: '#/components/schemas/Quantiles'
         account:
