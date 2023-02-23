@@ -7558,7 +7558,6 @@ components:
             type: array
         required:
         - project
-        - prs
     # yamllint disable-line rule:key-ordering
     JIRAEpicIssueCommon:
       description: Common properies if a JIRA issue or epic.
