@@ -4492,6 +4492,12 @@ components:
       - repositories
       type: object
     # yamllint disable-line rule:key-ordering
+    Granularities:
+      description: The splits of the specified time range.
+      items:
+        $ref: '#/components/schemas/Granularity'
+      minItems: 1
+      type: array
     Granularity:
       description: |-
         How often the metrics are reported. The value must satisfy the
@@ -4556,9 +4562,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
         quantiles:
           $ref: '#/components/schemas/Quantiles'
         exclude_inactive:
@@ -4760,9 +4764,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
         quantiles:
           $ref: '#/components/schemas/Quantiles'
         exclude_inactive:
@@ -5980,9 +5982,7 @@ components:
           description: Session account ID.
           type: integer
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
       required:
       - account
       - date_from
@@ -6085,9 +6085,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
       required:
       - calculated
       - date_from
@@ -7947,9 +7945,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
         quantiles:
           $ref: '#/components/schemas/Quantiles'
         account:
@@ -8307,10 +8303,7 @@ components:
         quantiles:
           $ref: '#/components/schemas/Quantiles'
         granularities:
-          description: Splits of the specified time range `[date_from, date_to)`.
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
         group_by_jira_label:
           description: Value indicating whether the metrics should be grouped by assigned
             JIRA issue label.
@@ -9285,9 +9278,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
         quantiles:
           $ref: '#/components/schemas/Quantiles'
         account:
@@ -9460,9 +9451,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
         quantiles:
           $ref: '#/components/schemas/Quantiles'
         split_by_check_runs:
@@ -10658,9 +10647,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
         quantiles:
           $ref: '#/components/schemas/Quantiles'
         account:
