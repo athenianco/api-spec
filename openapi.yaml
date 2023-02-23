@@ -5982,9 +5982,7 @@ components:
           description: Session account ID.
           type: integer
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
       required:
       - account
       - date_from
@@ -6087,9 +6085,7 @@ components:
         timezone:
           $ref: '#/components/schemas/TimeZone'
         granularities:
-          items:
-            $ref: '#/components/schemas/Granularity'
-          type: array
+          $ref: '#/components/schemas/Granularities'
       required:
       - calculated
       - date_from
