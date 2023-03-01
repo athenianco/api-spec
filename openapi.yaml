@@ -6830,8 +6830,8 @@ components:
     # yamllint disable-line rule:key-ordering
     JIRAFilter:
       additionalProperties: false
-      description: PR filters related to JIRA traits. The aggregation between each
-        filter type is *AND*.
+      description: |
+        Filters related to JIRA traits. The aggregation between each filter type is *AND*.
       example:
         epics:
         - DEV-167
@@ -6852,35 +6852,36 @@ components:
         - ENG
       properties:
         epics:
-          description: PRs must be linked to at least one JIRA epic from the list.
+          description: JIRA issues must be included in the epics from the list.
           items:
             type: string
           type: array
         labels_include:
-          description: PRs must relate to at least one JIRA issue label from the list.
+          description: |
+            Only issues having at least one label from the list will be included
             Several labels may be concatenated by a comma `,` so that all of them
             are required.
           items:
             type: string
           type: array
         labels_exclude:
-          description: PRs cannot relate to JIRA issue labels from the list.
+          description: Issues having one label from the list will be excluded.
           items:
             type: string
           type: array
         issue_types:
-          description: PRs must be linked to certain JIRA issue types, e.g. Bug, Task,
-            Design Document, etc.
+          description: |
+            Issues must have one of the given types, e.g. Bug, Task, Design Document, etc.
           items:
             type: string
           type: array
         priorities:
-          description: PRs must be linked to any JIRA issue with a priority in the given list.
+          description: Issues must have a priority from the given list.
           items:
             type: string
           type: array
         projects:
-          description: PRs must be linked to any JIRA issue in the given project keys.
+          description: Issues must be contained in a project in the given project keys list.
           items:
             type: string
           type: array
