@@ -6850,6 +6850,8 @@ components:
         projects:
         - DEV
         - ENG
+        status_categories:
+        - In Progress
       properties:
         epics:
           description: JIRA issues must be included in the epics from the list.
@@ -6884,6 +6886,11 @@ components:
           description: Issues must be contained in a project in the given project keys list.
           items:
             type: string
+          type: array
+        status_categories:
+          description: The JIRA issues must have a status belonging to one of these categories.
+          items:
+            $ref: '#/components/schemas/JIRAStatusCategory'
           type: array
         unmapped:
           description: Select PRs that are not mapped to any JIRA issue. May not be
