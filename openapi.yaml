@@ -7456,6 +7456,24 @@ components:
       - users
       type: object
     # yamllint disable-line rule:key-ordering
+    JIRAComment:
+      additionalProperties: false
+      properties:
+        author:
+          description: The name of the user who created the comment.
+          type: string
+        created:
+          description: The date and time at which the comment was created.
+          format: date-time
+          type: string
+        rendered_body:
+          description: The comment text.
+          type: string
+      required:
+      - author
+      - created
+      - rendered_body
+      type: object
     JIRAEpic:
       allOf:
       - $ref: '#/components/schemas/JIRAEpicIssueCommon'
@@ -7618,6 +7636,11 @@ components:
         comments:
           description: Number of comments in the issue excluding sub-tasks and children.
           type: integer
+        comment_list:
+          description: The list of comments for the issue.
+          items:
+            $ref: '#/components/schemas/JIRAComment'
+          type: array
         priority:
           description: Name of the priority. The details are returned in `FilteredJIRAStuff.priorities`.
           nullable: true
