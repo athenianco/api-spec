@@ -6721,6 +6721,13 @@ components:
       - metadata
       type: object
     # yamllint disable-line rule:key-ordering
+    GetJIRAIssuesInclude:
+      description: |
+        Additional information to include in the response for the get_jira_issues operation:
+        * jira_users: include details about mentioned Jira users
+      enum:
+      - jira_users
+      type: string
     GetJIRAIssuesRequest:
       additionalProperties: false
       description: |
@@ -6728,6 +6735,8 @@ components:
         Declaration of which issues the user wants to retrieve.
       example:
         account: 1
+        include:
+        - 'jira_users'
         issues:
         - "DEV-1345"
         - "DEV-567"
@@ -6736,6 +6745,11 @@ components:
         account:
           description: Account ID.
           type: integer
+        include:
+          description: Additional informations to include in the response.
+          items:
+            $ref: '#/components/schemas/GetJIRAIssuesInclude'
+          type: array
         issues:
           description: |
             List of issue identifiers (issue keys) to retrieve.
@@ -6784,6 +6798,15 @@ components:
           updated: '2023-02-23T09:25:30Z'
           url: https://jira.com/issue-2
       properties:
+        include:
+          additionalProperties: false
+          properties:
+            jira_users:
+              description: Mentioned users in the returned isssues.
+              items:
+                $ref: '#/components/schemas/JIRAUser'
+              type: array
+          type: object
         issues:
           items:
             $ref: '#/components/schemas/JIRAIssue'
