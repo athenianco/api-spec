@@ -932,6 +932,34 @@ paths:
       - default
 # {% endif %}
       x-openapi-router-controller: athenian.api.controllers.integrations_controller
+  /get/jira_issues:
+    post:
+      operationId: get_jira_issues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetJIRAIssuesRequest'
+        x-body-name: body
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJIRAIssuesResponse'
+          description: List of Jira issues, in the requested order.
+        400:
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
+      security:
+      - bearerAuth: []
+      - apiKeyAuth: []
+      summary: Retrieve Jira issues by key.
+      tags:
+      - get
+# {% if False %}
+      - default
+# {% endif %}
+      x-openapi-router-controller: athenian.api.controllers.jira_controller
   /get/pull_requests:
     post:
       operationId: get_prs
@@ -6693,6 +6721,76 @@ components:
       - metadata
       type: object
     # yamllint disable-line rule:key-ordering
+    GetJIRAIssuesRequest:
+      additionalProperties: false
+      description: |
+        Request body for the get_jira_issues operation.
+        Declaration of which issues the user wants to retrieve.
+      example:
+        account: 1
+        issues:
+        - "DEV-1345"
+        - "DEV-567"
+        - "ENG-123"
+      properties:
+        account:
+          description: Account ID.
+          type: integer
+        issues:
+          description: |
+            List of issue identifiers (issue keys) to retrieve.
+            The order of the requested issues will be preserved in the response.
+          items:
+            type: string
+          minItems: 1
+          type: array
+      type: object
+    GetJIRAIssuesResponse:
+      additionalProperties: false
+      description: Response for the get_jira_issues operation.
+      example:
+        issues:
+        - comments: 0
+          created: '2023-02-21T09:25:30Z'
+          id: P1-2
+          life_time: 259200s
+          priority: HIGH
+          project: '1'
+          prs:
+          - comments: 0
+            commits: 0
+            created: '2023-02-21T09:25:30Z'
+            events_now:
+            - created
+            files_changed: 1
+            number: 2
+            participants: []
+            repository: github.com/o/r
+            review_comments: 0
+            reviews: 0
+            size_added: 10
+            size_removed: 0
+            stage_timings:
+              wip: 259199s
+            stages_now:
+            - wip
+            title: PR 2 Title
+            updated: '2023-02-23T09:25:30Z'
+          reporter: Reporter N. 1
+          status: todo
+          story_points: .nan
+          title: Issue n. 2
+          type: Type 0
+          updated: '2023-02-23T09:25:30Z'
+          url: https://jira.com/issue-2
+      properties:
+        issues:
+          items:
+            $ref: '#/components/schemas/JIRAIssue'
+          type: array
+      required:
+      - issues
+      type: object
     GetPullRequestsRequest:
       additionalProperties: false
       description: |
@@ -7584,7 +7682,6 @@ components:
             type: array
         required:
         - project
-        - prs
     # yamllint disable-line rule:key-ordering
     JIRAEpicIssueCommon:
       description: Common properies if a JIRA issue or epic.
