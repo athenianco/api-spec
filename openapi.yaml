@@ -6766,6 +6766,9 @@ components:
             type: string
           minItems: 1
           type: array
+      required:
+      - account
+      - issues
       type: object
     GetJIRAIssuesResponse:
       additionalProperties: false
