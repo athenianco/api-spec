@@ -7773,6 +7773,9 @@ components:
           description: Name of the priority. The details are returned in `FilteredJIRAStuff.priorities`.
           nullable: true
           type: string
+        rendered_description:
+          description: The description of the issue rendered as HTML.
+          type: string
         status:
           description: Name of the status. The details are returned in `FilteredJIRAStuff.statuses`.
           type: string
