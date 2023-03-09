@@ -6724,9 +6724,11 @@ components:
     GetJIRAIssuesInclude:
       description: |
         Additional information to include in the response for the get_jira_issues operation:
+        * description: include the description for every issue; returned issues will include a `rendered_description` property
         * github_users: include details about the users mentioned in the linked pull requests
         * jira_users: include details about mentioned Jira users
       enum:
+      - description
       - github_users
       - jira_users
       type: string
