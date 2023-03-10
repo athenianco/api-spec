@@ -269,10 +269,13 @@ paths:
           content:
             application/json:
               schema:
-                enum:
-                - {}
+                properties:
+                  deployments:
+                    $ref: '#/components/schemas/NotifiedDeployments'
+                required:
+                - deployments
                 type: object
-          description: Empty object indicates a successful notification.
+          description: Details about the accepted deployment notifications.
         400:
           $ref: '#/components/responses/InvalidRequestErrorResponse'
         403:
@@ -9108,6 +9111,27 @@ components:
     NotifyDeploymentsRequest:
       items:
         $ref: '#/components/schemas/DeploymentNotification'
+      type: array
+    NotifiedDeployments:
+      description: The list of notified deployments.
+      example:
+      - name: prod-1984-05-01-ABCDEFGH
+        resolved: true
+      items:
+        additionalProperties: false
+        properties:
+          name:
+            description: Name of the deployment.
+            type: string
+          resolved:
+            description: |
+              Value indicating whether we resolved the received Git reference on the spot.
+              `false` is probably still OK for new references that we haven't synchronized yet.
+            type: boolean
+        required:
+        - name
+        - resolved
+        type: object
       type: array
     # yamllint disable-line rule:key-ordering
     NotifyReleasesRequest:
