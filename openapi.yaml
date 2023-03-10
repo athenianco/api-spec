@@ -9178,6 +9178,9 @@ components:
       - CANCELLED
       type: string
     # yamllint disable-line rule:key-ordering
+    DeploymentLabels:
+      description: Arbitrary key-value metadata that associates with the deployment.
+      type: object
     DeploymentNotification:
       description: |
         Push message about a deployment. We remove unresolved components after 24h.
@@ -9226,8 +9229,7 @@ components:
         conclusion:
           $ref: '#/components/schemas/DeploymentConclusion'
         labels:
-          description: Arbitrary key-value metadata that associates with the deployment.
-          type: object
+          $ref: '#/components/schemas/DeploymentLabels'
       required:
       - components
       - conclusion
