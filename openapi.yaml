@@ -306,6 +306,31 @@ paths:
 # {% endif %}
       x-codegen-request-body-name: body
       x-openapi-router-controller: athenian.api.controllers.events_controller
+  /events/deployment/{name}/labels:
+    parameters:
+    - description: Name of the deployment.
+      in: path
+      name: name
+      required: true
+      schema:
+        type: string
+      style: simple
+    get:
+      operationId: get_deployment_labels
+      responses:
+        200:
+          $ref: '#/components/responses/DeploymentLabelsResponse'
+        404:
+          $ref: '#/components/responses/DeploymentNotFoundResponse'
+      security:
+      - apiKeyAuth: []
+      tags:
+      - events
+# {% if False %}
+      - default
+# {% endif %}
+      summary: Retrieve the labels associated with the deployment.
+      x-openapi-router-controller: athenian.api.controllers.events_controller
   /events/releases:
     post:
       operationId: notify_releases
@@ -3381,6 +3406,24 @@ components:
         type: integer
       style: simple
   responses:
+    DeploymentLabelsResponse:
+      content:
+        application/json:
+          schema:
+            additionalProperties: false
+            properties:
+              labels:
+                $ref: '#/components/schemas/DeploymentLabels'
+            required:
+            - labels
+            type: object
+      description: The labels now associated with the deployment.
+    DeploymentNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericError'
+      description: A deployment with the given name was not found.
     EmptySuccessfulResponse:
       content:
         application/json:
