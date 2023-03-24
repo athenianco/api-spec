@@ -331,6 +331,32 @@ paths:
 # {% endif %}
       summary: Retrieve the labels associated with the deployment.
       x-openapi-router-controller: athenian.api.controllers.events_controller
+    patch:
+      operationId: modify_deployment_labels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeploymentModifyLabelsRequest'
+        x-body-name: body
+      responses:
+        200:
+          $ref: '#/components/responses/DeploymentLabelsResponse'
+        400:
+          $ref: '#/components/responses/InvalidRequestErrorResponse'
+        404:
+          $ref: '#/components/responses/DeploymentNotFoundResponse'
+      security:
+      - apiKeyAuth: []
+      summary: |
+        Modify the labels for the deployment applying the given instructions.
+      tags:
+      - events
+# {% if False %}
+      - default
+# {% endif %}
+      x-codegen-request-body-name: body
+      x-openapi-router-controller: athenian.api.controllers.events_controller
   /events/releases:
     post:
       operationId: notify_releases
@@ -9247,6 +9273,23 @@ components:
     # yamllint disable-line rule:key-ordering
     DeploymentLabels:
       description: Arbitrary key-value metadata that associates with the deployment.
+      type: object
+    DeploymentModifyLabelsRequest:
+      additionalProperties: false
+      description: |
+        Request to modify the labels associated with the deployment.
+        Each property in this object represents a command to execute.
+      example: {}
+      properties:
+        delete:
+          description: Delete the labels with the given keys.  Unexisting labels are ignored.
+          items:
+            type: string
+          type: array
+        upsert:
+          allOf:
+          - description: Set the given labels, overwriting values for already associated labels.
+          - $ref: '#/components/schemas/DeploymentLabels'
       type: object
     DeploymentNotification:
       description: |
