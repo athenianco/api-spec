@@ -6850,6 +6850,7 @@ components:
         - comments: 0
           created: '2023-02-21T09:25:30Z'
           id: P1-2
+          acknowledge_time: 132200s
           life_time: 259200s
           priority: HIGH
           project: '1'
@@ -7537,6 +7538,7 @@ components:
           priority: Low
           status: Backlog
           type: Epic
+          acknowledge_time: '132200s'
           life_time: '59172893s'
           url: https://example.com/?my-jira#DEV-158
           project: '10012'
@@ -7554,6 +7556,7 @@ components:
             prs: 0
             type: Task
             url: https://example.com/?my-jira#DEV-157
+            acknowledge_time: '132200s'
             life_time: '59172892s'
             subtasks: 42
           - id: DEV-156
@@ -7568,6 +7571,7 @@ components:
             prs: 0
             type: Task
             url: https://example.com/?my-jira#DEV-156
+            acknowledge_time: '132200s'
             life_time: '59172891s'
             subtasks: 3
             story_points: 5
@@ -7714,6 +7718,7 @@ components:
         priority: Low
         status: Backlog
         type: Epic
+        acknowledge_time: 132200s
         life_time: 10000s
         url: https://example.com/?my-jira#DEV-158
         project: '1002'
@@ -7730,6 +7735,7 @@ components:
           prs: 0
           type: Task
           url: https://example.com/?my-jira#DEV-157
+          acknowledge_time: 132200s
           life_time: 10000s
           subtasks: 0
         - id: DEV-156
@@ -7744,6 +7750,7 @@ components:
           prs: 0
           type: Task
           url: https://example.com/?my-jira#DEV-156
+          acknowledge_time: 132200s
           life_time: 20000s
           subtasks: 2
       type: object
@@ -7774,6 +7781,7 @@ components:
         status: Released
         prs: 0
         type: Task
+        acknowledge_time: 132200s
         life_time: 10000s
         url: https://example.com/?my-jira#DEV-157
         subtasks: 2
@@ -7823,6 +7831,12 @@ components:
             This timestamp can be missing and is always greater than or equal to `work_began`.
           format: date-time
           type: string
+        acknowledge_time:
+          allOf:
+          - description: |-
+              Issue's time spent between `work_began` and `created`. If work on issue has not
+              begun, time between `now()` and `created.  See also `jira-acknowledge-time` metric.
+          - $ref: '#/components/schemas/TimeDuration'
         lead_time:
           allOf:
           - description: |-
@@ -7873,6 +7887,7 @@ components:
       - comments
       - created
       - id
+      - acknowledge_time
       - life_time
       - priority
       - reporter
