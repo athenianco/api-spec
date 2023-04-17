@@ -10794,6 +10794,8 @@ components:
         * `dep-success-count` - number of successful deployments in the time period.
         * `dep-failure-count` - number of failed deployments in the time period.
         * `dep-success-ratio` - ratio between successful and all deployments.
+        * `dep-change-failure-count` - number of successful deployments introducing a failure in the system. This pertains deployments effects so is different from `dep-failure-count` which is about deployments execution.  A deployment can be marked as introducing a failure by associating it with the `failure` label, with any value.
+        * `dep-change-failure-ratio` - ratio between `dep-change-failure-count` and `dep-success-count`.
         * `dep-size-prs` - average number of deployed pull requests.
         * `dep-size-releases` - average number of deployed releases.
         * `dep-size-lines` - average number of deployed lines of code (changed = insertions + removals).
@@ -10812,6 +10814,8 @@ components:
       - dep-success-count
       - dep-failure-count
       - dep-success-ratio
+      - dep-change-failure-count
+      - dep-change-failure-ratio
       - dep-size-prs
       - dep-size-releases
       - dep-size-lines
