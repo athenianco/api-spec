@@ -4155,6 +4155,7 @@ components:
       example:
         is_admin: true
         expired: false
+        stale: false
         has_jira: true
         has_ci: true
         has_deployments: true
@@ -4164,6 +4165,9 @@ components:
           type: boolean
         expired:
           description: Indicates whether the account is disabled.
+          type: boolean
+        stale:
+          description: Indicates whether the account is temporarily not receiving data updates.
           type: boolean
         has_jira:
           description: Indicates whether the account installed the integration with
@@ -4182,6 +4186,7 @@ components:
       - has_deployments
       - has_jira
       - is_admin
+      - stale
       type: object
     # yamllint disable-line rule:key-ordering
     InvitedUser:
