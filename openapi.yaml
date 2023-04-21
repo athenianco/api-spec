@@ -5583,6 +5583,8 @@ components:
           items:
             $ref: '#/components/schemas/LinkedJIRAIssue'
           type: array
+        wait_first_review_time:
+          $ref: '#/components/schemas/TimeDuration'
       required:
       - comments
       - commits
