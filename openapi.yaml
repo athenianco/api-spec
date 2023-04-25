@@ -4106,12 +4106,14 @@ components:
             has_jira: true
             has_ci: true
             has_deployments: true
+            stale: false
           2:
             is_admin: false
             expired: false
             has_jira: false
             has_ci: true
             has_deployments: false
+            stale: false
       properties:
         accounts:
           additionalProperties:
