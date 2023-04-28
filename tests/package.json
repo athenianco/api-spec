@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ibm-openapi-validator": "^0.58.2",
+    "ibm-openapi-validator": "^0.97.3",
     "openapi-enforcer-cli": "^0.3.7"
   }
 }
